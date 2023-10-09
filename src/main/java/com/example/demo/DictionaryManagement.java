@@ -9,7 +9,7 @@ import java.util.Scanner;
 import static java.util.Collections.binarySearch;
 
 public class DictionaryManagement {
-    private static final String DATA_FILE_PATH = "D:\\Current_Study\\OOP\\demo\\data\\E_V_Selfmade.txt";
+    private static final String DATA_FILE_PATH = "D:\\.Current_Study\\OOP\\demo\\data\\E_V_Selfmade.txt";
 //    private static final String SPLITTING_CHARACTERS = "<html>";
 
     private Dictionary dictionary;
@@ -47,15 +47,20 @@ public class DictionaryManagement {
 
     public void dictionaryLookup() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> wordTargetList = dictionary.getWordTargetList();
-        ArrayList<String> wordExplainList = dictionary.getWordExplainList();
+        ArrayList<Word> wordList = dictionary.getWordList();
         while (true) {
             System.out.print("Nhập từ tiếng Anh muốn dịch: ");
             String wordTarget = sc.nextLine();
             System.out.print("Nghĩa tiếng Việt của từ: ");
-            int i = binarySearch(wordTargetList, wordTarget);
-            if (i >= 0) {
-                String wordExplain = wordExplainList.get(i);
+            String wordExplain = "";
+            for(Word word : wordList) {
+                wordExplain = "";
+                if(word.getWordTarget().equalsIgnoreCase(wordTarget)) {
+                    wordExplain = word.getWordExplain();
+                    break;
+                }
+            }
+            if (wordExplain != "") {
                 System.out.println(wordExplain);
             }
             else {
