@@ -6,3 +6,5 @@ energy	năng lượng
 fight	đánh
 git	git
 high	cao
+low	thap
+watch	dong ho
