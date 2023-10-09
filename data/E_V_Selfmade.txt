@@ -5,3 +5,4 @@ dinosaur	lỏng khung
 energy	năng lượng
 fight	đánh
 git	git
+high	cao
