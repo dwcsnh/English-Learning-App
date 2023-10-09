@@ -5,3 +5,5 @@ dinosaur	lỏng khung
 energy	năng lượng
 fight	đánh
 git	git
+DucAnh	dep trai
+AC	điều hòa
