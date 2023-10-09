@@ -6,3 +6,4 @@ energy	năng lượng
 fight	đánh
 git	git
 low	thap
+DucAnh	dep trai
