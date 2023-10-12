@@ -55,8 +55,8 @@ public class DictionaryManagement {
             String wordExplain = "";
             for(Word word : wordList) {
                 wordExplain = "";
-                if(word.getWordTarget().equalsIgnoreCase(wordTarget)) {
-                    wordExplain = word.getWordExplain();
+                if(word.getSpelling().equalsIgnoreCase(wordTarget)) {
+                    wordExplain = word.getMeaning();
                     break;
                 }
             }

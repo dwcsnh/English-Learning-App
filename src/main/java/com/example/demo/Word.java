@@ -1,22 +1,22 @@
 package com.example.demo;
 
 public class Word {
-    private String wordTarget;
-    private String wordExplain;
+    private String spelling;
+    private String meaning;
     public Word(String wordTarget, String wordExplain){
-        this.wordTarget = wordTarget;
-        this.wordExplain = wordExplain;
+        this.spelling = wordTarget;
+        this.meaning = wordExplain;
     }
-    public String getWordTarget(){
-        return wordTarget;
+    public String getSpelling(){
+        return spelling;
     }
-    public void setWordTarget(String wordTarget){
-        this.wordTarget = wordTarget;
+    public void setSpelling(String spelling){
+        this.spelling = spelling;
     }
-    public String getWordExplain(){
-        return wordExplain;
+    public String getMeaning(){
+        return meaning;
     }
-    public void setWordExplain(String wordExplain){
-        this.wordExplain = wordExplain;
+    public void setMeaning(String meaning){
+        this.meaning = meaning;
     }
 }
