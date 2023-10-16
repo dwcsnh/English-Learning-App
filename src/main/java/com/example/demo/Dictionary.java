@@ -29,7 +29,7 @@ public class Dictionary {
             int result = word.getSpelling().compareTo(spelling);
             if (result == 0) {
                 return mid;
-            } else if (result == -1) {
+            } else if (result < 0) {
                 start = mid + 1;
             } else {
                 end = mid - 1;
@@ -53,8 +53,8 @@ public class Dictionary {
             Word word = wordList.get(mid);
             int result = word.getSpelling().compareTo(spelling);
             if (result == 0) {
-                return -1;
-            } else if (result == -1) {
+                return mid;
+            } else if (result < 0) {
                 return insertIndex(mid + 1, end, spelling);
             } else {
                 return insertIndex(start, mid - 1, spelling);
