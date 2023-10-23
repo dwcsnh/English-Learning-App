@@ -14,7 +14,7 @@ public class DictionaryCommandline {
         System.out.printf("%-3s | %-10s | %s\n", "NO", "English", "Vietnamese");
         for(int i = 0; i < wordList.size(); i++){
             Word word = wordList.get(i);
-            System.out.printf("%-3d | %-10s | %s\n", i+1, word.getWordTarget(), word.getWordExplain());
+            System.out.printf("%-3d | %-10s | %s\n", i+1, word.getSpelling(), word.getMeaning());
         }
     }
     public void dictionaryBasic() throws IOException {

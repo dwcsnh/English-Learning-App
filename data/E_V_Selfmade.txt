@@ -1,10 +1,8 @@
-apple	quả táo
-banana	quả chuối
 cut	cắt
 dinosaur	lỏng khung
 energy	năng lượng
 fight	đánh
 git	git
-high	cao
 low	thap
-watch	dong ho
+DucAnh	dep trai
+Binh    khong dep trai = duc anh
