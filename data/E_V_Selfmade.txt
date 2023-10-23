@@ -5,4 +5,4 @@ fight	đánh
 git	git
 low	thap
 DucAnh	dep trai
-abc 1223
+Binh    khong dep trai = duc anh
