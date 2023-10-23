@@ -5,3 +5,4 @@ fight	đánh
 git	git
 low	thap
 DucAnh	dep trai
+abc 1223
