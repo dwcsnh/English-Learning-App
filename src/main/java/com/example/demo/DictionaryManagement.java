@@ -1,15 +1,13 @@
 package com.example.demo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.util.Collections.binarySearch;
 
 public class DictionaryManagement {
-    private static final String DATA_FILE_PATH = "D:\\.Current_Study\\OOP\\demo\\data\\E_V_Selfmade.txt";
+    private static final String DATA_FILE_PATH = "data\\test.txt";
 //    private static final String SPLITTING_CHARACTERS = "<html>";
 
     private Dictionary dictionary;
@@ -33,13 +31,15 @@ public class DictionaryManagement {
         }
     }
     public void insertFromFile() throws IOException {
-        FileReader fis = new FileReader(DATA_FILE_PATH);
-        BufferedReader br = new BufferedReader(fis);
+        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(DATA_FILE_PATH), "UTF8");
+
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String line;
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split("\t");
-            String wordTarget = parts[0];
-            String wordExplain = parts[1];
+        while ((line = bufferedReader.readLine()) != null) {
+            int splitIndex = line.indexOf("\t");
+            System.out.println(splitIndex);
+            String wordTarget = line.substring(0, splitIndex);
+            String wordExplain = line.substring(splitIndex + 1, line.length());
             Word word = new Word(wordTarget, wordExplain);
             dictionary.addWord(word);
         }
@@ -50,21 +50,18 @@ public class DictionaryManagement {
         ArrayList<Word> wordList = dictionary.getWordList();
         while (true) {
             System.out.print("Nhập từ tiếng Anh muốn dịch: ");
-            String wordTarget = sc.nextLine();
-            System.out.print("Nghĩa tiếng Việt của từ: ");
-            String wordExplain = "";
-            for(Word word : wordList) {
-                wordExplain = "";
-                if(word.getWordTarget().equalsIgnoreCase(wordTarget)) {
-                    wordExplain = word.getWordExplain();
-                    break;
+            String target = sc.nextLine();
+            ArrayList<Word>resultList = dictionary.searcher(target);
+            if (!resultList.isEmpty()) {
+                Word result = dictionary.lookUp(target);
+                if (result != null) {
+                    System.out.println("Nghĩa tiếng Việt của từ: " + result.getMeaning());
+                } else {
+                    System.out.println("Cac tu co the ban muon tim:");
+                    for(Word word : resultList) {
+                        System.out.println(word.getSpelling());
+                    }
                 }
-            }
-            if (wordExplain != "") {
-                System.out.println(wordExplain);
-            }
-            else {
-                System.out.println("targetWord not found!!");
             }
         }
     }

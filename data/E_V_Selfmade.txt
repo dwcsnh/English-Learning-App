@@ -1,9 +1,7 @@
-apple	quả táo
-banana	quả chuối
 cut	cắt
 dinosaur	lỏng khung
 energy	năng lượng
 fight	đánh
 git	git
 low	thap
-watch	dong ho
+DucAnh	dep trai
