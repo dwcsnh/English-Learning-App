@@ -2,18 +2,22 @@ package com.example.demo;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static java.util.Collections.binarySearch;
 
 public class DictionaryManagement {
-    private static final String DATA_FILE_PATH = "data\\test.txt";
-//    private static final String SPLITTING_CHARACTERS = "<html>";
+    private static final String DATA_FILE_PATH = "data\\E_V.txt";
+    private static final String SPLITTING_CHARACTERS = "<html>";
 
     private Dictionary dictionary;
+    private Map<String, Word> mapStringWord = new HashMap<>();
 
-    public DictionaryManagement() {
+    public DictionaryManagement() throws IOException {
         dictionary = new Dictionary();
+        insertFromFile();
     }
 
     public void insertFromCommandline() {
@@ -36,12 +40,12 @@ public class DictionaryManagement {
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            int splitIndex = line.indexOf("\t");
-            System.out.println(splitIndex);
-            String wordTarget = line.substring(0, splitIndex);
-            String wordExplain = line.substring(splitIndex + 1, line.length());
-            Word word = new Word(wordTarget, wordExplain);
+            String[] parts = line.split(SPLITTING_CHARACTERS);
+            String wordSpelling = parts[0];
+            String definition = SPLITTING_CHARACTERS + parts[1];
+            Word word = new Word(wordSpelling, definition);
             dictionary.addWord(word);
+            mapStringWord.put(wordSpelling, word);
         }
     }
 
@@ -68,5 +72,9 @@ public class DictionaryManagement {
 
     public ArrayList<Word> getDictionary() {
         return dictionary.getWordList();
+    }
+
+    public Map<String, Word> getMapStringWord() {
+        return mapStringWord;
     }
 }
