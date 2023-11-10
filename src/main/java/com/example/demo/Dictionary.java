@@ -92,4 +92,19 @@ public class Dictionary {
         }
         return result;
     }
+
+    public void remove(String input) {
+        int pos = findWordIndex(0, wordList.size() - 1, input);
+        wordList.remove(pos);
+    }
+
+    public boolean edit(String target, String meaning) {
+        int i = findWordIndex(0, wordList.size() - 1, target);
+        if (i == -1) return false;
+        Word wordEdit = new Word(target, meaning);
+        wordList.remove(i);
+        wordList.add(i, wordEdit);
+        return true;
+    }
+
 }

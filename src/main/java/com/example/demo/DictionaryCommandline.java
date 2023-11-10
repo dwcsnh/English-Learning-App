@@ -5,8 +5,12 @@ import java.util.ArrayList;
 
 public class DictionaryCommandline {
     private DictionaryManagement dictionaryManagement;
+    private Recent recent;
+    private Favorite favorite;
     public DictionaryCommandline(){
         dictionaryManagement = new DictionaryManagement();
+        recent = new Recent();
+        favorite = new Favorite();
     }
     public void showAllWords(){
         ArrayList<Word> wordList = dictionaryManagement.getDictionary();
@@ -18,9 +22,21 @@ public class DictionaryCommandline {
         }
     }
     public void dictionaryBasic() throws IOException {
-//        dictionaryManagement.insertFromCommandline();
-        dictionaryManagement.insertFromFile();
-        showAllWords();
-        dictionaryManagement.dictionaryLookup();
+        //dictionaryManagement.insertFromCommandline();
+        //dictionaryManagement.insertFromFile();
+        //showAllWords();
+        //dictionaryManagement.dictionaryLookup();
+        ArrayList<String> li = new ArrayList<>();
+        favorite.loadFavorite();
+        /*favorite.addWordToFavorite("mancy");
+        favorite.addWordToFavorite("mer");
+        favorite.addWordToFavorite("ment");*/
+        //favorite.exportFavorite();
+        //favorite.clearFavorite();
+        li = favorite.getFavoriteWordList();
+        for (int i = 0; i < li.size(); i++) {
+            System.out.println(li.get(i));
+        }
+        //System.out.println(":))");
     }
 }

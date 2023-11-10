@@ -8,7 +8,7 @@ import static java.util.Collections.binarySearch;
 
 public class DictionaryManagement {
     private static final String DATA_FILE_PATH = "data\\test.txt";
-//    private static final String SPLITTING_CHARACTERS = "<html>";
+    private static final String SPLITTING_CHARACTERS = "<html>";
 
     private Dictionary dictionary;
 
@@ -36,11 +36,17 @@ public class DictionaryManagement {
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            int splitIndex = line.indexOf("\t");
-            System.out.println(splitIndex);
+            int splitIndex = line.indexOf(SPLITTING_CHARACTERS);
+            //System.out.println(splitIndex);
             String wordTarget = line.substring(0, splitIndex);
-            String wordExplain = line.substring(splitIndex + 1, line.length());
+            String wordExplain = line.substring(splitIndex, line.length());
+            //System.out.println(wordExplain);
+            if (wordTarget.charAt(0) == '-') {
+                wordTarget = wordTarget.substring(1);
+            }
             Word word = new Word(wordTarget, wordExplain);
+            System.out.println(wordTarget);
+            System.out.println(wordExplain);
             dictionary.addWord(word);
         }
     }
@@ -68,5 +74,9 @@ public class DictionaryManagement {
 
     public ArrayList<Word> getDictionary() {
         return dictionary.getWordList();
+    }
+
+    public Dictionary getDictionary_() {
+        return dictionary;
     }
 }
