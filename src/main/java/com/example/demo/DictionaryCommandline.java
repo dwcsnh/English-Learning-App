@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class DictionaryCommandline {
     private DictionaryManagement dictionaryManagement;
-    public DictionaryCommandline(){
+    public DictionaryCommandline() throws IOException {
         dictionaryManagement = new DictionaryManagement();
     }
     public void showAllWords(){
-        ArrayList<Word> wordList = dictionaryManagement.getDictionary();
+        ArrayList<Word> wordList = dictionaryManagement.getDictionary().getWordList();
         //sort ?
         System.out.printf("%-3s | %-10s | %s\n", "NO", "English", "Vietnamese");
         for(int i = 0; i < wordList.size(); i++){
