@@ -1,0 +1,12 @@
+.searchView {
+    -fx-background-color: #EBEBEB;
+}
+.resultView {
+    -fx-background-color: #EBEBEB;
+}
+.container {
+    -fx-background-color: transparent;
+}
+.button {
+    -fx-background-color: transparent;
+}
