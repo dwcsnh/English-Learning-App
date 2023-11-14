@@ -159,7 +159,8 @@ public class WordleController {
                 labels[i].setText("");
                 labels[i].setStyle("-fx-background-color: #121213;" +
                         "-fx-border-color: #3A3A3C;" +
-                        "-fx-border-width: 5;");
+                        "-fx-border-width: 5;" +
+                        "-fx-border-radius: 5 5 5 5");
             }
             reset();
             //reset
