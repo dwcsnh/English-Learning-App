@@ -119,11 +119,14 @@ public class WordleController {
             labels[i + round * 5].setText(letter);
             System.out.println(labels[i + round * 5].getText());
             if (letter.equals(ans.substring(i, i + 1))) {
-                labels[i + round * 5].setStyle("-fx-background-color: #538D4E;");
+                labels[i + round * 5].setStyle("-fx-background-radius: 5 5 5 5;" +
+                                                "-fx-background-color: #538D4E;");
             } else if (ans.contains(letter)) {
-                labels[i + round * 5].setStyle("-fx-background-color: #B59F3B;");
+                labels[i + round * 5].setStyle("-fx-background-color: #B59F3B;" +
+                                                "-fx-background-radius: 5 5 5 5");
             } else {
-                labels[i + round * 5].setStyle("-fx-background-color: #3A3A3C;");
+                labels[i + round * 5].setStyle("-fx-background-color: #3A3A3C;" +
+                                                "-fx-background-radius: 5 5 5 5;");
             }
         }
         if (guess.equals(ans)) {
@@ -141,7 +144,8 @@ public class WordleController {
                     labels[i].setText("");
                     labels[i].setStyle("-fx-background-color: #121213;" +
                             "-fx-border-color: #3A3A3C;" +
-                            "-fx-border-width: 5;");
+                            "-fx-border-width: 5;" +
+                            "-fx-border-radius: 5 5 5 5");
                 }
                 reset();
             }
