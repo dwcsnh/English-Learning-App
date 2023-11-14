@@ -111,6 +111,7 @@ public class WordleController {
         String guess = textField.getText().toUpperCase();
         if (guess.length() != 5 || Pattern.matches(".*[\\W\\d].*", guess)) {
             showAlert("Invalid input", "Please type down 5 letter word without number or specific character!!");
+            textField.clear();
             return;
         }
         for (int i = 0; i < guess.length(); i++) {
@@ -159,6 +160,7 @@ public class WordleController {
             reset();
             //reset
         }
+        textField.clear();
     }
 
     private void showAlert(String title, String content) {
