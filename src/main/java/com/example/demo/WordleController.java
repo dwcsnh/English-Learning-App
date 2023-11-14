@@ -99,6 +99,8 @@ public class WordleController {
         ans = words[random.nextInt(words.length)].toUpperCase();
     }
 
+
+
     @FXML
     public void checkGuess(ActionEvent event) {
         Label[] labels = {

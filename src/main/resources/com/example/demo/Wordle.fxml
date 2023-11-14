@@ -221,10 +221,10 @@
             <Font name="Arial Black" size="40.0" />
          </font>
       </Label>
-      <TextField fx:id="textField" layoutX="94.0" layoutY="594.0" prefHeight="42.0" prefWidth="332.0" promptText="GUESS THE WORD" style="-fx-background-color: #82AC7E;">
+      <TextField fx:id="textField" layoutX="94.0" layoutY="594.0" onAction="#checkGuess" prefHeight="42.0" prefWidth="332.0" promptText="GUESS THE WORD" style="-fx-background-color: #82AC7E;">
          <font>
             <Font size="20.0" />
          </font></TextField>
-      <Button fx:id="button" layoutX="426.0" layoutY="594.0" mnemonicParsing="false" onAction="#checkGuess" prefHeight="42.0" prefWidth="76.0" text="Check It!" />
+      <Button fx:id="button" layoutX="426.0" layoutY="594.0" mnemonicParsing="false" onAction="#checkGuess" prefHeight="42.0" prefWidth="76.0" style="-fx-background-color: #558E50;" text="Check It!" />
    </children>
 </AnchorPane>
