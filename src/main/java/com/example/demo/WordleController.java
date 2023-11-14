@@ -6,11 +6,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 import java.io.*;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public class WordleController {
     @FXML
@@ -108,8 +107,8 @@ public class WordleController {
                 label21, label22, label23, label24, label25, label26, label27, label28, label29, label30
         };
         String guess = textField.getText().toUpperCase();
-        if (guess.length() != 5) {
-            showResult("Invalid input", "Please type down 5 letter word!!");
+        if (guess.length() != 5 || Pattern.matches(".*[\\W\\d].*", guess)) {
+            showAlert("Invalid input", "Please type down 5 letter word without number or specific character!!");
             return;
         }
         for (int i = 0; i < guess.length(); i++) {
@@ -133,7 +132,7 @@ public class WordleController {
                 nextRound();
             } else {
                 System.out.println("You lose!!");
-                showResult("You lose!", "The correct word was: " + ans);
+                showAlert("You lose!", "The correct word was: " + ans);
                 // Do something : show answer, alert, ...
                 for (int i = 0; i < 30; i++) {
                     labels[i].setText("");
@@ -146,7 +145,7 @@ public class WordleController {
         } else {
             System.out.println("You win!!");
             // Do something before start a new game
-            showResult("You win!", "Congratulations!");
+            showAlert("You win!", "Congratulations!\n" + "The correct word was: " + ans);
 
             //reset
             for (int i = 0; i < 30; i++) {
@@ -160,7 +159,7 @@ public class WordleController {
         }
     }
 
-    private void showResult(String title, String content) {
+    private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
