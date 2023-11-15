@@ -14,14 +14,16 @@ import java.util.ResourceBundle;
 public class ContainerController implements Initializable {
     @FXML
     AnchorPane contentPane;
-
     @FXML
     Button dictionaryButton;
     @FXML
     Button informationButton;
+    @FXML
+    Button historyButton;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
+    AnchorPane historyPane;
 
     public void showDictionaryPane() throws IOException {
         if (dictionaryPane == null) {
@@ -31,6 +33,16 @@ public class ContainerController implements Initializable {
         }
         contentPane.getChildren().clear();
         contentPane.getChildren().add(dictionaryPane);
+    }
+
+    public void showHistoryPane() throws IOException {
+        if (historyPane == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("history.fxml"));
+            historyPane = fxmlLoader.load();
+        }
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(historyPane);
     }
 
     public void showInformationPane() throws IOException {
@@ -59,6 +71,9 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == informationButton) {
             showInformationPane();
             System.out.println("click information button");
+        } else if (event.getSource() == historyButton) {
+            showHistoryPane();
+            System.out.println("click history button");
         }
     }
 }

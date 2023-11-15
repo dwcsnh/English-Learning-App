@@ -1,23 +1,27 @@
 package com.example.demo;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static java.util.Collections.binarySearch;
-
 public class DictionaryManagement {
-    private static final String DATA_FILE_PATH = "data\\E_V.txt";
-    private static final String SPLITTING_CHARACTERS = "<html>";
+    protected static String DATA_FILE_PATH;
+    protected static final String SPLITTING_CHARACTERS = "<html>";
 
-    private Dictionary dictionary;
+    protected Dictionary dictionary;
     private Map<String, Word> mapStringWord = new HashMap<>();
 
-    public DictionaryManagement() throws IOException {
+    public DictionaryManagement(String path) throws IOException {
         dictionary = new Dictionary();
+        setDataFilePath(path);
         insertFromFile();
+    }
+
+    public void setDataFilePath(String path) {
+        DATA_FILE_PATH = path;
     }
 
     public void insertFromCommandline() {
@@ -34,8 +38,9 @@ public class DictionaryManagement {
             dictionary.addWord(word);
         }
     }
+
     public void insertFromFile() throws IOException {
-        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(DATA_FILE_PATH), "UTF8");
+        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(DATA_FILE_PATH), StandardCharsets.UTF_8);
 
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String line;
@@ -46,6 +51,21 @@ public class DictionaryManagement {
             Word word = new Word(wordSpelling, definition);
             dictionary.addWord(word);
             mapStringWord.put(wordSpelling, word);
+        }
+    }
+
+    public void writeToFile(Word word) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(DATA_FILE_PATH);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+
+            bufferedWriter.write(word.getSpelling() + word.getMeaning());
+            bufferedWriter.newLine();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

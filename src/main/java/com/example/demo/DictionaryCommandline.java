@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class DictionaryCommandline {
     private DictionaryManagement dictionaryManagement;
     public DictionaryCommandline() throws IOException {
-        dictionaryManagement = new DictionaryManagement();
+        dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
     }
     public void showAllWords(){
         ArrayList<Word> wordList = dictionaryManagement.getDictionary().getWordList();

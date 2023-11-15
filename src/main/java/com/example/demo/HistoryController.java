@@ -6,36 +6,35 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.web.WebView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
-import com.example.demo.GoogleServices;
 
-public class DictionaryController implements Initializable {
-    private DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
-    ArrayList<Word> word = dictionaryManagement.getDictionary().getWordList();
+public class HistoryController implements Initializable {
+    private History history = new History("data\\E_V.txt");
+    ArrayList<Word> word = history.getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = dictionaryManagement.getMapStringWord();
+    Map<String, Word> mapStringWord = history.getMapStringWord();
 
     @FXML
     private TextField searchBar;
 
     @FXML
-    private ListView<String> dictionaryListView;
+    private ListView<String> historyListView;
 
     @FXML
-    private WebView dictionaryWebView;
+    private WebView historyWebView;
 
     @FXML
     private Button speaker;
 
-    public DictionaryController() throws IOException {
+    public HistoryController() throws IOException {
     }
 
     @Override
@@ -46,13 +45,13 @@ public class DictionaryController implements Initializable {
         }
 //        System.out.println(listViewWord);
 
-        dictionaryListView.getItems().addAll(listViewWord);
-        dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
+        historyListView.getItems().addAll(listViewWord);
+        historyListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
                         Word selectedWord = mapStringWord.get(newValue.trim());
                         String definition = selectedWord.getMeaning();
-                        dictionaryWebView.getEngine().loadContent(definition, "text/html");
+                        historyWebView.getEngine().loadContent(definition, "text/html");
                     }
                 }
         );
@@ -64,10 +63,10 @@ public class DictionaryController implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    Word target = dictionaryManagement.getDictionary().lookUp(input);
+                    Word target = history.getDictionary().lookUp(input);
                     if (target != null) {
                         String definition = target.getMeaning();
-                        dictionaryWebView.getEngine().loadContent(definition, "text/html");
+                        historyWebView.getEngine().loadContent(definition, "text/html");
                     } else {
                         System.out.println("cannot find word");
                     }
@@ -77,10 +76,10 @@ public class DictionaryController implements Initializable {
             } else {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    ArrayList<String> relevantWords = dictionaryManagement.getSearcher(input);
-                    dictionaryListView.getItems().setAll(relevantWords);
+                    ArrayList<String> relevantWords = history.getSearcher(input);
+                    historyListView.getItems().setAll(relevantWords);
                 } else {
-                    dictionaryListView.getItems().clear();
+                    historyListView.getItems().clear();
                 }
             }
         }
@@ -88,7 +87,7 @@ public class DictionaryController implements Initializable {
 
     @FXML
     public void updateSearchBar(MouseEvent event) {
-        String spelling = dictionaryListView.getSelectionModel().getSelectedItem();
+        String spelling = historyListView.getSelectionModel().getSelectedItem();
         if (spelling != null) {
             searchBar.setText(spelling);
         }
