@@ -2,10 +2,14 @@ package com.example.demo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.Random;
@@ -73,9 +77,13 @@ public class WordleController {
     @FXML
     private Label label30 = new Label();
     @FXML
+    private Label youWonLabel = new Label();
+    @FXML
     private TextField textField;
     @FXML
     private Button button;
+    @FXML
+    private Button howToPlay;
 
     private static final String DATA_WordleWord_PATH = "data\\wordleWord.txt";
     String[] words;
@@ -85,20 +93,19 @@ public class WordleController {
     private boolean win = false;
     private boolean end = false;
 
+    private boolean howToPlayOpen = false;
+
     public WordleController() throws IOException {
         InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(DATA_WordleWord_PATH), "UTF8");
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             words = line.split(" ");
-            for(String word : words) {
-                System.out.println(word);
-            }
         }
         Random random = new Random();
         ans = words[random.nextInt(words.length)].toUpperCase();
+        System.out.println(ans);
     }
-
 
 
     @FXML
@@ -110,7 +117,7 @@ public class WordleController {
         };
         String guess = textField.getText().toUpperCase();
         if (guess.length() != 5 || Pattern.matches(".*[\\W\\d].*", guess)) {
-            showAlert("Invalid input", "Please type down 5 letter word without number or specific character!!");
+            showInvalidInput();
             textField.clear();
             return;
         }
@@ -138,7 +145,7 @@ public class WordleController {
                 nextRound();
             } else {
                 System.out.println("You lose!!");
-                showAlert("You lose!", "The correct word was: " + ans);
+                showLoseTheGame();
                 // Do something : show answer, alert, ...
                 for (int i = 0; i < 30; i++) {
                     labels[i].setText("");
@@ -152,8 +159,7 @@ public class WordleController {
         } else {
             System.out.println("You win!!");
             // Do something before start a new game
-            showAlert("You win!", "Congratulations!\n" + "The correct word was: " + ans);
-
+            showWinTheGame();
             //reset
             for (int i = 0; i < 30; i++) {
                 labels[i].setText("");
@@ -166,6 +172,99 @@ public class WordleController {
             //reset
         }
         textField.clear();
+    }
+
+    @FXML
+    public void showHowToPlay() {
+        if (howToPlayOpen) {
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("howToPlay.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("How to Play Wordle");
+            stage.setScene(new Scene(root));
+            stage.setOnHidden(event -> howToPlayOpen = false);
+            howToPlayOpen = true;
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void closeHowToPlay(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void showWinTheGame() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("YouWin.fxml"));
+            Parent root = loader.load();
+            WordleController wordleController = loader.getController();
+            wordleController.youWonLabel.setText("It's: " + ans);
+
+            Stage stage = new Stage();
+            stage.setTitle("You Won!!");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void closeYouWinAndReplay(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void showLoseTheGame() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("YouLose.fxml"));
+            Parent root = loader.load();
+            WordleController wordleController = loader.getController();
+            wordleController.youWonLabel.setText("It's: " + ans);
+
+            Stage stage = new Stage();
+            stage.setTitle("You Lose!!");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void closeYouLoseAndReplay(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void showInvalidInput() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InvalidInput.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Invalid Input!!");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void closeInvalidInputAndContinue(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     private void showAlert(String title, String content) {
@@ -189,5 +288,6 @@ public class WordleController {
         end = false;
         Random random = new Random();
         ans = words[random.nextInt(words.length)].toUpperCase();
+        System.out.println(ans);
     }
 }
