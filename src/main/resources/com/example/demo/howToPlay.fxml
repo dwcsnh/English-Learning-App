@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121213;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.WordleController">
+   <children>
+      <Label alignment="CENTER" layoutX="166.0" layoutY="14.0" prefHeight="38.0" prefWidth="268.0" text="How to play" textFill="#4dc9c1">
+         <font>
+            <Font name="Cooper Black" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="101.0" layoutY="60.0" prefHeight="30.0" prefWidth="401.0" text="You have to guess the hidden word in 6 tries and the color of the letters" textFill="#4dc9c1">
+         <font>
+            <Font name="Century" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="201.0" layoutY="90.0" prefHeight="23.0" prefWidth="197.0" text="changes to show how close you are." textFill="#4dc9c1">
+         <font>
+            <Font name="Century" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="155.0" layoutY="113.0" prefHeight="30.0" prefWidth="293.0" text="To start the game, just enter any word, for example:" textFill="#4dc9c1">
+         <font>
+            <Font name="Century" size="12.0" />
+         </font>
+      </Label>
+      <HBox layoutX="176.0" layoutY="149.0" prefHeight="50.0" prefWidth="250.0">
+         <children>
+            <AnchorPane prefHeight="50.0" prefWidth="250.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #3A3A3C;" text="T" textFill="WHITE">
+                     <font>
+                        <Font name="Cooper Black" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="50.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #F3C237;" text="A" textFill="WHITE">
+                     <font>
+                        <Font name="Cooper Black" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="100.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #3A3A3C;" text="B" textFill="WHITE">
+                     <font>
+                        <Font name="Cooper Black" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="150.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #F3C237;" text="L" textFill="WHITE">
+                     <font>
+                        <Font name="Cooper Black" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="200.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #659960;" text="E" textFill="WHITE">
+                     <font>
+                        <Font name="Cooper Black" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="176.0" layoutY="228.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #3A3A3C;" text="T" textFill="WHITE">
+         <font>
+            <Font name="Cooper Black" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="224.0" layoutY="228.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #3A3A3C;" text="B" textFill="WHITE">
+         <font>
+            <Font name="Cooper Black" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="201.0" layoutY="228.0" prefHeight="30.0" prefWidth="30.0" text="," textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="263.0" layoutY="228.0" prefHeight="30.0" prefWidth="175.0" text="aren't in the target word at all." textFill="#4dc9c1">
+         <font>
+            <Font name="Century" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="176.0" layoutY="264.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #F3C237;" text="A" textFill="WHITE">
+         <font>
+            <Font name="Cooper Black" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="224.0" layoutY="264.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #F3C237;" text="L" textFill="WHITE">
+         <font>
+            <Font name="Cooper Black" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="201.0" layoutY="264.0" prefHeight="30.0" prefWidth="30.0" text="," textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="263.0" layoutY="264.0" prefHeight="30.0" prefWidth="206.0" text="is in the word but in the wrong spot." textFill="#4dc9c1">
+         <font>
+            <Font name="Century" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="224.0" layoutY="303.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 5 5 5 5; -fx-background-color: #659960;" text="E" textFill="WHITE">
+         <font>
+            <Font name="Cooper Black" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="263.0" layoutY="303.0" prefHeight="30.0" prefWidth="213.0" text="is in the word and in the correct spot." textFill="#4dc9c1">
+         <font>
+            <Font name="Century" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="254.0" layoutY="346.0" prefHeight="30.0" prefWidth="93.0" text="Good Luck!!" textFill="#4dc9c1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="539.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeHowToPlay" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #121213;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@exit.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</AnchorPane>
