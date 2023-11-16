@@ -23,12 +23,13 @@ public class History extends DictionaryManagement {
     * controller. Then use a function to sync the container controller with the variable in other controller.
     * */
 
-    public History(String path) throws IOException {
+    public History(String path) {
         super(path);
     }
 
     public void addWordToHistory(Word word) {
-        getDictionary().addWord(word);
-        writeToFile(word);
+        this.getDictionary().addWord(word);
+        this.writeToFile(word);
+        System.out.println("history recorded!");
     }
 }

@@ -18,10 +18,10 @@ import java.util.ResourceBundle;
 import com.example.demo.GoogleServices;
 
 public class DictionaryController implements Initializable {
-    private DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
-    ArrayList<Word> word = dictionaryManagement.getDictionary().getWordList();
+    ContainerController parent = new ContainerController();
+    ArrayList<Word> word = parent.getDictionaryManagement().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = dictionaryManagement.getMapStringWord();
+    Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
 
     @FXML
     private TextField searchBar;
@@ -34,9 +34,6 @@ public class DictionaryController implements Initializable {
 
     @FXML
     private Button speaker;
-
-    public DictionaryController() throws IOException {
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,6 +48,7 @@ public class DictionaryController implements Initializable {
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
                         Word selectedWord = mapStringWord.get(newValue.trim());
+                        parent.getHistory().addWordToHistory(selectedWord);
                         String definition = selectedWord.getMeaning();
                         dictionaryWebView.getEngine().loadContent(definition, "text/html");
                     }
@@ -64,8 +62,10 @@ public class DictionaryController implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    Word target = dictionaryManagement.getDictionary().lookUp(input);
+                    Word target = parent.getDictionaryManagement().getDictionary().lookUp(input);
                     if (target != null) {
+                        parent.getHistory().addWordToHistory(target);
+
                         String definition = target.getMeaning();
                         dictionaryWebView.getEngine().loadContent(definition, "text/html");
                     } else {
@@ -77,7 +77,7 @@ public class DictionaryController implements Initializable {
             } else {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    ArrayList<String> relevantWords = dictionaryManagement.getSearcher(input);
+                    ArrayList<String> relevantWords = parent.getDictionaryManagement().getSearcher(input);
                     dictionaryListView.getItems().setAll(relevantWords);
                 } else {
                     dictionaryListView.getItems().clear();
@@ -99,5 +99,12 @@ public class DictionaryController implements Initializable {
         if (event.getSource() == speaker) {
             GoogleServices.pronounce(searchBar.getText());
         }
+    }
+
+    public void sync(ContainerController parent) {
+        if (this.parent == null) {
+            System.out.println("null");
+        }
+        this.parent = parent;
     }
 }

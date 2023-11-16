@@ -14,7 +14,7 @@ public class DictionaryManagement {
     protected Dictionary dictionary;
     private Map<String, Word> mapStringWord = new HashMap<>();
 
-    public DictionaryManagement(String path) throws IOException {
+    public DictionaryManagement(String path) {
         dictionary = new Dictionary();
         setDataFilePath(path);
         insertFromFile();
@@ -39,29 +39,35 @@ public class DictionaryManagement {
         }
     }
 
-    public void insertFromFile() throws IOException {
-        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(DATA_FILE_PATH), StandardCharsets.UTF_8);
+    public void insertFromFile() {
+        try {
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(DATA_FILE_PATH), StandardCharsets.UTF_8);
 
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            String[] parts = line.split(SPLITTING_CHARACTERS);
-            String wordSpelling = parts[0];
-            String definition = SPLITTING_CHARACTERS + parts[1];
-            Word word = new Word(wordSpelling, definition);
-            dictionary.addWord(word);
-            mapStringWord.put(wordSpelling, word);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                int splitPosition = line.indexOf(SPLITTING_CHARACTERS);
+                if (splitPosition > 0 && splitPosition < line.length()) {
+                    String spelling = line.substring(0, splitPosition);
+                    String definition = line.substring(splitPosition);
+                    Word word = new Word(spelling, definition);
+                    dictionary.addWord(word);
+                    mapStringWord.put(spelling, word);
+                }
+            }
+            System.out.println("inserting...");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void writeToFile(Word word) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(DATA_FILE_PATH);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
-
-            bufferedWriter.write(word.getSpelling() + word.getMeaning());
-            bufferedWriter.newLine();
+            FileWriter fileWriter = new FileWriter("data\\history.txt", true);
+            fileWriter.write(word.getSpelling() + word.getMeaning() + "\n");
+            fileWriter.flush();
+            fileWriter.close();
+            System.out.println(word.getSpelling());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -105,5 +111,11 @@ public class DictionaryManagement {
 
     public Map<String, Word> getMapStringWord() {
         return mapStringWord;
+    }
+
+    public void print() {
+        for (Word word : dictionary.getWordList()) {
+            System.out.println(word.getSpelling());
+        }
     }
 }

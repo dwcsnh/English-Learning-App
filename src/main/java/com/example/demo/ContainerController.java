@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
+    private History history = new History("data\\history.txt");
+    private DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
     @FXML
     AnchorPane contentPane;
     @FXML
@@ -24,23 +26,24 @@ public class ContainerController implements Initializable {
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
     AnchorPane historyPane;
+    HistoryController historyController;
+    DictionaryController dictionaryController;
+
+    public DictionaryManagement getDictionaryManagement() {
+        return dictionaryManagement;
+    }
+    public History getHistory() {
+        return history;
+    }
 
     public void showDictionaryPane() throws IOException {
-        if (dictionaryPane == null) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("dictionary.fxml"));
-            dictionaryPane = fxmlLoader.load();
-        }
+        dictionaryController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(dictionaryPane);
     }
 
     public void showHistoryPane() throws IOException {
-        if (historyPane == null) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("history.fxml"));
-            historyPane = fxmlLoader.load();
-        }
+        historyController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(historyPane);
     }
@@ -57,9 +60,22 @@ public class ContainerController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resourceBundle) {
         try {
-            showDictionaryPane();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("dictionary.fxml"));
+            dictionaryPane = fxmlLoader.load();
+            dictionaryController = fxmlLoader.getController();
+            dictionaryController.sync(this);
         } catch (IOException e) {
-            System.out.println("dictionary to content fault");
+            System.out.println(e.getMessage());
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("history.fxml"));
+            historyPane = fxmlLoader.load();
+            historyController = fxmlLoader.getController();
+            historyController.sync(this);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

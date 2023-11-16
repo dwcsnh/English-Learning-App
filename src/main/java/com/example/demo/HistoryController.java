@@ -10,17 +10,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class HistoryController implements Initializable {
-    private History history = new History("data\\E_V.txt");
-    ArrayList<Word> word = history.getDictionary().getWordList();
+    ContainerController parent = new ContainerController();
+    ArrayList<Word> historyList = parent.getHistory().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = history.getMapStringWord();
+    Map<String, Word> mapStringWord = parent.getHistory().getMapStringWord();
 
     @FXML
     private TextField searchBar;
@@ -34,16 +33,13 @@ public class HistoryController implements Initializable {
     @FXML
     private Button speaker;
 
-    public HistoryController() throws IOException {
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        for(Word x : word) {
+        for(Word x : historyList) {
             listViewWord.add(x.getSpelling());
+            System.out.println(x.getSpelling());
         }
-//        System.out.println(listViewWord);
 
         historyListView.getItems().addAll(listViewWord);
         historyListView.getSelectionModel().selectedItemProperty().addListener(
@@ -57,13 +53,15 @@ public class HistoryController implements Initializable {
         );
     }
 
+
+
     @FXML
     public void updateListView(KeyEvent event) {
         if (event.getSource() == searchBar) {
             if (event.getCode() == KeyCode.ENTER) {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    Word target = history.getDictionary().lookUp(input);
+                    Word target = parent.getHistory().getDictionary().lookUp(input);
                     if (target != null) {
                         String definition = target.getMeaning();
                         historyWebView.getEngine().loadContent(definition, "text/html");
@@ -76,12 +74,13 @@ public class HistoryController implements Initializable {
             } else {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    ArrayList<String> relevantWords = history.getSearcher(input);
+                    ArrayList<String> relevantWords = parent.getHistory().getSearcher(input);
                     historyListView.getItems().setAll(relevantWords);
                 } else {
                     historyListView.getItems().clear();
                 }
             }
+            parent.getHistory().print();
         }
     }
 
@@ -98,5 +97,9 @@ public class HistoryController implements Initializable {
         if (event.getSource() == speaker) {
             GoogleServices.pronounce(searchBar.getText());
         }
+    }
+
+    public void sync(ContainerController parent) {
+        this.parent = parent;
     }
 }
