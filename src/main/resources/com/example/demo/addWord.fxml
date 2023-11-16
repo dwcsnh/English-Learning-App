@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AddWordController">
    <children>
-      <Button layoutX="557.0" layoutY="435.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="63.0" text="Cancel" />
+      <Button layoutX="557.0" layoutY="435.0" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="63.0" text="Cancel" />
       <Button layoutX="642.0" layoutY="435.0" mnemonicParsing="false" onAction="#saveWord" prefHeight="35.0" prefWidth="63.0" text="Save" />
       <Label alignment="CENTER" layoutX="295.0" layoutY="28.0" prefHeight="46.0" prefWidth="170.0" text="Add Word" textFill="#338276">
          <font>

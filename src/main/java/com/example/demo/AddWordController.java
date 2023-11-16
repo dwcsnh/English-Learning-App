@@ -1,13 +1,14 @@
 package com.example.demo;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class AddWordController {
     private String target;
@@ -47,6 +48,28 @@ public class AddWordController {
 
     }
 
+    @FXML
+    public void cancel() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText("You will lose data.");
+        alert.setContentText("Do you want to cancel?");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+        ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonTypeYes) {
+            targetTextField.clear();
+            definitionTextArea.clear();
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+
     public int wordExist() {
         return dictionaryManagement.getDictionary().findWordIndex(0, words.size() - 1, target);
     }
@@ -59,13 +82,25 @@ public class AddWordController {
         dictionaryManagement.writeToFile(words);
     }
 
-
     public void setAlertOnWordExist() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Thông báo");
-        alert.setHeaderText(null);
-        alert.setContentText("This word already exists!");
-        alert.showAndWait();
+        alert.setHeaderText("This word already exists.");
+        alert.setContentText("Do you want to edit this word?");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+        ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonTypeYes) {
+            words.remove(wordExist());
+            addWordToFile();
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
     }
 
     public void setAlertOnSuccessAddWord() {
