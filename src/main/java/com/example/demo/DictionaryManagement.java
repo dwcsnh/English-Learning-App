@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class DictionaryManagement {
-    protected static String DATA_FILE_PATH;
+    protected String DATA_FILE_PATH;
     protected static final String SPLITTING_CHARACTERS = "<html>";
 
     protected Dictionary dictionary;
@@ -61,13 +61,15 @@ public class DictionaryManagement {
         }
     }
 
-    public void writeToFile(Word word) {
+    public void writeToFile(ArrayList<Word> words) {
         try {
-            FileWriter fileWriter = new FileWriter("data\\history.txt", true);
-            fileWriter.write(word.getSpelling() + word.getMeaning() + "\n");
+            FileWriter fileWriter = new FileWriter(DATA_FILE_PATH);
+            for (Word word : words) {
+                fileWriter.write(word.getSpelling() + word.getMeaning() + "\n");
+                System.out.println(word.getSpelling());
+            }
             fileWriter.flush();
             fileWriter.close();
-            System.out.println(word.getSpelling());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -103,6 +105,15 @@ public class DictionaryManagement {
             result.add(word.getSpelling());
         }
         return result;
+    }
+
+    public boolean isExist(Word target) {
+        for (Word word : dictionary.getWordList()) {
+            if (word.getSpelling().equals(target.getSpelling())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Dictionary getDictionary() {

@@ -59,8 +59,8 @@ public class DictionaryController implements Initializable {
     @FXML
     public void updateListView(KeyEvent event) {
         if (event.getSource() == searchBar) {
+            String input = searchBar.getText();
             if (event.getCode() == KeyCode.ENTER) {
-                String input = searchBar.getText();
                 if (!input.isEmpty()) {
                     Word target = parent.getDictionaryManagement().getDictionary().lookUp(input);
                     if (target != null) {
@@ -74,7 +74,6 @@ public class DictionaryController implements Initializable {
                     System.out.println("null");
                 }
             } else {
-                String input = searchBar.getText();
                 if (!input.isEmpty()) {
                     ArrayList<String> relevantWords = parent.getDictionaryManagement().getSearcher(input);
                     dictionaryListView.getItems().setAll(relevantWords);
@@ -87,7 +86,7 @@ public class DictionaryController implements Initializable {
     }
 
     @FXML
-    public void updateSearchBar(MouseEvent event) {
+    public void updateSearchBar() {
         String spelling = dictionaryListView.getSelectionModel().getSelectedItem();
         if (spelling != null) {
             searchBar.setText(spelling);

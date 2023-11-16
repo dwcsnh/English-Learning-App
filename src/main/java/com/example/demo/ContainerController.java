@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
     private History history = new History("data\\history.txt");
+    private Favorite favorite = new Favorite("data\\favorite.txt");
     private DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
     @FXML
     AnchorPane contentPane;
@@ -32,8 +33,13 @@ public class ContainerController implements Initializable {
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
     }
+
     public History getHistory() {
         return history;
+    }
+
+    public Favorite getFavorite() {
+        return favorite;
     }
 
     public void showDictionaryPane() throws IOException {
@@ -49,11 +55,11 @@ public class ContainerController implements Initializable {
     }
 
     public void showHistoryPane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("history.fxml"));
+        historyPane = fxmlLoader.load();
+        historyController = fxmlLoader.getController();
 
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("history.fxml"));
-            historyPane = fxmlLoader.load();
-            historyController = fxmlLoader.getController();
         historyController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(historyPane);
