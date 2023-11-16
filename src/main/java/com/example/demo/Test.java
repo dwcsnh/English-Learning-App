@@ -1,18 +1,19 @@
 package com.example.demo;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) throws IOException {
 //        DictionaryCommandline dictionaryCommandline = new DictionaryCommandline();
 //        dictionaryCommandline.dictionaryBasic();
-        DictionaryManagement dictionaryManagement = new DictionaryManagement();
-        ArrayList<Word> word = dictionaryManagement.getDictionary();
-        ArrayList<String> words = new ArrayList<>();
-        for(Word x : word) {
-            words.add(x.getSpelling());
+        Scanner input = new Scanner(System.in);
+        GoogleServices services = new GoogleServices();
+        String text = "";
+        while (true) {
+            text = input.nextLine();
+            System.out.println(services.sentenceTranslation(text));
+            services.pronounce(text);
         }
-        System.out.println(words);
     }
 }

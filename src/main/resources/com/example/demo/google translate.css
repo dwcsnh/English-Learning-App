@@ -1,0 +1,11 @@
+.container {
+    -fx-background-color: #bfbfbf;
+}
+.textBox {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+.textBoxContainer {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px 10px 10px 10px
+}

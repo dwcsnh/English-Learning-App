@@ -43,6 +43,7 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(informationPane);
     }
 
+
     public void initialize(URL location, ResourceBundle resourceBundle) {
         try {
             showDictionaryPane();

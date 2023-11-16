@@ -5,3 +5,5 @@ fight	đánh
 git	git
 low	thap
 DucAnh	dep trai
+Binh    khong dep trai = duc anh
+Do Trong Binh   dep trai nhat

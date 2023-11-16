@@ -70,8 +70,33 @@ public class DictionaryManagement {
         }
     }
 
-    public ArrayList<Word> getDictionary() {
-        return dictionary.getWordList();
+    public ArrayList<String> getSearcher(String spelling) {
+        ArrayList<String> result = new ArrayList<>();
+        ArrayList<Word> words = dictionary.searcher(spelling);
+        for (Word word : words) {
+            result.add(word.getSpelling());
+        }
+        return result;
+    }
+
+    public void writeToFile(ArrayList<Word> words) {
+        try {
+            FileWriter fileWriter = new FileWriter(DATA_FILE_PATH);
+            for (Word word : words) {
+                fileWriter.write(word.getSpelling() + word.getMeaning() + "\n");
+                System.out.println(word.getSpelling());
+            }
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Dictionary getDictionary() {
+        return dictionary;
     }
 
     public Map<String, Word> getMapStringWord() {

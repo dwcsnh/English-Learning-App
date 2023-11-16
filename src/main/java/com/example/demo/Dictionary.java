@@ -12,14 +12,11 @@ public class Dictionary {
     public ArrayList<Word> getWordList() {
         return wordList;
     }
-
     public void setWordList(ArrayList<Word> words) {
         wordList = words;
     }
-
     /**
      * Find the index of the given word in the word list.
-     *
      * @param start
      * @param end
      * @param spelling
@@ -43,7 +40,6 @@ public class Dictionary {
 
     /**
      * Find the proper position for a word that not in the list using binary search.
-     *
      * @param start
      * @param end
      * @param spelling
@@ -65,10 +61,8 @@ public class Dictionary {
             }
         }
     }
-
     /**
      * Find a specific word.
-     *
      * @param spelling
      * @return
      */
@@ -82,10 +76,8 @@ public class Dictionary {
             return null;
         }
     }
-
     /**
      * Find a list of words starting with the given input.
-     *
      * @param input
      * @return
      */
@@ -96,11 +88,7 @@ public class Dictionary {
         Word word = wordList.get(start);
         while (word.getSpelling().startsWith(input)) {
             result.add(word);
-            if (start + 1 < size) {
-                word = wordList.get(++start);
-            } else {
-                break;
-            }
+            word = wordList.get(++start);
         }
         return result;
     }
