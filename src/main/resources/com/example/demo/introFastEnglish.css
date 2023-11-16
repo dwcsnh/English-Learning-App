@@ -1,0 +1,17 @@
+.anchorPane{
+    -fx-background-image: url('image/bk4.png');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+.button {
+    -fx-background-color: #659960;
+    -fx-background-radius: 20;
+}
+
+.button:hover {
+    -fx-background-color: #538D4E
+}
+
+.button:pressed {
+    -fx-background-color: #538D4E
+}
