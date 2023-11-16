@@ -35,10 +35,8 @@ public class HistoryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        for(Word x : historyList) {
-            listViewWord.add(x.getSpelling());
-            System.out.println(x.getSpelling());
+        for(int i = historyList.size() - 1; i >= 0; i--) {
+            listViewWord.add(historyList.get(i).getSpelling());
         }
 
         historyListView.getItems().addAll(listViewWord);
@@ -52,8 +50,6 @@ public class HistoryController implements Initializable {
                 }
         );
     }
-
-
 
     @FXML
     public void updateListView(KeyEvent event) {

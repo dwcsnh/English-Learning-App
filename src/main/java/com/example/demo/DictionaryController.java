@@ -65,7 +65,6 @@ public class DictionaryController implements Initializable {
                     Word target = parent.getDictionaryManagement().getDictionary().lookUp(input);
                     if (target != null) {
                         parent.getHistory().addWordToHistory(target);
-
                         String definition = target.getMeaning();
                         dictionaryWebView.getEngine().loadContent(definition, "text/html");
                     } else {
@@ -81,6 +80,7 @@ public class DictionaryController implements Initializable {
                     dictionaryListView.getItems().setAll(relevantWords);
                 } else {
                     dictionaryListView.getItems().clear();
+                    dictionaryListView.getItems().addAll(listViewWord);
                 }
             }
         }
