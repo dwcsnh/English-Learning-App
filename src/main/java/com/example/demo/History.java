@@ -18,4 +18,14 @@ public class History extends DictionaryManagement {
             this.writeToFile(this.getDictionary().getWordList());
         }
     }
+
+    @Override
+    public boolean isExist(Word target) {
+        for (Word word : dictionary.getWordList()) {
+            if (word.getSpelling().equals(target.getSpelling())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

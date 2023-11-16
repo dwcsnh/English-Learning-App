@@ -66,7 +66,6 @@ public class DictionaryManagement {
             FileWriter fileWriter = new FileWriter(DATA_FILE_PATH);
             for (Word word : words) {
                 fileWriter.write(word.getSpelling() + word.getMeaning() + "\n");
-                System.out.println(word.getSpelling());
             }
             fileWriter.flush();
             fileWriter.close();
@@ -108,10 +107,8 @@ public class DictionaryManagement {
     }
 
     public boolean isExist(Word target) {
-        for (Word word : dictionary.getWordList()) {
-            if (word.getSpelling().equals(target.getSpelling())) {
-                return true;
-            }
+        if(dictionary.lookUp(target.getSpelling()) != null) {
+            return true;
         }
         return false;
     }
