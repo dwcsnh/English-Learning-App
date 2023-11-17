@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
@@ -27,12 +28,15 @@ public class ContainerController implements Initializable {
     Button favoriteListButton;
     @FXML
     Button fastEnglishButton;
+    @FXML
+    Button dictionaryButton21;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
     AnchorPane historyPane;
     AnchorPane favoritePane;
     AnchorPane fastEnglishPane;
+    AnchorPane addWordPane;
     HistoryController historyController;
     DictionaryController dictionaryController;
     FavoriteController favoriteController;
@@ -106,6 +110,15 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(fastEnglishPane);
     }
 
+    public void showAddWordPane() throws IOException {
+        if (addWordPane == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("addWord.fxml"));
+            addWordPane = fxmlLoader.load();
+        }
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(addWordPane);
+    }
     public void initialize(URL location, ResourceBundle resourceBundle) {
         try {
             showDictionaryPane();
@@ -117,6 +130,9 @@ public class ContainerController implements Initializable {
     @FXML
     public void handleClickComponents(ActionEvent event) throws IOException {
         if (event.getSource() == dictionaryButton) {
+            dictionaryManagement.getDictionary().setWordList(new ArrayList<Word>());
+            dictionaryManagement.insertFromFile();
+            dictionaryController.init();
             showDictionaryPane();
             System.out.println("click dictionary button");
         } else if (event.getSource() == informationButton) {
@@ -131,6 +147,9 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == fastEnglishButton) {
             showFastEnglishPane();
             System.out.println("click fast list button");
+        } else if (event.getSource() == dictionaryButton21) {
+            showAddWordPane();
+            System.out.println("click addWord button");
         }
     }
 }

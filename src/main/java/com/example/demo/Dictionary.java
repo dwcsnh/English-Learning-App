@@ -9,6 +9,10 @@ public class Dictionary {
         wordList.add(word);
     }
 
+    public void addWordByBinary(Word word){
+        int i = insertIndex(0, wordList.size() - 1, word.getSpelling());
+        wordList.add(i, word);
+    }
     public ArrayList<Word> getWordList() {
         return wordList;
     }
