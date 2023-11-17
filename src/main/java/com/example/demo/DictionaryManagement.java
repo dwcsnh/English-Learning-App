@@ -1,23 +1,27 @@
 package com.example.demo;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static java.util.Collections.binarySearch;
-
 public class DictionaryManagement {
-    private static final String DATA_FILE_PATH = "data\\E_V.txt";
-    private static final String SPLITTING_CHARACTERS = "<html>";
+    protected String DATA_FILE_PATH;
+    protected static final String SPLITTING_CHARACTERS = "<html>";
 
-    private Dictionary dictionary;
+    protected Dictionary dictionary;
     private Map<String, Word> mapStringWord = new HashMap<>();
 
-    public DictionaryManagement() throws IOException {
+    public DictionaryManagement(String path) {
         dictionary = new Dictionary();
+        setDataFilePath(path);
         insertFromFile();
+    }
+
+    public void setDataFilePath(String path) {
+        DATA_FILE_PATH = path;
     }
 
     public void insertFromCommandline() {
@@ -34,18 +38,41 @@ public class DictionaryManagement {
             dictionary.addWord(word);
         }
     }
-    public void insertFromFile() throws IOException {
-        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(DATA_FILE_PATH), "UTF8");
 
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            String[] parts = line.split(SPLITTING_CHARACTERS);
-            String wordSpelling = parts[0];
-            String definition = SPLITTING_CHARACTERS + parts[1];
-            Word word = new Word(wordSpelling, definition);
-            dictionary.addWord(word);
-            mapStringWord.put(wordSpelling, word);
+    public void insertFromFile() {
+        try {
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(DATA_FILE_PATH), StandardCharsets.UTF_8);
+
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                int splitPosition = line.indexOf(SPLITTING_CHARACTERS);
+                if (splitPosition > 0 && splitPosition < line.length()) {
+                    String spelling = line.substring(0, splitPosition);
+                    String definition = line.substring(splitPosition);
+                    Word word = new Word(spelling, definition);
+                    dictionary.addWord(word);
+                    mapStringWord.put(spelling, word);
+                }
+            }
+            System.out.println("inserting...");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeToFile(ArrayList<Word> words) {
+        try {
+            FileWriter fileWriter = new FileWriter(DATA_FILE_PATH);
+            for (Word word : words) {
+                fileWriter.write(word.getSpelling() + word.getMeaning() + "\n");
+            }
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -79,11 +106,24 @@ public class DictionaryManagement {
         return result;
     }
 
+    public boolean isExist(Word target) {
+        if(dictionary.lookUp(target.getSpelling()) != null) {
+            return true;
+        }
+        return false;
+    }
+
     public Dictionary getDictionary() {
         return dictionary;
     }
 
     public Map<String, Word> getMapStringWord() {
         return mapStringWord;
+    }
+
+    public void print() {
+        for (Word word : dictionary.getWordList()) {
+            System.out.println(word.getSpelling());
+        }
     }
 }

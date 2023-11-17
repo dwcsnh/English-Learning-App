@@ -3,7 +3,7 @@ package com.example.demo;
 import java.util.ArrayList;
 
 public class Dictionary {
-    private ArrayList<Word> wordList = new ArrayList<>();
+    protected ArrayList<Word> wordList = new ArrayList<>();
 
     public void addWord(Word word) {
         wordList.add(word);
@@ -91,5 +91,14 @@ public class Dictionary {
             word = wordList.get(++start);
         }
         return result;
+    }
+
+    public void removeWord(String spelling) {
+        for (Word word : wordList) {
+            if (word.getSpelling().equals(spelling)) {
+                wordList.remove(word);
+                break;
+            }
+        }
     }
 }

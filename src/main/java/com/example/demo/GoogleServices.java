@@ -30,7 +30,7 @@ public class GoogleServices {
         return APP_SCRIPT_DEPLOYMENT_URL + "?text=" + text + "&source=" + sourceLang + "&target=" + targetLang;
     }
 
-    public String generatePronunciationURL(String text) {
+    public static String generatePronunciationURL(String text) {
         if (text.contains(" ")) {
             text = text.replace(" ", "%20");
         }
@@ -60,7 +60,7 @@ public class GoogleServices {
         return line;
     }
 
-    public void pronounce(String text) {
+    public static void pronounce(String text) {
         URL url;
         String audioURL = generatePronunciationURL(text);
         try {
