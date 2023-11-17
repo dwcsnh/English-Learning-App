@@ -58,7 +58,7 @@ public class DictionaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        for(Word x : word) {
+        for (Word x : word) {
             listViewWord.add(x.getSpelling());
         }
 //        System.out.println(listViewWord);
@@ -68,7 +68,7 @@ public class DictionaryController implements Initializable {
 
         dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                    if (newValue != null){
+                    if (newValue != null) {
                         Word selectedWord = mapStringWord.get(newValue.trim());
                         String definition = selectedWord.getMeaning();
                         dictionaryWebView.getEngine().loadContent(definition, "text/html");
@@ -132,12 +132,12 @@ public class DictionaryController implements Initializable {
 
     @FXML
     private void showEditWord(ActionEvent event) {
-        if(editWordOpen) {
+        if (editWordOpen) {
             return;
         }
         try {
             String selectedWord = dictionaryListView.getSelectionModel().getSelectedItem();
-            if(selectedWord != null) {
+            if (selectedWord != null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("editWord.fxml"));
                 Parent root = loader.load();
 
@@ -155,6 +155,8 @@ public class DictionaryController implements Initializable {
                 stage.setOnHidden(e -> resetMapAndWebView());
                 editWordOpen = true;
                 stage.show();
+            } else {
+                editWordController.showUnselectedWord();
             }
 
         } catch (IOException e) {

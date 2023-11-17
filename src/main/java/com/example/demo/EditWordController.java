@@ -2,7 +2,10 @@ package com.example.demo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -27,6 +30,8 @@ public class EditWordController {
     private WebView editWebView;
 
     Map<String, Word> mapStringWord;
+
+    private boolean unselectedWordOpen = false;
 
 
     @FXML
@@ -55,8 +60,34 @@ public class EditWordController {
     @FXML
     public void editUpdateDictionary(ActionEvent event) {
         Word newWord = mapStringWord.get(currentWordLabel.getText());
-        newWord.setMeaning("<html>" + editTextArea.getText() + "<html>");
+        newWord.setMeaning("<html>" + editTextArea.getText() + "</html>");
         mapStringWord.put(newWord.getSpelling(), newWord);
         closeEditWord(event);
+    }
+
+    @FXML
+    public void showUnselectedWord() {
+        if (unselectedWordOpen) {
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("unselectedWord.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Unselected Word");
+            stage.setScene(new Scene(root));
+            stage.setOnHidden(event -> unselectedWordOpen = false);
+            unselectedWordOpen = true;
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void closeUnselectedWord(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }
