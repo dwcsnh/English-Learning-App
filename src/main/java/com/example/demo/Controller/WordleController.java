@@ -9,9 +9,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -185,6 +187,8 @@ public class WordleController {
 
             Stage stage = new Stage();
             stage.setTitle("How to Play Wordle");
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.setOnHidden(event -> howToPlayOpen = false);
             howToPlayOpen = true;
@@ -210,6 +214,8 @@ public class WordleController {
 
             Stage stage = new Stage();
             stage.setTitle("You Won!!");
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -233,6 +239,8 @@ public class WordleController {
 
             Stage stage = new Stage();
             stage.setTitle("You Lose!!");
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -254,6 +262,8 @@ public class WordleController {
 
             Stage stage = new Stage();
             stage.setTitle("Invalid Input!!");
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

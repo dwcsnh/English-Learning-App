@@ -9,11 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 
 public class EditWordController {
 
@@ -73,6 +75,8 @@ public class EditWordController {
 
             Stage stage = new Stage();
             stage.setTitle("Unselected Word");
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.setOnHidden(event -> unselectedWordOpen = false);
             unselectedWordOpen = true;
