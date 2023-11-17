@@ -38,11 +38,20 @@
             <children>
                 <AnchorPane layoutX="15.0" layoutY="40.0" prefHeight="48.0" prefWidth="440.0" AnchorPane.rightAnchor="0.39999999999997726" AnchorPane.topAnchor="38.0">
                     <children>
-                        <Button layoutX="298.0" layoutY="5.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@searcher.css">
+                  <Button fx:id="unfavoriteButton" layoutX="298.0" layoutY="5.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@searcher.css">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@RemoveFromFavorite.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                        <Button fx:id="favoriteButton" layoutX="298.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#updateFavoriteList" prefHeight="35.0" prefWidth="35.0" stylesheets="@searcher.css">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@pressed heart.png" />
+                                        <Image url="@AddToFavorite.png" />
                                     </image>
                                 </ImageView>
                             </graphic>

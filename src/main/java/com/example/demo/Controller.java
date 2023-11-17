@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
-    DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
 
     ArrayList<Word> word = dictionaryManagement.getDictionary().getWordList();
     ArrayList<String> words= new ArrayList<>();
