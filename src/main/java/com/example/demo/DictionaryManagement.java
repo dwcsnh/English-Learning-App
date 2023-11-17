@@ -126,4 +126,8 @@ public class DictionaryManagement {
             System.out.println(word.getSpelling());
         }
     }
+
+    public void removeWordFromWordList(String spelling) {
+        dictionary.removeWord(spelling);
+    }
 }

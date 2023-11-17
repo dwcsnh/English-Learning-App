@@ -13,7 +13,7 @@
          <children>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" stylesheets="@google%20translate.css">
+                  <Button mnemonicParsing="false" stylesheets="@google translate.css">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>

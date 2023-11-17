@@ -7,3 +7,4 @@ tumid<html><i>tumid /'tju:mid/</i><br/><ul><li><b><i> tính từ</i></b><ul><li>
 2-way device<html><i>2-way device</i><br/><ul><li><font color='#cc0000'><b> (Tech) thiết bị 2 chiều/thu phát</b></font></li></ul></html>
 1-byte character string<html><i>1-byte character string</i><br/><ul><li><font color='#cc0000'><b> (Tech) chuỗi ký tự 1 bai</b></font></li></ul></html>
 -mer<html><i>-mer</i><br/><ul><li><font color='#cc0000'><b> hậu tố tạo danh từ có nghĩa là polyme (trùng phân) hoặc isome (đồng phân)</b></font></li></ul></html>
+-merous<html><i>-merous</i><br/><ul><li><font color='#cc0000'><b> hình thái ghép tạo tính từ có nghĩa: có một số bộ phận nhất định</b></font></li></ul></html>
