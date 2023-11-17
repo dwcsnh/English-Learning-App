@@ -19,9 +19,12 @@ public class ContainerController implements Initializable {
     Button dictionaryButton;
     @FXML
     Button informationButton;
+    @FXML
+    Button addWordButton;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
+    AnchorPane addWordPane;
 
     public void showDictionaryPane() throws IOException {
         if (dictionaryPane == null) {
@@ -43,6 +46,17 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(informationPane);
     }
 
+    public void showAddWordPane() throws IOException {
+        if (addWordPane == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("addWord.fxml"));
+            addWordPane = fxmlLoader.load();
+        }
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(addWordPane);
+    }
+
+
     public void initialize(URL location, ResourceBundle resourceBundle) {
         try {
             showDictionaryPane();
@@ -59,6 +73,9 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == informationButton) {
             showInformationPane();
             System.out.println("click information button");
+        } else if (event.getSource() == addWordButton) {
+            showAddWordPane();
+            System.out.println("click addWord button");
         }
     }
 }

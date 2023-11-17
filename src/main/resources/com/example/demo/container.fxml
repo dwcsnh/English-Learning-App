@@ -40,7 +40,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="dictionaryButton2" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                  <Button fx:id="addWordButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
