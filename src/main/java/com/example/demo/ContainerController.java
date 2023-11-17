@@ -23,12 +23,16 @@ public class ContainerController implements Initializable {
     Button informationButton;
     @FXML
     Button historyButton;
+    @FXML
+    Button favoriteListButton;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
     AnchorPane historyPane;
+    AnchorPane favoritePane;
     HistoryController historyController;
     DictionaryController dictionaryController;
+    FavoriteController favoriteController;
 
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
@@ -65,6 +69,17 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(historyPane);
     }
 
+    public void showFavoritePane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("favorite.fxml"));
+        favoritePane = fxmlLoader.load();
+        favoriteController = fxmlLoader.getController();
+
+        favoriteController.sync(this);
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(favoritePane);
+    }
+
     public void showInformationPane() throws IOException {
         if (informationPane == null) {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -94,6 +109,9 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == historyButton) {
             showHistoryPane();
             System.out.println("click history button");
+        } else if (event.getSource() == favoriteListButton) {
+            showFavoritePane();
+            System.out.println("click favorite list button");
         }
     }
 }

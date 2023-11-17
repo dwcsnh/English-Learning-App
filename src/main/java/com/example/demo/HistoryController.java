@@ -20,6 +20,7 @@ public class HistoryController implements Initializable {
     ArrayList<Word> historyList = parent.getHistory().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
     Map<String, Word> mapStringWord = parent.getHistory().getMapStringWord();
+    private Word currentWord;
 
     @FXML
     private TextField searchBar;
@@ -33,6 +34,9 @@ public class HistoryController implements Initializable {
     @FXML
     private Button speaker;
 
+    @FXML
+    private Button favoriteButton;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         for(int i = historyList.size() - 1; i >= 0; i--) {
@@ -44,6 +48,8 @@ public class HistoryController implements Initializable {
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
                         Word selectedWord = mapStringWord.get(newValue.trim());
+                        currentWord = selectedWord;
+                        setFavoriteButton(currentWord);
                         String definition = selectedWord.getMeaning();
                         historyWebView.getEngine().loadContent(definition, "text/html");
                     }
@@ -59,6 +65,8 @@ public class HistoryController implements Initializable {
                 if (!input.isEmpty()) {
                     Word target = parent.getHistory().getDictionary().lookUp(input);
                     if (target != null) {
+                        currentWord = target;
+                        setFavoriteButton(currentWord);
                         String definition = target.getMeaning();
                         historyWebView.getEngine().loadContent(definition, "text/html");
                     } else {
@@ -93,6 +101,32 @@ public class HistoryController implements Initializable {
         if (event.getSource() == speaker) {
             GoogleServices.pronounce(searchBar.getText());
         }
+    }
+
+    @FXML
+    public void updateFavoriteList() {
+        if (currentWord == null) {
+            System.out.println("Current word is null");
+        } else {
+            if (parent.getFavorite().isExist(currentWord)) {
+                System.out.println("This word is already in favorite list");
+                parent.getFavorite().removeWordFromFavorite(currentWord);
+                favoriteButton.setOpacity(1);
+            } else {
+                parent.getFavorite().addWordToFavorite(currentWord);
+                favoriteButton.setOpacity(0);
+            }
+            favoriteButton.setMouseTransparent(false);
+        }
+    }
+
+    public void setFavoriteButton(Word word) {
+        if (parent.getFavorite().isExist(word)) {
+            favoriteButton.setOpacity(0);
+        } else {
+            favoriteButton.setOpacity(1);
+        }
+        favoriteButton.setMouseTransparent(false);
     }
 
     public void sync(ContainerController parent) {
