@@ -75,7 +75,7 @@ public class AddWordController {
     }
 
     public void addWordToFile() {
-        String editDef = "<html><i>-" + target +"</i><br/><ul><li><font color='#cc0000'><b> "
+        String editDef = "<html><i>" + target +"</i><br/><ul><li><font color='#cc0000'><b> "
                         + definition + "</b></font></li></ul></html>";
         Word word = new Word(target, editDef);
         dictionaryManagement.getDictionary().addWordByBinary(word);
