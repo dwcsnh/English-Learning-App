@@ -1,7 +1,11 @@
 package com.example.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -17,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 import com.example.demo.GoogleServices;
+import javafx.stage.Stage;
 
 public class DictionaryController implements Initializable {
     ContainerController parent = new ContainerController();
@@ -39,6 +44,10 @@ public class DictionaryController implements Initializable {
 
     @FXML
     private Button favoriteButton;
+
+    private EditWordController editWordController = new EditWordController();
+
+    private boolean editWordOpen = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -92,6 +101,47 @@ public class DictionaryController implements Initializable {
                 }
             }
         }
+    }
+
+    @FXML
+    private void showEditWordPane(ActionEvent event) {
+        if (editWordOpen) {
+            return;
+        }
+        try {
+            String selectedWord = dictionaryListView.getSelectionModel().getSelectedItem();
+            if (selectedWord != null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("editWord.fxml"));
+                Parent root = loader.load();
+
+                editWordController = loader.getController();
+
+                editWordController.setCurrentWordLabel(selectedWord);
+
+                editWordController.setWebView(mapStringWord.get(selectedWord).getMeaning());
+
+                editWordController.setMapStringWord(mapStringWord);
+
+                Stage stage = new Stage();
+                stage.setTitle("Edit Word");
+                stage.setScene(new Scene(root));
+                stage.setOnHidden(e -> resetMapAndWebView());
+                editWordOpen = true;
+                stage.show();
+            } else {
+                editWordController.showUnselectedWord();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void resetMapAndWebView() {
+        String newdefinition = mapStringWord.get(dictionaryListView.getSelectionModel().getSelectedItem()).getMeaning();
+        dictionaryWebView.getEngine().loadContent(newdefinition, "text/html");
+        editWordOpen = false;
+        parent.getDictionaryManagement().writeToFile(word);
     }
 
     @FXML
