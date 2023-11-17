@@ -9,3 +9,6 @@
     -fx-background-color: #ffffff;
     -fx-background-radius: 10px 10px 10px 10px
 }
+.button {
+    -fx-background-color: transparent;
+}

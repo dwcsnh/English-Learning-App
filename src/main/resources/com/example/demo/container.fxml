@@ -11,7 +11,7 @@
     <children>
         <AnchorPane prefHeight="500.0" prefWidth="40.0" styleClass="sidebar" stylesheets="@container.css">
             <children>
-            <VBox layoutY="160.0">
+            <VBox layoutY="125.0">
                <children>
                       <Button fx:id="dictionaryButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
                      <graphic>
@@ -54,6 +54,15 @@
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@add word.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="wordleButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Wordle.png" />
                            </image>
                         </ImageView>
                      </graphic>

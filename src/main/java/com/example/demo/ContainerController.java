@@ -25,14 +25,18 @@ public class ContainerController implements Initializable {
     Button historyButton;
     @FXML
     Button favoriteListButton;
+    @FXML
+    Button wordleButton;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
     AnchorPane historyPane;
     AnchorPane favoritePane;
+    AnchorPane wordlePane;
     HistoryController historyController;
     DictionaryController dictionaryController;
     FavoriteController favoriteController;
+    WordleController wordleController;
 
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
@@ -67,6 +71,16 @@ public class ContainerController implements Initializable {
         historyController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(historyPane);
+    }
+
+    public void showWordlePane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("NewWordle.fxml"));
+        wordlePane = fxmlLoader.load();
+        wordleController = fxmlLoader.getController();
+
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(wordlePane);
     }
 
     public void showFavoritePane() throws IOException {
@@ -111,6 +125,9 @@ public class ContainerController implements Initializable {
             System.out.println("click history button");
         } else if (event.getSource() == favoriteListButton) {
             showFavoritePane();
+            System.out.println("click favorite list button");
+        } else if (event.getSource() == wordleButton) {
+            showWordlePane();
             System.out.println("click favorite list button");
         }
     }
