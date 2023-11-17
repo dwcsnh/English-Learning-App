@@ -68,6 +68,15 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button fx:id="fastEnglishButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/icons8-game-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
                 <Button fx:id="informationButton" layoutY="464.0" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">

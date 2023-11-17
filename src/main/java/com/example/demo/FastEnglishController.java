@@ -15,6 +15,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.media.Media;
@@ -50,6 +51,8 @@ public class FastEnglishController {
     private int highScoreNumber;
     private boolean preview = false;
 
+    @FXML
+    AnchorPane contentPane;
     @FXML
     private Label wordLabel;
     @FXML
@@ -93,13 +96,14 @@ public class FastEnglishController {
     public void PlayGame() throws IOException {
         System.out.println("Play");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FastEnglish.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        //Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage) playButton.getScene().getWindow();
-        stage.setScene(scene);
-
+        //stage.setScene(scene);*/
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(fxmlLoader.load());
         FastEnglishController fastEnglishController = fxmlLoader.getController();
         stage.setOnCloseRequest(event -> {
-            fastEnglishController.shutdown(); // Gọi hàm shutdown từ controller trước khi đóng ứng dụng
+            fastEnglishController.shutdown();
         });
         fastEnglishController.init();
     }
