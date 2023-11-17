@@ -13,9 +13,13 @@ public class History extends DictionaryManagement {
             this.writeToFile(this.dictionary.getWordList());
             System.out.println("history recorded!");
         } else {
-            this.dictionary.getWordList().remove(word);
+            this.dictionary.removeWord(word.getSpelling());
             this.dictionary.addWord(word);
-            this.writeToFile(this.getDictionary().getWordList());
+            this.writeToFile(this.dictionary.getWordList());
+        }
+        System.out.println("Current history: ");
+        for(Word w : this.dictionary.getWordList()) {
+            System.out.println(w.getSpelling());
         }
     }
 
@@ -25,6 +29,7 @@ public class History extends DictionaryManagement {
             if (word.getSpelling().equals(target.getSpelling())) {
                 return true;
             }
+            System.out.println(word.getSpelling());
         }
         return false;
     }

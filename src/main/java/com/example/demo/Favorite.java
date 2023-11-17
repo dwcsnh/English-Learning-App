@@ -20,6 +20,7 @@ public class Favorite extends DictionaryManagement {
     }
 
     public void removeWordFromFavorite(Word word) {
-        this.dictionary.getWordList().remove(word);
+        this.dictionary.removeWord(word.getSpelling());
+        this.writeToFile(this.dictionary.getWordList());
     }
 }

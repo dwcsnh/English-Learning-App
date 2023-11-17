@@ -92,4 +92,13 @@ public class Dictionary {
         }
         return result;
     }
+
+    public void removeWord(String spelling) {
+        for (Word word : wordList) {
+            if (word.getSpelling().equals(spelling)) {
+                wordList.remove(word);
+                break;
+            }
+        }
+    }
 }
