@@ -62,41 +62,6 @@ public class FavoriteController implements Initializable {
         );
     }
 
-    public void init() {
-        listViewWord.clear();
-        word = parent.getDictionaryManagement().getDictionary().getWordList();
-        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-        for(Word x : word) {
-            listViewWord.add(x.getSpelling());
-        }
-        //System.out.println(listViewWord);
-        /*System.out.println("......");
-        for (String s : listViewWord) {
-            System.out.println(s);
-        }
-        System.out.println("......");*/
-        System.out.println("......");
-        for (Word s : word) {
-            System.out.println(s.getSpelling());
-        }
-        System.out.println("......");
-        dictionaryListView.getItems().clear();
-        dictionaryListView.getItems().addAll(listViewWord);
-        dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue != null){
-                        Word selectedWord = mapStringWord.get(newValue.trim());
-                        currentWord = selectedWord;
-                        setFavoriteButton(currentWord);
-                        parent.getHistory().addWordToHistory(selectedWord);
-                        String definition = selectedWord.getMeaning();
-                        dictionaryWebView.getEngine().loadContent(definition, "text/html");
-                    }
-                }
-        );
-    }
-
-
     @FXML
     public void updateListView(KeyEvent event) {
         if (event.getSource() == searchBar) {

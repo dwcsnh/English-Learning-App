@@ -1,5 +1,8 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.BasePlus.DictionaryManagement;
+import com.example.demo.BasePlus.Word;
+import com.example.demo.Controller.DictionaryController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextArea;

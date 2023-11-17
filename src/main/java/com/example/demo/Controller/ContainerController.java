@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.BasePlus.DictionaryManagement;
 import com.example.demo.BasePlus.Favorite;
 import com.example.demo.BasePlus.History;
+import com.example.demo.BasePlus.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -116,7 +117,7 @@ public class ContainerController implements Initializable {
     public void showAddWordPane() throws IOException {
         if (addWordPane == null) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("addWord.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/addWord.fxml"));
             addWordPane = fxmlLoader.load();
         }
         contentPane.getChildren().clear();
