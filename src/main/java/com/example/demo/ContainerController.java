@@ -25,14 +25,18 @@ public class ContainerController implements Initializable {
     Button historyButton;
     @FXML
     Button favoriteListButton;
+    @FXML
+    Button fastEnglishButton;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
     AnchorPane historyPane;
     AnchorPane favoritePane;
+    AnchorPane fastEnglishPane;
     HistoryController historyController;
     DictionaryController dictionaryController;
     FavoriteController favoriteController;
+    FastEnglishController fastEnglishController;
 
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
@@ -90,6 +94,18 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(informationPane);
     }
 
+    public void showFastEnglishPane() throws IOException {
+        if (fastEnglishPane == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("introFastEnglish.fxml"));
+            fastEnglishPane = fxmlLoader.load();
+            fastEnglishController = fxmlLoader.getController();
+        }
+        //fastEnglishController.init();
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(fastEnglishPane);
+    }
+
     public void initialize(URL location, ResourceBundle resourceBundle) {
         try {
             showDictionaryPane();
@@ -112,6 +128,9 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == favoriteListButton) {
             showFavoritePane();
             System.out.println("click favorite list button");
+        } else if (event.getSource() == fastEnglishButton) {
+            showFastEnglishPane();
+            System.out.println("click fast list button");
         }
     }
 }

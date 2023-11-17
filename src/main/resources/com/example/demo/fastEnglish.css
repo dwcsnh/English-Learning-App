@@ -1,0 +1,9 @@
+.anchorPane{
+    -fx-background-image: url('image/bk4.png'); /* Đường dẫn đến hình ảnh */
+    -fx-background-size: cover; /* Đảm bảo hình ảnh nền hiển thị đầy đủ */
+    -fx-background-repeat: no-repeat; /* Ngăn lặp lại hình ảnh */
+}
+.wordLabel {
+    -fx-background-color: #FFFFFF; /* Màu cam */
+    -fx-border-radius: 5px;
+}
