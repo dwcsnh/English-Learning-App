@@ -47,7 +47,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button layoutX="345.0" layoutY="5.0" mnemonicParsing="false" onAction="#showEditWord" prefHeight="35.0" prefWidth="35.0" stylesheets="@searcher.css">
+                        <Button layoutX="345.0" layoutY="5.0" mnemonicParsing="false" onAction="#showEditWordPane" prefHeight="35.0" prefWidth="35.0" stylesheets="@searcher.css">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>

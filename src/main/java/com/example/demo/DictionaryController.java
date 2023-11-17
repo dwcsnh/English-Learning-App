@@ -131,7 +131,7 @@ public class DictionaryController implements Initializable {
     }
 
     @FXML
-    private void showEditWord(ActionEvent event) {
+    private void showEditWordPane(ActionEvent event) {
         if (editWordOpen) {
             return;
         }

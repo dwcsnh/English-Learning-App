@@ -84,7 +84,6 @@ public class DictionaryManagement {
             FileWriter fileWriter = new FileWriter(DATA_FILE_PATH);
             for (Word word : words) {
                 fileWriter.write(word.getSpelling() + word.getMeaning() + "\n");
-                System.out.println(word.getSpelling());
             }
             fileWriter.flush();
             fileWriter.close();
