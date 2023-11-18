@@ -21,7 +21,7 @@ public class FavoriteController implements Initializable {
     ContainerController parent = new ContainerController();
     ArrayList<Word> word = parent.getFavorite().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = parent.getFavorite().getMapStringWord();
+    Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
     private Word currentWord;
 
     @FXML

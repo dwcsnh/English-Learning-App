@@ -21,7 +21,7 @@ public class HistoryController implements Initializable {
     ContainerController parent = new ContainerController();
     ArrayList<Word> historyList = parent.getHistory().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = parent.getHistory().getMapStringWord();
+    Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
     private Word currentWord;
 
     @FXML

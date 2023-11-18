@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebView;
 import javafx.scene.input.KeyEvent;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javafx.stage.Stage;
@@ -126,6 +128,8 @@ public class DictionaryController implements Initializable {
                 Stage stage = new Stage();
                 stage.setTitle("Edit Word");
                 stage.setScene(new Scene(root));
+                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+                stage.getIcons().add(icon);
                 stage.setOnHidden(e -> resetMapAndWebView());
                 editWordOpen = true;
                 stage.show();
