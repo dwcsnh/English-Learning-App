@@ -20,6 +20,7 @@ public class ContainerController implements Initializable {
     private History history = new History("data\\history.txt");
     private Favorite favorite = new Favorite("data\\favorite.txt");
     private DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
+    private boolean pickAddWord = false;
     @FXML
     AnchorPane contentPane;
     @FXML
@@ -45,6 +46,7 @@ public class ContainerController implements Initializable {
     DictionaryController dictionaryController;
     FavoriteController favoriteController;
     FastEnglishController fastEnglishController;
+    AddWordController addWordController;
 
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
@@ -119,6 +121,7 @@ public class ContainerController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/addWord.fxml"));
             addWordPane = fxmlLoader.load();
+            addWordController = fxmlLoader.getController();
         }
         contentPane.getChildren().clear();
         contentPane.getChildren().add(addWordPane);
@@ -134,9 +137,14 @@ public class ContainerController implements Initializable {
     @FXML
     public void handleClickComponents(ActionEvent event) throws IOException {
         if (event.getSource() == dictionaryButton) {
-            dictionaryManagement.getDictionary().setWordList(new ArrayList<Word>());
-            dictionaryManagement.insertFromFile();
-            dictionaryController.init();
+            pickAddWord = addWordController.isAdded();
+            if (pickAddWord) {
+                dictionaryManagement.getDictionary().setWordList(new ArrayList<Word>());
+                dictionaryManagement.insertFromFile();
+                dictionaryController.init();
+                pickAddWord = false;
+                addWordController.setAdded(false);
+            }
             showDictionaryPane();
             System.out.println("click dictionary button");
         } else if (event.getSource() == informationButton) {
@@ -152,6 +160,7 @@ public class ContainerController implements Initializable {
             showFastEnglishPane();
             System.out.println("click fast list button");
         } else if (event.getSource() == dictionaryButton21) {
+            //pickAddWord = true;
             showAddWordPane();
             System.out.println("click addWord button");
         }

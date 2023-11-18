@@ -24,6 +24,7 @@ public class AddWordController {
     private TextField targetTextField;
     @FXML
     private TextArea definitionTextArea;
+    boolean isAdded = false;
 
     public AddWordController() throws IOException {
     }
@@ -100,6 +101,7 @@ public class AddWordController {
         //dictionaryController.setWords(words);
         dictionaryManagement.writeToFile(words);
         //dictionaryController.setAddWord(true);
+        isAdded = true;
     }
 
     public void setAlertOnWordExist() {
@@ -137,5 +139,13 @@ public class AddWordController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    public boolean isAdded() {
+        return isAdded;
+    }
+
+    public void setAdded(boolean added) {
+        isAdded = added;
     }
 }
