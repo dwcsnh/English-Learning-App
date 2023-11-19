@@ -1,6 +1,4 @@
-package com.example.demo;
-
-import java.io.*;
+package com.example.demo.BasePlus;
 
 public class History extends DictionaryManagement {
     public History(String path) {

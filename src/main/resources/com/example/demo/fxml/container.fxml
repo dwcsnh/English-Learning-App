@@ -7,83 +7,83 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="container" stylesheets="@container.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ContainerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="container" stylesheets="@../container.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.ContainerController">
     <children>
-        <AnchorPane prefHeight="500.0" prefWidth="40.0" styleClass="sidebar" stylesheets="@container.css">
+        <AnchorPane prefHeight="500.0" prefWidth="40.0" styleClass="sidebar" stylesheets="@../container.css">
             <children>
             <VBox layoutY="125.0">
                <children>
-                      <Button fx:id="dictionaryButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                      <Button fx:id="dictionaryButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@home.png" />
+                              <Image url="@../home.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="dictionaryButton1" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                  <Button fx:id="googleTranslateButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@google translate.png" />
+                              <Image url="@../google translate.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="historyButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                  <Button fx:id="historyButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@history.png" />
+                              <Image url="@../history.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="favoriteListButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                  <Button fx:id="favoriteListButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@FavoriteFolder.png" />
+                              <Image url="@../FavoriteFolder.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="dictionaryButton21" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                  <Button fx:id="dictionaryButton21" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@add word.png" />
+                              <Image url="@../add word.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="wordleButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                  <Button fx:id="wordleButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@Wordle.png" />
+                              <Image url="@../Wordle.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                   <Separator />
-                  <Button fx:id="dictionaryButton3" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                  <Button fx:id="dictionaryButton3" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@setting.png" />
+                              <Image url="@../setting.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                </children>
             </VBox>
-                <Button fx:id="informationButton" layoutY="464.0" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@container.css">
+                <Button fx:id="informationButton" layoutY="464.0" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@info.png" />
+                        <Image url="@../info.png" />
                      </image>
                   </ImageView>
                </graphic>

@@ -1,5 +1,8 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.BasePlus.DictionaryManagement;
+import com.example.demo.BasePlus.Favorite;
+import com.example.demo.BasePlus.History;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,16 +30,20 @@ public class ContainerController implements Initializable {
     Button favoriteListButton;
     @FXML
     Button wordleButton;
+    @FXML
+    Button googleTranslateButton;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
     AnchorPane historyPane;
     AnchorPane favoritePane;
     AnchorPane wordlePane;
+    AnchorPane googleTranslatePane;
     HistoryController historyController;
     DictionaryController dictionaryController;
     FavoriteController favoriteController;
     WordleController wordleController;
+    GoogleTranslateController googleTranslateController;
 
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
@@ -53,7 +60,7 @@ public class ContainerController implements Initializable {
     public void showDictionaryPane() throws IOException {
         if (dictionaryPane == null) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("dictionary.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/dictionary.fxml"));
             dictionaryPane = fxmlLoader.load();
             dictionaryController = fxmlLoader.getController();
         }
@@ -64,7 +71,7 @@ public class ContainerController implements Initializable {
 
     public void showHistoryPane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("history.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/history.fxml"));
         historyPane = fxmlLoader.load();
         historyController = fxmlLoader.getController();
 
@@ -75,7 +82,7 @@ public class ContainerController implements Initializable {
 
     public void showWordlePane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("NewWordle.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/NewWordle.fxml"));
         wordlePane = fxmlLoader.load();
         wordleController = fxmlLoader.getController();
 
@@ -85,7 +92,7 @@ public class ContainerController implements Initializable {
 
     public void showFavoritePane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("favorite.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/favorite.fxml"));
         favoritePane = fxmlLoader.load();
         favoriteController = fxmlLoader.getController();
 
@@ -94,10 +101,21 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(favoritePane);
     }
 
+    public void showGoogleTranslatePane() throws IOException {
+        if (googleTranslatePane == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/google translate.fxml"));
+            googleTranslatePane = fxmlLoader.load();
+            googleTranslateController = fxmlLoader.getController();
+        }
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(googleTranslatePane);
+    }
+
     public void showInformationPane() throws IOException {
         if (informationPane == null) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("information.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/information.fxml"));
             informationPane = fxmlLoader.load();
         }
         contentPane.getChildren().clear();
@@ -128,7 +146,10 @@ public class ContainerController implements Initializable {
             System.out.println("click favorite list button");
         } else if (event.getSource() == wordleButton) {
             showWordlePane();
-            System.out.println("click favorite list button");
+            System.out.println("click wordle button");
+        } else if (event.getSource() == googleTranslateButton) {
+            showGoogleTranslatePane();
+            System.out.println("click google translate button");
         }
     }
 }

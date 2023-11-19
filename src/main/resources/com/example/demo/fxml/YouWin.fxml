@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: #121213;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.WordleController">
+<AnchorPane prefHeight="300.0" prefWidth="250.0" style="-fx-background-color: #121213;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.WordleController">
    <children>
       <Label alignment="CENTER" layoutX="42.0" prefHeight="54.0" prefWidth="126.0" text="You Won !!" textFill="#659960">
          <font>
@@ -16,7 +16,7 @@
       </Label>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="168.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@champion.png" />
+            <Image url="@../champion.png" />
          </image>
       </ImageView>
       <Button layoutX="61.0" layoutY="123.0" mnemonicParsing="false" onAction="#closeYouWinAndReplay" prefHeight="54.0" prefWidth="126.0" style="-fx-background-color: #659960;" text="New Game" textFill="WHITE">

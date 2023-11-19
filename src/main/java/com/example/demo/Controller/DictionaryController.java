@@ -1,22 +1,21 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.BasePlus.Word;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
-import com.example.demo.GoogleServices;
+import com.example.demo.BasePlus.GoogleServices;
 
 public class DictionaryController implements Initializable {
     ContainerController parent = new ContainerController();
@@ -105,7 +104,7 @@ public class DictionaryController implements Initializable {
     @FXML
     public void readWord(MouseEvent event) {
         if (event.getSource() == speaker) {
-            GoogleServices.pronounce(searchBar.getText());
+            GoogleServices.pronounce(searchBar.getText(), "en");
         }
     }
 

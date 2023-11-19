@@ -1,35 +1,37 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.BasePlus.GoogleServices;
+import com.example.demo.BasePlus.Word;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.web.WebView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebView;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class FavoriteController implements Initializable {
+public class HistoryController implements Initializable {
     ContainerController parent = new ContainerController();
-    ArrayList<Word> word = parent.getFavorite().getDictionary().getWordList();
+    ArrayList<Word> historyList = parent.getHistory().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = parent.getFavorite().getMapStringWord();
+    Map<String, Word> mapStringWord = parent.getHistory().getMapStringWord();
     private Word currentWord;
 
     @FXML
     private TextField searchBar;
 
     @FXML
-    private ListView<String> favoriteListView;
+    private ListView<String> historyListView;
 
     @FXML
-    private WebView favoriteWebView;
+    private WebView historyWebView;
 
     @FXML
     private Button speaker;
@@ -39,22 +41,19 @@ public class FavoriteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        for(Word x : word) {
-            listViewWord.add(x.getSpelling());
+        for(int i = historyList.size() - 1; i >= 0; i--) {
+            listViewWord.add(historyList.get(i).getSpelling());
         }
-//        System.out.println(listViewWord);
 
-        favoriteListView.getItems().addAll(listViewWord);
-        favoriteListView.getSelectionModel().selectedItemProperty().addListener(
+        historyListView.getItems().addAll(listViewWord);
+        historyListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
                         Word selectedWord = mapStringWord.get(newValue.trim());
                         currentWord = selectedWord;
                         setFavoriteButton(currentWord);
-                        parent.getHistory().addWordToHistory(selectedWord);
                         String definition = selectedWord.getMeaning();
-                        favoriteWebView.getEngine().loadContent(definition, "text/html");
+                        historyWebView.getEngine().loadContent(definition, "text/html");
                     }
                 }
         );
@@ -63,16 +62,15 @@ public class FavoriteController implements Initializable {
     @FXML
     public void updateListView(KeyEvent event) {
         if (event.getSource() == searchBar) {
-            String input = searchBar.getText();
             if (event.getCode() == KeyCode.ENTER) {
+                String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    Word target = parent.getFavorite().getDictionary().lookUp(input);
+                    Word target = parent.getHistory().getDictionary().lookUp(input);
                     if (target != null) {
                         currentWord = target;
                         setFavoriteButton(currentWord);
-                        parent.getHistory().addWordToHistory(target);
                         String definition = target.getMeaning();
-                        favoriteWebView.getEngine().loadContent(definition, "text/html");
+                        historyWebView.getEngine().loadContent(definition, "text/html");
                     } else {
                         System.out.println("cannot find word");
                     }
@@ -80,20 +78,21 @@ public class FavoriteController implements Initializable {
                     System.out.println("null");
                 }
             } else {
+                String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    ArrayList<String> relevantWords = parent.getFavorite().getSearcher(input);
-                    favoriteListView.getItems().setAll(relevantWords);
+                    ArrayList<String> relevantWords = parent.getHistory().getSearcher(input);
+                    historyListView.getItems().setAll(relevantWords);
                 } else {
-                    favoriteListView.getItems().clear();
-                    favoriteListView.getItems().addAll(listViewWord);
+                    historyListView.getItems().clear();
                 }
             }
+            parent.getHistory().print();
         }
     }
 
     @FXML
-    public void updateSearchBar() {
-        String spelling = favoriteListView.getSelectionModel().getSelectedItem();
+    public void updateSearchBar(MouseEvent event) {
+        String spelling = historyListView.getSelectionModel().getSelectedItem();
         if (spelling != null) {
             searchBar.setText(spelling);
         }
@@ -102,7 +101,7 @@ public class FavoriteController implements Initializable {
     @FXML
     public void readWord(MouseEvent event) {
         if (event.getSource() == speaker) {
-            GoogleServices.pronounce(searchBar.getText());
+            GoogleServices.pronounce(searchBar.getText(), "en");
         }
     }
 
@@ -133,9 +132,6 @@ public class FavoriteController implements Initializable {
     }
 
     public void sync(ContainerController parent) {
-        if (this.parent == null) {
-            System.out.println("null");
-        }
         this.parent = parent;
     }
 }

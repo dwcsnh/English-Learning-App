@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.BasePlus;
 
 public class Favorite extends DictionaryManagement {
     public Favorite(String path) {

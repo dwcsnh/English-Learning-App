@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.BasePlus;
 
 public class Word {
     private String spelling;

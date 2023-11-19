@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.BasePlus.DictionaryManagement;
+import com.example.demo.BasePlus.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
