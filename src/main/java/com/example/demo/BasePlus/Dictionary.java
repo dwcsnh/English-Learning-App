@@ -15,6 +15,12 @@ public class Dictionary {
     public void setWordList(ArrayList<Word> words) {
         wordList = words;
     }
+
+    public void addWordByBinary(Word word){
+        int i = insertIndex(0, wordList.size() - 1, word.getSpelling());
+        wordList.add(i, word);
+    }
+
     /**
      * Find the index of the given word in the word list.
      * @param start

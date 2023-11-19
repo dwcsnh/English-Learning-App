@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.BasePlus.DictionaryManagement;
 import com.example.demo.BasePlus.Favorite;
 import com.example.demo.BasePlus.History;
+import com.example.demo.BasePlus.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +13,14 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
     private History history = new History("data\\history.txt");
     private Favorite favorite = new Favorite("data\\favorite.txt");
     private DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
+    private boolean pickAddWord = false;
     @FXML
     AnchorPane contentPane;
     @FXML
@@ -32,18 +35,22 @@ public class ContainerController implements Initializable {
     Button wordleButton;
     @FXML
     Button googleTranslateButton;
+    @FXML
+    Button addWordButton;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
     AnchorPane historyPane;
     AnchorPane favoritePane;
     AnchorPane wordlePane;
+    AnchorPane addWordPane;
     AnchorPane googleTranslatePane;
     HistoryController historyController;
     DictionaryController dictionaryController;
     FavoriteController favoriteController;
     WordleController wordleController;
     GoogleTranslateController googleTranslateController;
+    AddWordController addWordController;
 
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
@@ -112,6 +119,17 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(googleTranslatePane);
     }
 
+    public void showAddWordPane() throws IOException {
+        if (addWordPane == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/addWord.fxml"));
+            addWordPane = fxmlLoader.load();
+            addWordController = fxmlLoader.getController();
+        }
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(addWordPane);
+    }
+
     public void showInformationPane() throws IOException {
         if (informationPane == null) {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -133,6 +151,14 @@ public class ContainerController implements Initializable {
     @FXML
     public void handleClickComponents(ActionEvent event) throws IOException {
         if (event.getSource() == dictionaryButton) {
+            pickAddWord = addWordController.isAdded();
+            if (pickAddWord) {
+                dictionaryManagement.getDictionary().setWordList(new ArrayList<Word>());
+                dictionaryManagement.insertFromFile();
+                dictionaryController.init();
+                pickAddWord = false;
+                addWordController.setAdded(false);
+            }
             showDictionaryPane();
             System.out.println("click dictionary button");
         } else if (event.getSource() == informationButton) {
@@ -150,6 +176,10 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == googleTranslateButton) {
             showGoogleTranslatePane();
             System.out.println("click google translate button");
+        } else if (event.getSource() == addWordButton) {
+            //pickAddWord = true;
+            showAddWordPane();
+            System.out.println("click addWord button");
         }
     }
 }

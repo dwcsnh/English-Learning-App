@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="760.0" styleClass="container" stylesheets="@container.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.GoogleTranslateController">
+   <children>
+      <AnchorPane prefHeight="80.0" prefWidth="760.0" />
+      <AnchorPane layoutY="90.0" prefHeight="420.0" prefWidth="380.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <HBox AnchorPane.leftAnchor="15.0">
+               <children>
+                  <Button fx:id="sourceEn" mnemonicParsing="false" onMouseClicked="#updateLanguage" styleClass="sidebar-button" stylesheets="@container.css">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@GreatBritainFlag.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="sourceVi" mnemonicParsing="false" onMouseClicked="#updateLanguage" styleClass="sidebar-button" stylesheets="@container.css">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@VietNamFlag.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <TextArea fx:id="inputTextArea" layoutX="14.0" layoutY="43.0" onKeyReleased="#translateText" prefHeight="300.0" prefWidth="350.0" promptText="Anything you want to translate" wrapText="true" AnchorPane.leftAnchor="15.0">
+               <font>
+                  <Font size="18.0" />
+               </font></TextArea>
+            <Button fx:id="sourceSpeaker" layoutX="313.0" mnemonicParsing="false" onMouseClicked="#speakSourceLanguage" styleClass="sidebar-button" stylesheets="@container.css">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@audio.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="380.0" layoutY="90.0" prefHeight="420.0" prefWidth="380.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <HBox AnchorPane.leftAnchor="15.0">
+               <children>
+                  <Button fx:id="targetEn" mnemonicParsing="false" onMouseClicked="#updateLanguage" styleClass="sidebar-button" stylesheets="@container.css">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@GreatBritainFlag.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="targetVi" mnemonicParsing="false" onMouseClicked="#updateLanguage" styleClass="sidebar-button" stylesheets="@container.css">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@VietNamFlag.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <TextArea fx:id="translationTextArea" editable="false" layoutX="14.0" layoutY="43.0" prefHeight="300.0" prefWidth="350.0" promptText="Translation" wrapText="true" AnchorPane.leftAnchor="14.0">
+               <font>
+                  <Font size="18.0" />
+               </font></TextArea>
+            <Button fx:id="targetSpeaker" layoutX="313.0" mnemonicParsing="false" onMouseClicked="#speakTargetLanguage" styleClass="sidebar-button" stylesheets="@container.css">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@audio.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

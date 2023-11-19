@@ -16,7 +16,7 @@
       </Label>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="168.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../champion.png" />
+            <Image url="@../logo/champion.png" />
          </image>
       </ImageView>
       <Button layoutX="61.0" layoutY="123.0" mnemonicParsing="false" onAction="#closeYouWinAndReplay" prefHeight="54.0" prefWidth="126.0" style="-fx-background-color: #659960;" text="New Game" textFill="WHITE">

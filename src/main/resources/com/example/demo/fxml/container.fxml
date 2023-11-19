@@ -17,7 +17,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../home.png" />
+                              <Image url="@../logo/home.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -26,7 +26,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../google translate.png" />
+                              <Image url="@../logo/google translate.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -35,7 +35,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../history.png" />
+                              <Image url="@../logo/history.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -44,16 +44,16 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../FavoriteFolder.png" />
+                              <Image url="@../logo/FavoriteFolder.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="dictionaryButton21" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
+                  <Button fx:id="addWordButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../add word.png" />
+                              <Image url="@../logo/add word.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -62,7 +62,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Wordle.png" />
+                              <Image url="@../logo/Wordle.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -72,7 +72,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../setting.png" />
+                              <Image url="@../logo/setting.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -83,7 +83,7 @@
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../info.png" />
+                        <Image url="@../logo/info.png" />
                      </image>
                   </ImageView>
                </graphic>
