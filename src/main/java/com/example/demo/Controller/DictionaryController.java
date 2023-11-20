@@ -81,17 +81,6 @@ public class DictionaryController implements Initializable {
         for(Word x : word) {
             listViewWord.add(x.getSpelling());
         }
-        //System.out.println(listViewWord);
-        /*System.out.println("......");
-        for (String s : listViewWord) {
-            System.out.println(s);
-        }
-        System.out.println("......");*/
-        System.out.println("......");
-        for (Word s : word) {
-            System.out.println(s.getSpelling());
-        }
-        System.out.println("......");
         dictionaryListView.getItems().clear();
         dictionaryListView.getItems().addAll(listViewWord);
         dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
