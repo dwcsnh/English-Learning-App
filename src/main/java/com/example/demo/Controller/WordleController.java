@@ -180,7 +180,7 @@ public class WordleController {
             return;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("howToPlay.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/fxml/howToPlay.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -203,7 +203,7 @@ public class WordleController {
     @FXML
     public void showWinTheGame() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("YouWin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/fxml/YouWin.fxml"));
             Parent root = loader.load();
             WordleController wordleController = loader.getController();
             wordleController.youWonLabel.setText("It's: " + ans);
@@ -226,7 +226,7 @@ public class WordleController {
     @FXML
     public void showLoseTheGame() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("YouLose.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/fxml/YouLose.fxml"));
             Parent root = loader.load();
             WordleController wordleController = loader.getController();
             wordleController.youWonLabel.setText("It's: " + ans);

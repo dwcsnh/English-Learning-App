@@ -26,8 +26,6 @@ public class ContainerController implements Initializable {
     @FXML
     Button dictionaryButton;
     @FXML
-    Button informationButton;
-    @FXML
     Button historyButton;
     @FXML
     Button favoriteListButton;
@@ -112,11 +110,6 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(addWordPane);
     }
 
-    public void showInformationPane() {
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(informationPane);
-    }
-
     public void initialize(URL location, ResourceBundle resourceBundle) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -165,13 +158,6 @@ public class ContainerController implements Initializable {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/information.fxml"));
-            informationPane = fxmlLoader.load();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
             showDictionaryPane();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -189,9 +175,6 @@ public class ContainerController implements Initializable {
             }
             showDictionaryPane();
             System.out.println("click dictionary button");
-        } else if (event.getSource() == informationButton) {
-            showInformationPane();
-            System.out.println("click information button");
         } else if (event.getSource() == historyButton) {
             showHistoryPane();
             System.out.println("click history button");

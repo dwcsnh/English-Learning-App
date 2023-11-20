@@ -11,7 +11,7 @@
     <children>
         <AnchorPane prefHeight="500.0" prefWidth="40.0" styleClass="sidebar" stylesheets="@../container.css">
             <children>
-            <VBox layoutY="125.0">
+            <VBox layoutY="143.0">
                <children>
                       <Button fx:id="dictionaryButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
@@ -58,6 +58,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Separator />
                   <Button fx:id="wordleButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -67,27 +68,8 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Separator />
-                  <Button fx:id="dictionaryButton3" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../logo/setting.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
             </VBox>
-                <Button fx:id="informationButton" layoutY="464.0" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../logo/info.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="contentPane" layoutX="40.0" prefHeight="500.0" prefWidth="760.0" style="-fx-background-color: #ffffff;" />
