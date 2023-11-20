@@ -127,7 +127,8 @@ public class DictionaryManagement {
         }
     }
 
-    public void removeWordFromWordList(String spelling) {
-        dictionary.removeWord(spelling);
+    public void removeWordFromFile(Word word) {
+        this.getDictionary().removeWord(word.getSpelling());
+        writeToFile(this.getDictionary().getWordList());
     }
 }

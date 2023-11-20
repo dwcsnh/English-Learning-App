@@ -148,6 +148,24 @@ public class FavoriteController implements Initializable {
         parent.getDictionaryManagement().writeToFile(word);
     }
 
+    public void removeWord() {
+        if (currentWord != null) {
+            parent.getDictionaryManagement().getMapStringWord().remove(currentWord.getSpelling());
+            parent.getDictionaryManagement().removeWordFromFile(currentWord);
+            parent.getHistory().removeWordFromFile(currentWord);
+            parent.getFavorite().removeWordFromFile(currentWord);
+            word = parent.getFavorite().getDictionary().getWordList();
+            listViewWord.clear();
+            for (Word w : word) {
+                listViewWord.add(w.getSpelling());
+            }
+            favoriteListView.getItems().clear();
+            favoriteListView.getItems().addAll(listViewWord);
+            favoriteWebView.getEngine().loadContent("");
+            searchBar.clear();
+        }
+    }
+
     @FXML
     public void updateSearchBar() {
         String spelling = favoriteListView.getSelectionModel().getSelectedItem();

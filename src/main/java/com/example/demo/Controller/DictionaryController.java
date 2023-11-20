@@ -83,18 +83,6 @@ public class DictionaryController implements Initializable {
         }
         dictionaryListView.getItems().clear();
         dictionaryListView.getItems().addAll(listViewWord);
-        dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue != null){
-                        Word selectedWord = mapStringWord.get(newValue.trim());
-                        currentWord = selectedWord;
-                        setFavoriteButton(currentWord);
-                        parent.getHistory().addWordToHistory(selectedWord);
-                        String definition = selectedWord.getMeaning();
-                        dictionaryWebView.getEngine().loadContent(definition, "text/html");
-                    }
-                }
-        );
     }
 
     @FXML
@@ -169,6 +157,24 @@ public class DictionaryController implements Initializable {
         dictionaryWebView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
         parent.getDictionaryManagement().writeToFile(word);
+    }
+
+    public void removeWord() {
+        if (currentWord != null) {
+            parent.getDictionaryManagement().getMapStringWord().remove(currentWord.getSpelling());
+            parent.getDictionaryManagement().removeWordFromFile(currentWord);
+            parent.getHistory().removeWordFromFile(currentWord);
+            parent.getFavorite().removeWordFromFile(currentWord);
+            word = parent.getDictionaryManagement().getDictionary().getWordList();
+            listViewWord.clear();
+            for (Word w : word) {
+                listViewWord.add(w.getSpelling());
+            }
+            dictionaryListView.getItems().clear();
+            dictionaryListView.getItems().addAll(listViewWord);
+            dictionaryWebView.getEngine().loadContent("");
+            searchBar.clear();
+        }
     }
 
     @FXML

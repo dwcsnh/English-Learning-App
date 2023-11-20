@@ -145,6 +145,24 @@ public class HistoryController implements Initializable {
         parent.getDictionaryManagement().writeToFile(historyList);
     }
 
+    public void removeWord() {
+        if (currentWord != null) {
+            parent.getDictionaryManagement().getMapStringWord().remove(currentWord.getSpelling());
+            parent.getDictionaryManagement().removeWordFromFile(currentWord);
+            parent.getHistory().removeWordFromFile(currentWord);
+            parent.getFavorite().removeWordFromFile(currentWord);
+            historyList = parent.getHistory().getDictionary().getWordList();
+            listViewWord.clear();
+            for (Word w : historyList) {
+                listViewWord.add(w.getSpelling());
+            }
+            historyListView.getItems().clear();
+            historyListView.getItems().addAll(listViewWord);
+            historyWebView.getEngine().loadContent("");
+            searchBar.clear();
+        }
+    }
+
     @FXML
     public void updateSearchBar(MouseEvent event) {
         String spelling = historyListView.getSelectionModel().getSelectedItem();

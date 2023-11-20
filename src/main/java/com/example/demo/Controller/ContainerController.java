@@ -64,7 +64,12 @@ public class ContainerController implements Initializable {
         return favorite;
     }
 
-    public void showDictionaryPane() {
+    public void showDictionaryPane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/dictionary.fxml"));
+        dictionaryPane = fxmlLoader.load();
+        dictionaryController = fxmlLoader.getController();
+
         dictionaryController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(dictionaryPane);
@@ -86,7 +91,12 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(wordlePane);
     }
 
-    public void showFavoritePane() {
+    public void showFavoritePane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/favorite.fxml"));
+        favoritePane = fxmlLoader.load();
+        favoriteController = fxmlLoader.getController();
+
         favoriteController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(favoritePane);
@@ -161,7 +171,11 @@ public class ContainerController implements Initializable {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        showDictionaryPane();
+        try {
+            showDictionaryPane();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
