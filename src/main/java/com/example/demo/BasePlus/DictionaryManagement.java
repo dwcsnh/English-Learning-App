@@ -55,7 +55,6 @@ public class DictionaryManagement {
                     mapStringWord.put(spelling, word);
                 }
             }
-            System.out.println("inserting...");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -119,12 +118,6 @@ public class DictionaryManagement {
 
     public Map<String, Word> getMapStringWord() {
         return mapStringWord;
-    }
-
-    public void print() {
-        for (Word word : dictionary.getWordList()) {
-            System.out.println(word.getSpelling());
-        }
     }
 
     public void removeWordFromFile(Word word) {

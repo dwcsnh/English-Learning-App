@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="760.0" styleClass="container" stylesheets="@../container.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.GoogleTranslateController">
+<AnchorPane fx:id="googleTranslatePane" prefHeight="500.0" prefWidth="760.0" styleClass="container" stylesheets="@../container.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.GoogleTranslateController">
    <children>
-      <AnchorPane prefHeight="80.0" prefWidth="760.0" />
-      <AnchorPane layoutY="90.0" prefHeight="420.0" prefWidth="380.0" AnchorPane.topAnchor="80.0">
+      <AnchorPane prefHeight="50.0" prefWidth="760.0" />
+      <AnchorPane layoutY="50.0" prefHeight="360.0" prefWidth="380.0" AnchorPane.topAnchor="50.0">
          <children>
             <HBox AnchorPane.leftAnchor="15.0">
                <children>
@@ -35,7 +35,7 @@
                   </Button>
                </children>
             </HBox>
-            <TextArea fx:id="inputTextArea" layoutX="14.0" layoutY="43.0" onKeyReleased="#translateText" prefHeight="300.0" prefWidth="350.0" promptText="Anything you want to translate" wrapText="true" AnchorPane.leftAnchor="15.0">
+            <TextArea fx:id="inputTextArea" layoutX="14.0" layoutY="43.0" onKeyReleased="#translateText" prefHeight="300.0" prefWidth="350.0" promptText="Anything you want to translate" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0">
                <font>
                   <Font size="18.0" />
                </font></TextArea>
@@ -50,7 +50,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="380.0" layoutY="90.0" prefHeight="420.0" prefWidth="380.0" AnchorPane.topAnchor="80.0">
+      <AnchorPane layoutX="380.0" layoutY="50.0" prefHeight="360.0" prefWidth="380.0" AnchorPane.topAnchor="50.0">
          <children>
             <HBox AnchorPane.leftAnchor="15.0">
                <children>
@@ -74,7 +74,7 @@
                   </Button>
                </children>
             </HBox>
-            <TextArea fx:id="translationTextArea" editable="false" layoutX="14.0" layoutY="43.0" prefHeight="300.0" prefWidth="350.0" promptText="Translation" wrapText="true" AnchorPane.leftAnchor="14.0">
+            <TextArea fx:id="translationTextArea" editable="false" layoutX="14.0" layoutY="43.0" prefHeight="300.0" prefWidth="350.0" promptText="Translation" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0">
                <font>
                   <Font size="18.0" />
                </font></TextArea>
@@ -88,5 +88,10 @@
                </graphic>
             </Button>
          </children></AnchorPane>
+      <Button layoutX="335.0" layoutY="428.0" mnemonicParsing="false" onAction="#translate" text="Translate" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

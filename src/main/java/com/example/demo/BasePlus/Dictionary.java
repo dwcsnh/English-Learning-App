@@ -94,7 +94,11 @@ public class Dictionary {
         Word word = wordList.get(start);
         while (word.getSpelling().startsWith(input)) {
             result.add(word);
-            word = wordList.get(++start);
+            if (start < size - 1) {
+                word = wordList.get(++start);
+            } else {
+                break;
+            }
         }
         return result;
     }

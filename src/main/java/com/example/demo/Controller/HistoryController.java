@@ -8,9 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -20,10 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HistoryController implements Initializable {
     ContainerController parent = new ContainerController();
@@ -77,7 +72,7 @@ public class HistoryController implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    Word target = parent.getHistory().getDictionary().lookUp(input);
+                    Word target = parent.getHistory().findWord(input);
                     if (target != null) {
                         currentWord = target;
                         setFavoriteButton(currentWord);
@@ -94,11 +89,15 @@ public class HistoryController implements Initializable {
                 if (!input.isEmpty()) {
                     ArrayList<String> relevantWords = parent.getHistory().getSearcher(input);
                     historyListView.getItems().setAll(relevantWords);
+                    currentWord = null;
+                    historyWebView.getEngine().loadContent("");
                 } else {
                     historyListView.getItems().clear();
+                    historyListView.getItems().addAll(listViewWord);
+                    currentWord = null;
+                    historyWebView.getEngine().loadContent("");
                 }
             }
-            parent.getHistory().print();
         }
     }
 
@@ -147,19 +146,38 @@ public class HistoryController implements Initializable {
 
     public void removeWord() {
         if (currentWord != null) {
-            parent.getDictionaryManagement().getMapStringWord().remove(currentWord.getSpelling());
-            parent.getDictionaryManagement().removeWordFromFile(currentWord);
-            parent.getHistory().removeWordFromFile(currentWord);
-            parent.getFavorite().removeWordFromFile(currentWord);
-            historyList = parent.getHistory().getDictionary().getWordList();
-            listViewWord.clear();
-            for (Word w : historyList) {
-                listViewWord.add(w.getSpelling());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning!");
+            alert.setHeaderText(currentWord.getSpelling() + " will be removed!");
+            alert.setContentText("Do you want to remove?");
+
+            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == buttonTypeYes) {
+                parent.getDictionaryManagement().getMapStringWord().remove(currentWord.getSpelling());
+                parent.getDictionaryManagement().removeWordFromFile(currentWord);
+                parent.getHistory().removeWordFromFile(currentWord);
+                parent.getFavorite().removeWordFromFile(currentWord);
+                historyList = parent.getHistory().getDictionary().getWordList();
+                listViewWord.clear();
+                for (Word w : historyList) {
+                    listViewWord.add(w.getSpelling());
+                }
+                historyListView.getItems().clear();
+                historyListView.getItems().addAll(listViewWord);
+                historyWebView.getEngine().loadContent("");
+                searchBar.clear();
             }
-            historyListView.getItems().clear();
-            historyListView.getItems().addAll(listViewWord);
-            historyWebView.getEngine().loadContent("");
-            searchBar.clear();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Warning!");
+            alert.setHeaderText(null);
+            alert.setContentText("No word chosen!");
+            alert.showAndWait();
         }
     }
 
@@ -184,7 +202,6 @@ public class HistoryController implements Initializable {
             System.out.println("Current word is null");
         } else {
             if (parent.getFavorite().isExist(currentWord)) {
-                System.out.println("This word is already in favorite list");
                 parent.getFavorite().removeWordFromFavorite(currentWord);
                 favoriteButton.setOpacity(1);
             } else {

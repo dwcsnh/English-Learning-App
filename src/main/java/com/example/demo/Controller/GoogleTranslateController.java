@@ -71,6 +71,13 @@ public class GoogleTranslateController implements Initializable {
         }
     }
 
+    @FXML
+    public void translate() {
+        String input = inputTextArea.getText();
+        String translation = googleServices.sentenceTranslation(input);
+        translationTextArea.setText(translation);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sourceVi.setOpacity(0.5);

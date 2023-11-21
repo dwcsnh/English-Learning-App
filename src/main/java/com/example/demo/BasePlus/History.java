@@ -1,5 +1,7 @@
 package com.example.demo.BasePlus;
 
+import java.util.ArrayList;
+
 public class History extends DictionaryManagement {
     public History(String path) {
         super(path);
@@ -9,15 +11,10 @@ public class History extends DictionaryManagement {
         if (!isExist(word)) {
             this.dictionary.addWord(word);
             this.writeToFile(this.dictionary.getWordList());
-            System.out.println("history recorded!");
         } else {
             this.dictionary.removeWord(word.getSpelling());
             this.dictionary.addWord(word);
             this.writeToFile(this.dictionary.getWordList());
-        }
-        System.out.println("Current history: ");
-        for(Word w : this.dictionary.getWordList()) {
-            System.out.println(w.getSpelling());
         }
     }
 
@@ -27,8 +24,27 @@ public class History extends DictionaryManagement {
             if (word.getSpelling().equals(target.getSpelling())) {
                 return true;
             }
-            System.out.println(word.getSpelling());
         }
         return false;
+    }
+
+    @Override
+    public ArrayList<String> getSearcher(String spelling) {
+        ArrayList<String> result = new ArrayList<>();
+        for (Word word : dictionary.getWordList()) {
+            if (word.getSpelling().startsWith(spelling)) {
+                result.add(word.getSpelling());
+            }
+        }
+        return result;
+    }
+
+    public Word findWord(String target) {
+        for(Word word : dictionary.getWordList()) {
+            if (word.getSpelling().equals(target)) {
+                return word;
+            }
+        }
+        return null;
     }
 }

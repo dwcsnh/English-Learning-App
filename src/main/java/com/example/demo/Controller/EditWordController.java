@@ -59,7 +59,8 @@ public class EditWordController {
     @FXML
     public void editUpdateDictionary(ActionEvent event) {
         Word newWord = mapStringWord.get(currentWordLabel.getText());
-        newWord.setMeaning("<html>" + editTextArea.getText() + "</html>");
+        newWord.setMeaning("<html><i>" + newWord.getSpelling() +"</i><br/><ul><li><font color='#cc0000'><b> "
+                + editTextArea.getText() + "</b></font></li></ul></html>");
         mapStringWord.put(newWord.getSpelling(), newWord);
         closeEditWord(event);
     }
