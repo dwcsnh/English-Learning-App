@@ -21,7 +21,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="202.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" stylesheets="@../searcher.css">
+                  <Button fx:id="searchButton" layoutX="202.0" mnemonicParsing="false" onAction="#buttonSearch" prefHeight="35.0" prefWidth="35.0" stylesheets="@../searcher.css">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>

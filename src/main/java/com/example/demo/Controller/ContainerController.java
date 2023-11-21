@@ -172,12 +172,6 @@ public class ContainerController implements Initializable {
         if (event.getSource() == dictionaryButton) {
             resetButtonStyle();
             dictionaryButton.setStyle("-fx-background-color: #EBEBEB;");
-            pickAddWord = addWordController.isAdded();
-            if (pickAddWord) {
-                dictionaryController.init();
-                pickAddWord = false;
-                addWordController.setAdded(false);
-            }
             showDictionaryPane();
             System.out.println("click dictionary button");
         } else if (event.getSource() == historyButton) {
