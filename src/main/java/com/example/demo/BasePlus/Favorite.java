@@ -6,11 +6,11 @@ public class Favorite extends DictionaryManagement {
     }
 
     /*
-    * add word to favorite list using binary search.
-    * write entire favorite list to favorite.txt.
-    * when open -> read the data to favorite list.
-    * when unfavorite -> remove from favorite list -> rewrite the txt file.
-    * */
+     * add word to favorite list using binary search.
+     * write entire favorite list to favorite.txt.
+     * when open -> read the data to favorite list.
+     * when unfavorite -> remove from favorite list -> rewrite the txt file.
+     * */
 
     public void addWordToFavorite(Word word) {
         int size = this.dictionary.getWordList().size();

@@ -9,21 +9,20 @@ public class Dictionary {
         wordList.add(word);
     }
 
-    public void addWordByBinary(Word word){
-        int i = insertIndex(0, wordList.size() - 1, word.getSpelling());
-        wordList.add(i, word);
-    }
     public ArrayList<Word> getWordList() {
         return wordList;
     }
-
     public void setWordList(ArrayList<Word> words) {
         wordList = words;
     }
 
+    public void addWordByBinary(Word word){
+        int i = insertIndex(0, wordList.size() - 1, word.getSpelling());
+        wordList.add(i, word);
+    }
+
     /**
      * Find the index of the given word in the word list.
-     *
      * @param start
      * @param end
      * @param spelling
@@ -47,7 +46,6 @@ public class Dictionary {
 
     /**
      * Find the proper position for a word that not in the list using binary search.
-     *
      * @param start
      * @param end
      * @param spelling
@@ -69,10 +67,8 @@ public class Dictionary {
             }
         }
     }
-
     /**
      * Find a specific word.
-     *
      * @param spelling
      * @return
      */
@@ -86,10 +82,8 @@ public class Dictionary {
             return null;
         }
     }
-
     /**
      * Find a list of words starting with the given input.
-     *
      * @param input
      * @return
      */

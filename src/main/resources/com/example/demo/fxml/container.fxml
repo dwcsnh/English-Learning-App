@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="container" stylesheets="@../container.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.ContainerController">
-    <children>
-        <AnchorPane prefHeight="500.0" prefWidth="40.0" styleClass="sidebar" stylesheets="@../container.css">
-            <children>
-            <VBox layoutY="160.0">
+   <children>
+      <AnchorPane prefHeight="500.0" prefWidth="40.0" styleClass="sidebar" stylesheets="@../container.css">
+         <children>
+            <VBox layoutY="125.0">
                <children>
-                      <Button fx:id="dictionaryButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
+                  <Button fx:id="dictionaryButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -22,7 +22,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="dictionaryButton1" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
+                  <Button fx:id="googleTranslateButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -49,7 +49,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="dictionaryButton21" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
+                  <Button fx:id="addWordButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,11 +59,11 @@
                      </graphic>
                   </Button>
                   <Separator />
-                  <Button fx:id="dictionaryButton3" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
+                  <Button fx:id="wordleButton" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../logo/setting.png" />
+                              <Image url="@../logo/Wordle.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -72,24 +72,15 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/icons8-game-50.png" />
+                              <Image url="@../logo/F.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                </children>
             </VBox>
-                <Button fx:id="informationButton" layoutY="464.0" mnemonicParsing="false" onAction="#handleClickComponents" prefHeight="35.0" prefWidth="35.0" styleClass="sidebar-button" stylesheets="@../container.css">
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../logo/info.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            </children>
-        </AnchorPane>
-        <AnchorPane fx:id="contentPane" layoutX="40.0" prefHeight="500.0" prefWidth="760.0" style="-fx-background-color: #ffffff;" />
-    </children>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="contentPane" layoutX="40.0" prefHeight="500.0" prefWidth="760.0" style="-fx-background-color: #ffffff;" />
+   </children>
 </AnchorPane>

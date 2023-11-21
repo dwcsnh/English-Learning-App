@@ -26,27 +26,33 @@ public class ContainerController implements Initializable {
     @FXML
     Button dictionaryButton;
     @FXML
-    Button informationButton;
-    @FXML
     Button historyButton;
     @FXML
     Button favoriteListButton;
     @FXML
-    Button fastEnglishButton;
+    Button wordleButton;
     @FXML
-    Button dictionaryButton21;
+    Button googleTranslateButton;
+    @FXML
+    Button addWordButton;
+    @FXML
+    Button fastEnglishButton;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
     AnchorPane historyPane;
     AnchorPane favoritePane;
-    AnchorPane fastEnglishPane;
+    AnchorPane wordlePane;
     AnchorPane addWordPane;
+    AnchorPane googleTranslatePane;
+    AnchorPane fastEnglishPane;
     HistoryController historyController;
     DictionaryController dictionaryController;
     FavoriteController favoriteController;
-    FastEnglishController fastEnglishController;
+    WordleController wordleController;
+    GoogleTranslateController googleTranslateController;
     AddWordController addWordController;
+    FastEnglishController fastEnglishController;
 
     public DictionaryManagement getDictionaryManagement() {
         return dictionaryManagement;
@@ -61,12 +67,11 @@ public class ContainerController implements Initializable {
     }
 
     public void showDictionaryPane() throws IOException {
-        if (dictionaryPane == null) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/dictionary.fxml"));
-            dictionaryPane = fxmlLoader.load();
-            dictionaryController = fxmlLoader.getController();
-        }
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/dictionary.fxml"));
+        dictionaryPane = fxmlLoader.load();
+        dictionaryController = fxmlLoader.getController();
+
         dictionaryController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(dictionaryPane);
@@ -83,6 +88,11 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(historyPane);
     }
 
+    public void showWordlePane() {
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(wordlePane);
+    }
+
     public void showFavoritePane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/favorite.fxml"));
@@ -94,40 +104,76 @@ public class ContainerController implements Initializable {
         contentPane.getChildren().add(favoritePane);
     }
 
-    public void showInformationPane() throws IOException {
-        if (informationPane == null) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/information.fxml"));
-            informationPane = fxmlLoader.load();
-        }
+    public void showGoogleTranslatePane() {
         contentPane.getChildren().clear();
-        contentPane.getChildren().add(informationPane);
+        contentPane.getChildren().add(googleTranslatePane);
     }
 
-    public void showFastEnglishPane() throws IOException {
-        if (fastEnglishPane == null) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/introFastEnglish.fxml"));
-            fastEnglishPane = fxmlLoader.load();
-            fastEnglishController = fxmlLoader.getController();
-        }
-        //fastEnglishController.init();
+    public void showAddWordPane() {
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(addWordPane);
+    }
+
+    public void showFastEnglishPane() {
         contentPane.getChildren().clear();
         contentPane.getChildren().add(fastEnglishPane);
     }
 
-    public void showAddWordPane() throws IOException {
-        if (addWordPane == null) {
+    public void initialize(URL location, ResourceBundle resourceBundle) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/dictionary.fxml"));
+            dictionaryPane = fxmlLoader.load();
+            dictionaryController = fxmlLoader.getController();
+            dictionaryController.sync(this);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/history.fxml"));
+            historyPane = fxmlLoader.load();
+            historyController = fxmlLoader.getController();
+            historyController.sync(this);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/favorite.fxml"));
+            favoritePane = fxmlLoader.load();
+            favoriteController = fxmlLoader.getController();
+            favoriteController.sync(this);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/NewWordle.fxml"));
+            wordlePane = fxmlLoader.load();
+            wordleController = fxmlLoader.getController();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/google translate.fxml"));
+            googleTranslatePane = fxmlLoader.load();
+            googleTranslateController = fxmlLoader.getController();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/addWord.fxml"));
             addWordPane = fxmlLoader.load();
             addWordController = fxmlLoader.getController();
-        }
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(addWordPane);
-    }
-    public void initialize(URL location, ResourceBundle resourceBundle) {
-        try {
+            addWordController.sync(this);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/introFastEnglish.fxml"));
+            fastEnglishPane = fxmlLoader.load();
+            fastEnglishController = fxmlLoader.getController();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } try {
             showDictionaryPane();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -139,30 +185,31 @@ public class ContainerController implements Initializable {
         if (event.getSource() == dictionaryButton) {
             pickAddWord = addWordController.isAdded();
             if (pickAddWord) {
-                dictionaryManagement.getDictionary().setWordList(new ArrayList<Word>());
-                dictionaryManagement.insertFromFile();
                 dictionaryController.init();
                 pickAddWord = false;
                 addWordController.setAdded(false);
             }
             showDictionaryPane();
             System.out.println("click dictionary button");
-        } else if (event.getSource() == informationButton) {
-            showInformationPane();
-            System.out.println("click information button");
         } else if (event.getSource() == historyButton) {
             showHistoryPane();
             System.out.println("click history button");
         } else if (event.getSource() == favoriteListButton) {
             showFavoritePane();
             System.out.println("click favorite list button");
-        } else if (event.getSource() == fastEnglishButton) {
-            showFastEnglishPane();
-            System.out.println("click fast list button");
-        } else if (event.getSource() == dictionaryButton21) {
+        } else if (event.getSource() == wordleButton) {
+            showWordlePane();
+            System.out.println("click wordle button");
+        } else if (event.getSource() == googleTranslateButton) {
+            showGoogleTranslatePane();
+            System.out.println("click google translate button");
+        } else if (event.getSource() == addWordButton) {
             //pickAddWord = true;
             showAddWordPane();
             System.out.println("click addWord button");
+        } else if (event.getSource() == fastEnglishButton) {
+            showFastEnglishPane();
+            System.out.println("click fastEnglish button");
         }
     }
 }

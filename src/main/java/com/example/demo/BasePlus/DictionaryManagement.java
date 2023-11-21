@@ -55,7 +55,6 @@ public class DictionaryManagement {
                     mapStringWord.put(spelling, word);
                 }
             }
-            System.out.println("inserting...");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -89,9 +88,9 @@ public class DictionaryManagement {
                     System.out.println("Nghĩa tiếng Việt của từ: " + result.getMeaning());
                 } else {
                     System.out.println("Cac tu co the ban muon tim:");
-                    for(Word word : resultList) {
+                    /*for(Word word : resultList) {
                         System.out.println(word.getSpelling());
-                    }
+                    }*/
                 }
             }
         }
@@ -121,9 +120,8 @@ public class DictionaryManagement {
         return mapStringWord;
     }
 
-    public void print() {
-        for (Word word : dictionary.getWordList()) {
-            System.out.println(word.getSpelling());
-        }
+    public void removeWordFromFile(Word word) {
+        this.getDictionary().removeWord(word.getSpelling());
+        writeToFile(this.getDictionary().getWordList());
     }
 }

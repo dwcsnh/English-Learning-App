@@ -126,7 +126,7 @@ public class WordleController {
         for (int i = 0; i < guess.length(); i++) {
             String letter = guess.substring(i, i + 1);
             labels[i + round * 5].setText(letter);
-            System.out.println(labels[i + round * 5].getText());
+            //System.out.println(labels[i + round * 5].getText());
             if (letter.equals(ans.substring(i, i + 1))) {
                 labels[i + round * 5].setStyle("-fx-background-radius: 5 5 5 5;" +
                         "-fx-background-color: #538D4E;");
