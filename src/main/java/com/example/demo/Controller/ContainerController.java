@@ -63,22 +63,18 @@ public class ContainerController implements Initializable {
     }
 
     public void showDictionaryPane() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/dictionary.fxml"));
-        dictionaryPane = fxmlLoader.load();
-        dictionaryController = fxmlLoader.getController();
-
+        if(dictionaryManagement.wordListChanged()) {
+            dictionaryController.reloadListView();
+        }
         dictionaryController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(dictionaryPane);
     }
 
     public void showHistoryPane() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/history.fxml"));
-        historyPane = fxmlLoader.load();
-        historyController = fxmlLoader.getController();
-
+        if(history.wordListChanged()) {
+            historyController.reloadListView();
+        }
         historyController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(historyPane);
@@ -90,11 +86,9 @@ public class ContainerController implements Initializable {
     }
 
     public void showFavoritePane() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/favorite.fxml"));
-        favoritePane = fxmlLoader.load();
-        favoriteController = fxmlLoader.getController();
-
+        if (favorite.wordListChanged()) {
+            favoriteController.reloadListView();
+        }
         favoriteController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(favoritePane);
@@ -106,6 +100,7 @@ public class ContainerController implements Initializable {
     }
 
     public void showAddWordPane() {
+        addWordController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(addWordPane);
     }
@@ -159,6 +154,7 @@ public class ContainerController implements Initializable {
             System.out.println(e.getMessage());
         } try {
             showDictionaryPane();
+            dictionaryButton.setStyle("-fx-background-color: #EBEBEB;");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

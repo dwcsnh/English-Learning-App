@@ -48,15 +48,15 @@ public class HistoryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for(int i = historyList.size() - 1; i >= 0; i--) {
-            listViewWord.add(historyList.get(i).getSpelling());
+        for(int i = parent.getHistory().getDictionary().getWordList().size() - 1; i >= 0; i--) {
+            listViewWord.add(parent.getHistory().getDictionary().getWordList().get(i).getSpelling());
         }
 
         historyListView.getItems().addAll(listViewWord);
         historyListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
-                        Word selectedWord = mapStringWord.get(newValue.trim());
+                        Word selectedWord = parent.getDictionaryManagement().getMapStringWord().get(newValue.trim());
                         currentWord = selectedWord;
                         setFavoriteButton(currentWord);
                         String definition = selectedWord.getMeaning();
@@ -72,7 +72,7 @@ public class HistoryController implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    Word target = mapStringWord.get(input);
+                    Word target = parent.getDictionaryManagement().getMapStringWord().get(input);
                     if (target != null) {
                         currentWord = target;
                         setFavoriteButton(currentWord);
@@ -115,7 +115,7 @@ public class HistoryController implements Initializable {
                 editWordController = loader.getController();
                 editWordController.sync(this.parent);
                 editWordController.setCurrentWordLabel(selectedWord);
-                editWordController.setWebView(mapStringWord.get(selectedWord).getMeaning());
+                editWordController.setWebView(parent.getDictionaryManagement().getMapStringWord().get(selectedWord).getMeaning());
 
                 Stage stage = new Stage();
                 stage.setTitle("Edit Word");
@@ -135,10 +135,18 @@ public class HistoryController implements Initializable {
     }
 
     public void resetMapAndWebView() {
-        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-        String newdefinition = mapStringWord.get(historyListView.getSelectionModel().getSelectedItem()).getMeaning();
+        String newdefinition = parent.getDictionaryManagement().getMapStringWord().get(historyListView.getSelectionModel().getSelectedItem()).getMeaning();
         historyWebView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
+    }
+
+    public void reloadListView() {
+        listViewWord.clear();
+        for(int i = parent.getHistory().getDictionary().getWordList().size() - 1; i >= 0; i--) {
+            listViewWord.add(parent.getHistory().getDictionary().getWordList().get(i).getSpelling());
+        }
+        historyListView.getItems().clear();
+        historyListView.getItems().addAll(listViewWord);
     }
 
     public void removeWord() {
@@ -159,9 +167,9 @@ public class HistoryController implements Initializable {
                 parent.getDictionaryManagement().removeWordFromFile(currentWord);
                 parent.getHistory().removeWordFromFile(currentWord);
                 parent.getFavorite().removeWordFromFile(currentWord);
-                historyList = parent.getHistory().getDictionary().getWordList();
+//                historyList = parent.getHistory().getDictionary().getWordList();
                 listViewWord.clear();
-                for (Word w : historyList) {
+                for (Word w : parent.getHistory().getDictionary().getWordList()) {
                     listViewWord.add(w.getSpelling());
                 }
                 historyListView.getItems().clear();

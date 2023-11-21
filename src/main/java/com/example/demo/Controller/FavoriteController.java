@@ -22,7 +22,7 @@ import java.util.*;
 
 public class FavoriteController implements Initializable {
     ContainerController parent = new ContainerController();
-    ArrayList<Word> word = parent.getFavorite().getDictionary().getWordList();
+//    ArrayList<Word> word = parent.getFavorite().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
     Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
     private Word currentWord;
@@ -49,7 +49,7 @@ public class FavoriteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        for(Word x : word) {
+        for(Word x : parent.getFavorite().getDictionary().getWordList()) {
             listViewWord.add(x.getSpelling());
         }
 
@@ -57,7 +57,7 @@ public class FavoriteController implements Initializable {
         favoriteListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
-                        Word selectedWord = mapStringWord.get(newValue.trim());
+                        Word selectedWord = parent.getDictionaryManagement().getMapStringWord().get(newValue.trim());
                         currentWord = selectedWord;
                         setFavoriteButton(currentWord);
                         parent.getHistory().addWordToHistory(selectedWord);
@@ -74,7 +74,7 @@ public class FavoriteController implements Initializable {
             String input = searchBar.getText();
             if (event.getCode() == KeyCode.ENTER) {
                 if (!input.isEmpty()) {
-                    Word target = mapStringWord.get(input);
+                    Word target = parent.getDictionaryManagement().getMapStringWord().get(input);
                     if (target != null) {
                         currentWord = target;
                         setFavoriteButton(currentWord);
@@ -117,7 +117,7 @@ public class FavoriteController implements Initializable {
                 editWordController = loader.getController();
                 editWordController.sync(this.parent);
                 editWordController.setCurrentWordLabel(selectedWord);
-                editWordController.setWebView(mapStringWord.get(selectedWord).getMeaning());
+                editWordController.setWebView(parent.getDictionaryManagement().getMapStringWord().get(selectedWord).getMeaning());
 
                 Stage stage = new Stage();
                 stage.setTitle("Edit Word");
@@ -137,10 +137,19 @@ public class FavoriteController implements Initializable {
     }
 
     public void resetMapAndWebView() {
-        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-        String newdefinition = mapStringWord.get(favoriteListView.getSelectionModel().getSelectedItem()).getMeaning();
+//        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
+        String newdefinition = parent.getDictionaryManagement().getMapStringWord().get(favoriteListView.getSelectionModel().getSelectedItem()).getMeaning();
         favoriteWebView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
+    }
+
+    public void reloadListView() {
+        listViewWord.clear();
+        for (Word w : parent.getFavorite().getDictionary().getWordList()) {
+            listViewWord.add(w.getSpelling());
+        }
+        favoriteListView.getItems().clear();
+        favoriteListView.getItems().addAll(listViewWord);
     }
 
     public void removeWord() {
@@ -161,9 +170,9 @@ public class FavoriteController implements Initializable {
                 parent.getDictionaryManagement().removeWordFromFile(currentWord);
                 parent.getHistory().removeWordFromFile(currentWord);
                 parent.getFavorite().removeWordFromFile(currentWord);
-                word = parent.getFavorite().getDictionary().getWordList();
+//                word = parent.getFavorite().getDictionary().getWordList();
                 listViewWord.clear();
-                for (Word w : word) {
+                for (Word w : parent.getFavorite().getDictionary().getWordList()) {
                     listViewWord.add(w.getSpelling());
                 }
                 favoriteListView.getItems().clear();

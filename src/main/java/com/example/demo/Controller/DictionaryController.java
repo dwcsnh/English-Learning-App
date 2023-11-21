@@ -27,7 +27,6 @@ public class DictionaryController implements Initializable {
     ArrayList<String> listViewWord = new ArrayList<>();
     Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
     private Word currentWord;
-    private boolean wordListChanged = false;
 
     @FXML
     private TextField searchBar;
@@ -51,7 +50,7 @@ public class DictionaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        for(Word x : word) {
+        for(Word x : parent.getDictionaryManagement().getDictionary().getWordList()) {
             listViewWord.add(x.getSpelling());
         }
 
@@ -59,7 +58,7 @@ public class DictionaryController implements Initializable {
         dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
-                        Word selectedWord = mapStringWord.get(newValue.trim());
+                        Word selectedWord = parent.getDictionaryManagement().getMapStringWord().get(newValue.trim());
                         currentWord = selectedWord;
                         setFavoriteButton(currentWord);
                         parent.getHistory().addWordToHistory(selectedWord);
@@ -72,9 +71,9 @@ public class DictionaryController implements Initializable {
 
     public void init() {
         listViewWord.clear();
-        word = parent.getDictionaryManagement().getDictionary().getWordList();
-        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-        for(Word x : word) {
+//        word = parent.getDictionaryManagement().getDictionary().getWordList();
+//        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
+        for(Word x : parent.getDictionaryManagement().getDictionary().getWordList()) {
             listViewWord.add(x.getSpelling());
         }
         dictionaryListView.getItems().clear();
@@ -87,7 +86,7 @@ public class DictionaryController implements Initializable {
             String input = searchBar.getText();
             if (event.getCode() == KeyCode.ENTER) {
                 if (!input.isEmpty()) {
-                    Word target = mapStringWord.get(input);
+                    Word target = parent.getDictionaryManagement().getMapStringWord().get(input);
                     if (target != null) {
                         currentWord = target;
                         setFavoriteButton(currentWord);
@@ -130,7 +129,7 @@ public class DictionaryController implements Initializable {
                 editWordController = loader.getController();
                 editWordController.sync(this.parent);
                 editWordController.setCurrentWordLabel(selectedWord);
-                editWordController.setWebView(mapStringWord.get(selectedWord).getMeaning());
+                editWordController.setWebView(parent.getDictionaryManagement().getMapStringWord().get(selectedWord).getMeaning());
 
                 Stage stage = new Stage();
                 stage.setTitle("Edit Word");
@@ -150,10 +149,19 @@ public class DictionaryController implements Initializable {
     }
 
     public void resetMapAndWebView() {
-        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-        String newdefinition = mapStringWord.get(dictionaryListView.getSelectionModel().getSelectedItem()).getMeaning();
+//        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
+        String newdefinition = parent.getDictionaryManagement().getMapStringWord().get(dictionaryListView.getSelectionModel().getSelectedItem()).getMeaning();
         dictionaryWebView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
+    }
+
+    public void reloadListView() {
+        listViewWord.clear();
+        for (Word w : parent.getDictionaryManagement().getDictionary().getWordList()) {
+            listViewWord.add(w.getSpelling());
+        }
+        dictionaryListView.getItems().clear();
+        dictionaryListView.getItems().addAll(listViewWord);
     }
 
     public void removeWord() {
@@ -175,9 +183,9 @@ public class DictionaryController implements Initializable {
                 parent.getHistory().removeWordFromFile(currentWord);
                 parent.getFavorite().removeWordFromFile(currentWord);
                 currentWord = null;
-                word = parent.getDictionaryManagement().getDictionary().getWordList();
+//                word = parent.getDictionaryManagement().getDictionary().getWordList();
                 listViewWord.clear();
-                for (Word w : word) {
+                for (Word w : parent.getDictionaryManagement().getDictionary().getWordList()) {
                     listViewWord.add(w.getSpelling());
                 }
                 dictionaryListView.getItems().clear();
@@ -232,14 +240,6 @@ public class DictionaryController implements Initializable {
             favoriteButton.setOpacity(1);
         }
         favoriteButton.setMouseTransparent(false);
-    }
-
-    public boolean isWordListChanged() {
-        return wordListChanged;
-    }
-
-    public void setWordListChanged(boolean changed) {
-        wordListChanged = changed;
     }
 
     public void sync(ContainerController parent) {
