@@ -1,6 +1,5 @@
 package com.example.demo.Controller;
 
-import com.example.demo.BasePlus.GoogleServices;
 import com.example.demo.BasePlus.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,9 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebView;
@@ -19,11 +16,9 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
+import com.example.demo.BasePlus.GoogleServices;
 import javafx.stage.Stage;
 
 public class DictionaryController implements Initializable {
@@ -32,6 +27,7 @@ public class DictionaryController implements Initializable {
     ArrayList<String> listViewWord = new ArrayList<>();
     Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
     private Word currentWord;
+    private boolean wordListChanged = false;
 
     @FXML
     private TextField searchBar;
@@ -58,7 +54,6 @@ public class DictionaryController implements Initializable {
         for(Word x : word) {
             listViewWord.add(x.getSpelling());
         }
-//        System.out.println(listViewWord);
 
         dictionaryListView.getItems().addAll(listViewWord);
         dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
@@ -82,33 +77,9 @@ public class DictionaryController implements Initializable {
         for(Word x : word) {
             listViewWord.add(x.getSpelling());
         }
-        //System.out.println(listViewWord);
-        /*System.out.println("......");
-        for (String s : listViewWord) {
-            System.out.println(s);
-        }
-        System.out.println("......");*/
-        System.out.println("......");
-        for (Word s : word) {
-            System.out.println(s.getSpelling());
-        }
-        System.out.println("......");
         dictionaryListView.getItems().clear();
         dictionaryListView.getItems().addAll(listViewWord);
-        dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue != null){
-                        Word selectedWord = mapStringWord.get(newValue.trim());
-                        currentWord = selectedWord;
-                        setFavoriteButton(currentWord);
-                        parent.getHistory().addWordToHistory(selectedWord);
-                        String definition = selectedWord.getMeaning();
-                        dictionaryWebView.getEngine().loadContent(definition, "text/html");
-                    }
-                }
-        );
     }
-
 
     @FXML
     public void updateListView(KeyEvent event) {
@@ -116,7 +87,7 @@ public class DictionaryController implements Initializable {
             String input = searchBar.getText();
             if (event.getCode() == KeyCode.ENTER) {
                 if (!input.isEmpty()) {
-                    Word target = parent.getDictionaryManagement().getDictionary().lookUp(input);
+                    Word target = mapStringWord.get(input);
                     if (target != null) {
                         currentWord = target;
                         setFavoriteButton(currentWord);
@@ -133,9 +104,13 @@ public class DictionaryController implements Initializable {
                 if (!input.isEmpty()) {
                     ArrayList<String> relevantWords = parent.getDictionaryManagement().getSearcher(input);
                     dictionaryListView.getItems().setAll(relevantWords);
+                    currentWord = null;
+                    dictionaryWebView.getEngine().loadContent("");
                 } else {
                     dictionaryListView.getItems().clear();
                     dictionaryListView.getItems().addAll(listViewWord);
+                    dictionaryWebView.getEngine().loadContent("");
+                    currentWord = null;
                 }
             }
         }
@@ -182,6 +157,47 @@ public class DictionaryController implements Initializable {
         dictionaryWebView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
         parent.getDictionaryManagement().writeToFile(word);
+        for(Word w : word) {
+            System.out.println(w.getMeaning());
+        }
+    }
+
+    public void removeWord() {
+        if (currentWord != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning!");
+            alert.setHeaderText(currentWord.getSpelling() + " will be removed!");
+            alert.setContentText("Do you want to remove?");
+
+            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == buttonTypeYes) {
+                parent.getDictionaryManagement().getMapStringWord().remove(currentWord.getSpelling());
+                parent.getDictionaryManagement().removeWordFromFile(currentWord);
+                parent.getHistory().removeWordFromFile(currentWord);
+                parent.getFavorite().removeWordFromFile(currentWord);
+                currentWord = null;
+                word = parent.getDictionaryManagement().getDictionary().getWordList();
+                listViewWord.clear();
+                for (Word w : word) {
+                    listViewWord.add(w.getSpelling());
+                }
+                dictionaryListView.getItems().clear();
+                dictionaryListView.getItems().addAll(listViewWord);
+                dictionaryWebView.getEngine().loadContent("");
+                searchBar.clear();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Warning!");
+            alert.setHeaderText(null);
+            alert.setContentText("No word chosen!");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -195,7 +211,7 @@ public class DictionaryController implements Initializable {
     @FXML
     public void readWord(MouseEvent event) {
         if (event.getSource() == speaker) {
-            GoogleServices.pronounce(searchBar.getText());
+            GoogleServices.pronounce(searchBar.getText(), "en");
         }
     }
 
@@ -205,7 +221,6 @@ public class DictionaryController implements Initializable {
             System.out.println("Current word is null");
         } else {
             if (parent.getFavorite().isExist(currentWord)) {
-                System.out.println("This word is already in favorite list");
                 parent.getFavorite().removeWordFromFavorite(currentWord);
                 favoriteButton.setOpacity(1);
             } else {
@@ -225,10 +240,15 @@ public class DictionaryController implements Initializable {
         favoriteButton.setMouseTransparent(false);
     }
 
+    public boolean isWordListChanged() {
+        return wordListChanged;
+    }
+
+    public void setWordListChanged(boolean changed) {
+        wordListChanged = changed;
+    }
+
     public void sync(ContainerController parent) {
-        if (this.parent == null) {
-            System.out.println("null");
-        }
         this.parent = parent;
     }
 }

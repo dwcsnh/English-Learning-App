@@ -16,12 +16,12 @@
             <Font name="Cooper Black" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="targetTextField" layoutX="54.0" layoutY="116.0" onAction="#getTargetOnTextField" prefHeight="35.0" prefWidth="442.0" promptText="Nhập từ">
+      <TextField fx:id="targetTextField" layoutX="159.0" layoutY="118.0" onAction="#getTargetOnTextField" prefHeight="35.0" prefWidth="442.0" promptText="Nhập từ">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextArea fx:id="definitionTextArea" layoutX="55.0" layoutY="198.0" prefHeight="200.0" prefWidth="441.0" promptText="Nhập nghĩa của từ" wrapText="true">
+      <TextArea fx:id="definitionTextArea" layoutX="159.0" layoutY="187.0" prefHeight="200.0" prefWidth="441.0" promptText="Nhập nghĩa của từ" wrapText="true">
          <font>
             <Font size="16.0" />
          </font>

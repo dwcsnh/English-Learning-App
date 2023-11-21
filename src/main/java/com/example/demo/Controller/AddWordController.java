@@ -17,8 +17,8 @@ public class AddWordController {
     private String target;
     private String definition;
 
-    DictionaryController dictionaryController = new DictionaryController();
-    DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
+    ContainerController parent = new ContainerController();
+    DictionaryManagement dictionaryManagement = parent.getDictionaryManagement();
     ArrayList<Word> words = dictionaryManagement.getDictionary().getWordList();
     @FXML
     private TextField targetTextField;
@@ -89,7 +89,7 @@ public class AddWordController {
 
     public void addWordToFile() {
         String editDef = "<html><i>" + target +"</i><br/><ul><li><font color='#cc0000'><b> "
-                        + definition + "</b></font></li></ul></html>";
+                + definition + "</b></font></li></ul></html>";
         Word word = new Word(target, editDef);
         dictionaryManagement.getDictionary().addWordByBinary(word);
         words = dictionaryManagement.getDictionary().getWordList();
@@ -100,6 +100,8 @@ public class AddWordController {
         System.out.println("..");
         //dictionaryController.setWords(words);
         dictionaryManagement.writeToFile(words);
+        parent.getDictionaryManagement().getMapStringWord().put(target, word);
+        parent.getDictionaryManagement().getDictionary().setWordList(words);
         //dictionaryController.setAddWord(true);
         isAdded = true;
     }
@@ -147,5 +149,9 @@ public class AddWordController {
 
     public void setAdded(boolean added) {
         isAdded = added;
+    }
+
+    public void sync(ContainerController parent) {
+        this.parent = parent;
     }
 }

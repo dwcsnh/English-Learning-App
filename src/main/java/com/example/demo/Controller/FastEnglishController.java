@@ -112,7 +112,7 @@ public class FastEnglishController {
             return;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/demo/previewFastEnglish.fxml"));
+            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/demo/fxml/previewFastEnglish.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setTitle("Preview");
@@ -355,7 +355,7 @@ public class FastEnglishController {
     }
 
     public void readWord() {
-        googleServices.pronounce(word);
+        googleServices.pronounce(word, "en");
     }
 
     public void playSoundOnLostGame() {
