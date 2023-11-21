@@ -21,64 +21,25 @@ import java.util.*;
 import com.example.demo.BasePlus.GoogleServices;
 import javafx.stage.Stage;
 
-public class DictionaryController implements Initializable {
-    ContainerController parent = new ContainerController();
-    ArrayList<Word> word = parent.getDictionaryManagement().getDictionary().getWordList();
-    ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-    private Word currentWord;
-    private boolean wordListChanged = false;
-
-    @FXML
-    private TextField searchBar;
-
-    @FXML
-    private ListView<String> dictionaryListView;
-
-    @FXML
-    private WebView dictionaryWebView;
-
-    @FXML
-    private Button speaker;
-
-    @FXML
-    private Button favoriteButton;
-
-    private EditWordController editWordController = new EditWordController();
-
-    private boolean editWordOpen = false;
+public class DictionaryController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        for(Word x : word) {
+        for(Word x : parent.getDictionaryManagement().getDictionary().getWordList()) {
             listViewWord.add(x.getSpelling());
         }
 
-        dictionaryListView.getItems().addAll(listViewWord);
-        dictionaryListView.getSelectionModel().selectedItemProperty().addListener(
+        listView.getItems().addAll(listViewWord);
+        listView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
-                        Word selectedWord = mapStringWord.get(newValue.trim());
+                        Word selectedWord = parent.getDictionaryManagement().getMapStringWord().get(newValue.trim());
                         currentWord = selectedWord;
-                        setFavoriteButton(currentWord);
-                        parent.getHistory().addWordToHistory(selectedWord);
-                        String definition = selectedWord.getMeaning();
-                        dictionaryWebView.getEngine().loadContent(definition, "text/html");
+                        showWord();
                     }
                 }
         );
-    }
-
-    public void init() {
-        listViewWord.clear();
-        word = parent.getDictionaryManagement().getDictionary().getWordList();
-        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-        for(Word x : word) {
-            listViewWord.add(x.getSpelling());
-        }
-        dictionaryListView.getItems().clear();
-        dictionaryListView.getItems().addAll(listViewWord);
     }
 
     @FXML
@@ -87,13 +48,10 @@ public class DictionaryController implements Initializable {
             String input = searchBar.getText();
             if (event.getCode() == KeyCode.ENTER) {
                 if (!input.isEmpty()) {
-                    Word target = mapStringWord.get(input);
+                    Word target = parent.getDictionaryManagement().getMapStringWord().get(input);
                     if (target != null) {
                         currentWord = target;
-                        setFavoriteButton(currentWord);
-                        parent.getHistory().addWordToHistory(target);
-                        String definition = target.getMeaning();
-                        dictionaryWebView.getEngine().loadContent(definition, "text/html");
+                        showWord();
                     } else {
                         System.out.println("cannot find word");
                     }
@@ -103,149 +61,46 @@ public class DictionaryController implements Initializable {
             } else {
                 if (!input.isEmpty()) {
                     ArrayList<String> relevantWords = parent.getDictionaryManagement().getSearcher(input);
-                    dictionaryListView.getItems().setAll(relevantWords);
+                    listView.getItems().setAll(relevantWords);
                     currentWord = null;
-                    dictionaryWebView.getEngine().loadContent("");
+                    webView.getEngine().loadContent("");
+                    favoriteButton.setOpacity(1);
                 } else {
-                    dictionaryListView.getItems().clear();
-                    dictionaryListView.getItems().addAll(listViewWord);
-                    dictionaryWebView.getEngine().loadContent("");
+                    listView.getItems().clear();
+                    listView.getItems().addAll(listViewWord);
+                    webView.getEngine().loadContent("");
                     currentWord = null;
+                    favoriteButton.setOpacity(1);
                 }
             }
         }
     }
 
     @FXML
-    private void showEditWordPane(ActionEvent event) {
-        if (editWordOpen) {
-            return;
-        }
-        try {
-            String selectedWord = dictionaryListView.getSelectionModel().getSelectedItem();
-            if (selectedWord != null) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/fxml/editWord.fxml"));
-                Parent root = loader.load();
-
-                editWordController = loader.getController();
-
-                editWordController.setCurrentWordLabel(selectedWord);
-
-                editWordController.setWebView(mapStringWord.get(selectedWord).getMeaning());
-
-                editWordController.setMapStringWord(mapStringWord);
-
-                Stage stage = new Stage();
-                stage.setTitle("Edit Word");
-                stage.setScene(new Scene(root));
-                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
-                stage.getIcons().add(icon);
-                stage.setOnHidden(e -> resetMapAndWebView());
-                editWordOpen = true;
-                stage.show();
+    public void buttonSearch() {
+        String input = searchBar.getText();
+        if (!input.isEmpty()) {
+            Word target = parent.getDictionaryManagement().getMapStringWord().get(input);
+            if (target != null) {
+                currentWord = target;
+                showWord();
             } else {
-                editWordController.showUnselectedWord();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void resetMapAndWebView() {
-        String newdefinition = mapStringWord.get(dictionaryListView.getSelectionModel().getSelectedItem()).getMeaning();
-        dictionaryWebView.getEngine().loadContent(newdefinition, "text/html");
-        editWordOpen = false;
-        parent.getDictionaryManagement().writeToFile(word);
-    }
-
-    public void removeWord() {
-        if (currentWord != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Warning!");
-            alert.setHeaderText(currentWord.getSpelling() + " will be removed!");
-            alert.setContentText("Do you want to remove?");
-
-            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
-
-            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == buttonTypeYes) {
-                parent.getDictionaryManagement().getMapStringWord().remove(currentWord.getSpelling());
-                parent.getDictionaryManagement().removeWordFromFile(currentWord);
-                parent.getHistory().removeWordFromFile(currentWord);
-                parent.getFavorite().removeWordFromFile(currentWord);
-                currentWord = null;
-                word = parent.getDictionaryManagement().getDictionary().getWordList();
-                listViewWord.clear();
-                for (Word w : word) {
-                    listViewWord.add(w.getSpelling());
-                }
-                dictionaryListView.getItems().clear();
-                dictionaryListView.getItems().addAll(listViewWord);
-                dictionaryWebView.getEngine().loadContent("");
-                searchBar.clear();
+                System.out.println("cannot find word");
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Warning!");
-            alert.setHeaderText(null);
-            alert.setContentText("No word chosen!");
-            alert.showAndWait();
+            System.out.println("null");
         }
     }
 
-    @FXML
-    public void updateSearchBar() {
-        String spelling = dictionaryListView.getSelectionModel().getSelectedItem();
-        if (spelling != null) {
-            searchBar.setText(spelling);
+    public void reload() {
+        listViewWord.clear();
+        for (Word w : parent.getDictionaryManagement().getDictionary().getWordList()) {
+            listViewWord.add(w.getSpelling());
         }
-    }
-
-    @FXML
-    public void readWord(MouseEvent event) {
-        if (event.getSource() == speaker) {
-            GoogleServices.pronounce(searchBar.getText(), "en");
-        }
-    }
-
-    @FXML
-    public void updateFavoriteList() {
-        if (currentWord == null) {
-            System.out.println("Current word is null");
-        } else {
-            if (parent.getFavorite().isExist(currentWord)) {
-                parent.getFavorite().removeWordFromFavorite(currentWord);
-                favoriteButton.setOpacity(1);
-            } else {
-                parent.getFavorite().addWordToFavorite(currentWord);
-                favoriteButton.setOpacity(0);
-            }
-            favoriteButton.setMouseTransparent(false);
-        }
-    }
-
-    public void setFavoriteButton(Word word) {
-        if (parent.getFavorite().isExist(word)) {
-            favoriteButton.setOpacity(0);
-        } else {
-            favoriteButton.setOpacity(1);
-        }
-        favoriteButton.setMouseTransparent(false);
-    }
-
-    public boolean isWordListChanged() {
-        return wordListChanged;
-    }
-
-    public void setWordListChanged(boolean changed) {
-        wordListChanged = changed;
-    }
-
-    public void sync(ContainerController parent) {
-        this.parent = parent;
+        listView.getItems().clear();
+        listView.getItems().addAll(listViewWord);
+        searchBar.clear();
+        webView.getEngine().loadContent("");
+        favoriteButton.setOpacity(1);
     }
 }

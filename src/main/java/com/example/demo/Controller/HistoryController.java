@@ -20,47 +20,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class HistoryController implements Initializable {
-    ContainerController parent = new ContainerController();
-    ArrayList<Word> historyList = parent.getHistory().getDictionary().getWordList();
-    ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-    private Word currentWord;
-
-    @FXML
-    private TextField searchBar;
-
-    @FXML
-    private ListView<String> historyListView;
-
-    @FXML
-    private WebView historyWebView;
-
-    @FXML
-    private Button speaker;
-
-    @FXML
-    private Button favoriteButton;
-
-    private EditWordController editWordController = new EditWordController();
-
-    private boolean editWordOpen = false;
-
+public class HistoryController extends Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for(int i = historyList.size() - 1; i >= 0; i--) {
-            listViewWord.add(historyList.get(i).getSpelling());
+        for(int i = parent.getHistory().getDictionary().getWordList().size() - 1; i >= 0; i--) {
+            listViewWord.add(parent.getHistory().getDictionary().getWordList().get(i).getSpelling());
         }
 
-        historyListView.getItems().addAll(listViewWord);
-        historyListView.getSelectionModel().selectedItemProperty().addListener(
+        listView.getItems().addAll(listViewWord);
+        listView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
-                        Word selectedWord = mapStringWord.get(newValue.trim());
+                        Word selectedWord = parent.getDictionaryManagement().getMapStringWord().get(newValue.trim());
                         currentWord = selectedWord;
-                        setFavoriteButton(currentWord);
-                        String definition = selectedWord.getMeaning();
-                        historyWebView.getEngine().loadContent(definition, "text/html");
+                        showWord();
                     }
                 }
         );
@@ -72,12 +45,10 @@ public class HistoryController implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    Word target = parent.getHistory().findWord(input);
+                    Word target = parent.getDictionaryManagement().getMapStringWord().get(input);
                     if (target != null) {
                         currentWord = target;
-                        setFavoriteButton(currentWord);
-                        String definition = target.getMeaning();
-                        historyWebView.getEngine().loadContent(definition, "text/html");
+                        showWord();
                     } else {
                         System.out.println("cannot find word");
                     }
@@ -88,140 +59,53 @@ public class HistoryController implements Initializable {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
                     ArrayList<String> relevantWords = parent.getHistory().getSearcher(input);
-                    historyListView.getItems().setAll(relevantWords);
+                    listView.getItems().setAll(relevantWords);
                     currentWord = null;
-                    historyWebView.getEngine().loadContent("");
+                    webView.getEngine().loadContent("");
+                    favoriteButton.setOpacity(1);
                 } else {
-                    historyListView.getItems().clear();
-                    historyListView.getItems().addAll(listViewWord);
+                    listView.getItems().clear();
+                    listView.getItems().addAll(listViewWord);
                     currentWord = null;
-                    historyWebView.getEngine().loadContent("");
+                    webView.getEngine().loadContent("");
+                    favoriteButton.setOpacity(1);
                 }
             }
         }
     }
 
     @FXML
-    private void showEditWordPane(ActionEvent event) {
-        if (editWordOpen) {
-            return;
-        }
-        try {
-            String selectedWord = historyListView.getSelectionModel().getSelectedItem();
-            if (selectedWord != null) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/fxml/editWord.fxml"));
-                Parent root = loader.load();
-
-                editWordController = loader.getController();
-
-                editWordController.setCurrentWordLabel(selectedWord);
-
-                editWordController.setWebView(mapStringWord.get(selectedWord).getMeaning());
-
-                editWordController.setMapStringWord(mapStringWord);
-
-                Stage stage = new Stage();
-                stage.setTitle("Edit Word");
-                stage.setScene(new Scene(root));
-                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
-                stage.getIcons().add(icon);
-                stage.setOnHidden(e -> resetMapAndWebView());
-                editWordOpen = true;
-                stage.show();
+    public void buttonSearch() {
+        String input = searchBar.getText();
+        if (!input.isEmpty()) {
+            Word target = parent.getDictionaryManagement().getMapStringWord().get(input);
+            if (target != null) {
+                currentWord = target;
+                showWord();
             } else {
-                editWordController.showUnselectedWord();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void resetMapAndWebView() {
-        String newdefinition = mapStringWord.get(historyListView.getSelectionModel().getSelectedItem()).getMeaning();
-        historyWebView.getEngine().loadContent(newdefinition, "text/html");
-        editWordOpen = false;
-        parent.getDictionaryManagement().writeToFile(historyList);
-    }
-
-    public void removeWord() {
-        if (currentWord != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Warning!");
-            alert.setHeaderText(currentWord.getSpelling() + " will be removed!");
-            alert.setContentText("Do you want to remove?");
-
-            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
-
-            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == buttonTypeYes) {
-                parent.getDictionaryManagement().getMapStringWord().remove(currentWord.getSpelling());
-                parent.getDictionaryManagement().removeWordFromFile(currentWord);
-                parent.getHistory().removeWordFromFile(currentWord);
-                parent.getFavorite().removeWordFromFile(currentWord);
-                historyList = parent.getHistory().getDictionary().getWordList();
-                listViewWord.clear();
-                for (Word w : historyList) {
-                    listViewWord.add(w.getSpelling());
-                }
-                historyListView.getItems().clear();
-                historyListView.getItems().addAll(listViewWord);
-                historyWebView.getEngine().loadContent("");
-                searchBar.clear();
+                System.out.println("cannot find word");
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Warning!");
-            alert.setHeaderText(null);
-            alert.setContentText("No word chosen!");
-            alert.showAndWait();
+            System.out.println("null");
         }
     }
 
-    @FXML
-    public void updateSearchBar(MouseEvent event) {
-        String spelling = historyListView.getSelectionModel().getSelectedItem();
-        if (spelling != null) {
-            searchBar.setText(spelling);
-        }
+    @Override
+    public void showWord() {
+        setFavoriteButton(currentWord);
+        String definition = currentWord.getMeaning();
+        webView.getEngine().loadContent(definition, "text/html");
     }
 
-    @FXML
-    public void readWord(MouseEvent event) {
-        if (event.getSource() == speaker) {
-            GoogleServices.pronounce(searchBar.getText(), "en");
+    public void reload() {
+        listViewWord.clear();
+        for(int i = parent.getHistory().getDictionary().getWordList().size() - 1; i >= 0; i--) {
+            listViewWord.add(parent.getHistory().getDictionary().getWordList().get(i).getSpelling());
         }
-    }
-
-    @FXML
-    public void updateFavoriteList() {
-        if (currentWord == null) {
-            System.out.println("Current word is null");
-        } else {
-            if (parent.getFavorite().isExist(currentWord)) {
-                parent.getFavorite().removeWordFromFavorite(currentWord);
-                favoriteButton.setOpacity(1);
-            } else {
-                parent.getFavorite().addWordToFavorite(currentWord);
-                favoriteButton.setOpacity(0);
-            }
-            favoriteButton.setMouseTransparent(false);
-        }
-    }
-
-    public void setFavoriteButton(Word word) {
-        if (parent.getFavorite().isExist(word)) {
-            favoriteButton.setOpacity(0);
-        } else {
-            favoriteButton.setOpacity(1);
-        }
-        favoriteButton.setMouseTransparent(false);
-    }
-
-    public void sync(ContainerController parent) {
-        this.parent = parent;
+        listView.getItems().clear();
+        listView.getItems().addAll(listViewWord);
+        searchBar.clear();
+        webView.getEngine().loadContent("");
+        favoriteButton.setOpacity(1);
     }
 }

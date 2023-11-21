@@ -18,8 +18,8 @@ public class AddWordController {
     private String definition;
 
     ContainerController parent = new ContainerController();
-    DictionaryManagement dictionaryManagement = parent.getDictionaryManagement();
-    ArrayList<Word> words = dictionaryManagement.getDictionary().getWordList();
+    //    DictionaryManagement dictionaryManagement = parent.getDictionaryManagement();
+//    ArrayList<Word> words = dictionaryManagement.getDictionary().getWordList();
     @FXML
     private TextField targetTextField;
     @FXML
@@ -84,24 +84,18 @@ public class AddWordController {
     }
 
     public int wordExist() {
-        return dictionaryManagement.getDictionary().findWordIndex(0, words.size() - 1, target);
+        return parent.getDictionaryManagement().getDictionary().findWordIndex(0, parent.getDictionaryManagement().getDictionary().getWordList().size() - 1, target);
     }
 
     public void addWordToFile() {
         String editDef = "<html><i>" + target +"</i><br/><ul><li><font color='#cc0000'><b> "
                 + definition + "</b></font></li></ul></html>";
         Word word = new Word(target, editDef);
-        dictionaryManagement.getDictionary().addWordByBinary(word);
-        words = dictionaryManagement.getDictionary().getWordList();
-        System.out.println("..");
-        for(Word x : words) {
-            System.out.println(x.getSpelling());
-        }
-        System.out.println("..");
+        parent.getDictionaryManagement().getDictionary().addWordByBinary(word);
         //dictionaryController.setWords(words);
-        dictionaryManagement.writeToFile(words);
+        parent.getDictionaryManagement().writeToFile(parent.getDictionaryManagement().getDictionary().getWordList());
         parent.getDictionaryManagement().getMapStringWord().put(target, word);
-        parent.getDictionaryManagement().getDictionary().setWordList(words);
+        parent.getDictionaryManagement().setWordlistChanged(true);
         //dictionaryController.setAddWord(true);
         isAdded = true;
     }
@@ -119,7 +113,7 @@ public class AddWordController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == buttonTypeYes) {
-            words.remove(wordExist());
+            parent.getDictionaryManagement().getDictionary().getWordList().remove(wordExist());
             addWordToFile();
             System.out.println("Yes");
         } else {

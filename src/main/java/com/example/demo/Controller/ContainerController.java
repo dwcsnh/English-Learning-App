@@ -67,22 +67,18 @@ public class ContainerController implements Initializable {
     }
 
     public void showDictionaryPane() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/dictionary.fxml"));
-        dictionaryPane = fxmlLoader.load();
-        dictionaryController = fxmlLoader.getController();
-
+        if(dictionaryManagement.wordListChanged()) {
+            dictionaryController.reload();
+        }
         dictionaryController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(dictionaryPane);
     }
 
     public void showHistoryPane() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/history.fxml"));
-        historyPane = fxmlLoader.load();
-        historyController = fxmlLoader.getController();
-
+        if(history.wordListChanged()) {
+            historyController.reload();
+        }
         historyController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(historyPane);
@@ -94,11 +90,9 @@ public class ContainerController implements Initializable {
     }
 
     public void showFavoritePane() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/example/demo/fxml/favorite.fxml"));
-        favoritePane = fxmlLoader.load();
-        favoriteController = fxmlLoader.getController();
-
+        if (favorite.wordListChanged()) {
+            favoriteController.reload();
+        }
         favoriteController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(favoritePane);
@@ -110,6 +104,7 @@ public class ContainerController implements Initializable {
     }
 
     public void showAddWordPane() {
+        addWordController.sync(this);
         contentPane.getChildren().clear();
         contentPane.getChildren().add(addWordPane);
     }
@@ -175,39 +170,57 @@ public class ContainerController implements Initializable {
             System.out.println(e.getMessage());
         } try {
             showDictionaryPane();
+            dictionaryButton.setStyle("-fx-background-color: #EBEBEB;");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    public void resetButtonStyle() {
+        dictionaryButton.setStyle("-fx-background-color: transparent;");
+        historyButton.setStyle("-fx-background-color: transparent;");
+        favoriteListButton.setStyle("-fx-background-color: transparent;");
+        wordleButton.setStyle("-fx-background-color: transparent;");
+        googleTranslateButton.setStyle("-fx-background-color: transparent;");
+        addWordButton.setStyle("-fx-background-color: transparent;");
+        fastEnglishButton.setStyle("-fx-background-color: transparent;");
+    }
+
     @FXML
     public void handleClickComponents(ActionEvent event) throws IOException {
         if (event.getSource() == dictionaryButton) {
-            pickAddWord = addWordController.isAdded();
-            if (pickAddWord) {
-                dictionaryController.init();
-                pickAddWord = false;
-                addWordController.setAdded(false);
-            }
+            resetButtonStyle();
+            dictionaryButton.setStyle("-fx-background-color: #EBEBEB;");
             showDictionaryPane();
             System.out.println("click dictionary button");
         } else if (event.getSource() == historyButton) {
+            resetButtonStyle();
+            historyButton.setStyle("-fx-background-color: #EBEBEB;");
             showHistoryPane();
             System.out.println("click history button");
         } else if (event.getSource() == favoriteListButton) {
+            resetButtonStyle();
+            favoriteListButton.setStyle("-fx-background-color: #EBEBEB;");
             showFavoritePane();
             System.out.println("click favorite list button");
         } else if (event.getSource() == wordleButton) {
+            resetButtonStyle();
+            wordleButton.setStyle("-fx-background-color: #EBEBEB;");
             showWordlePane();
             System.out.println("click wordle button");
         } else if (event.getSource() == googleTranslateButton) {
+            resetButtonStyle();
+            googleTranslateButton.setStyle("-fx-background-color: #EBEBEB;");
             showGoogleTranslatePane();
             System.out.println("click google translate button");
         } else if (event.getSource() == addWordButton) {
-            //pickAddWord = true;
+            resetButtonStyle();
+            addWordButton.setStyle("-fx-background-color: #EBEBEB;");
             showAddWordPane();
             System.out.println("click addWord button");
         } else if (event.getSource() == fastEnglishButton) {
+            resetButtonStyle();
+            fastEnglishButton.setStyle("-fx-background-color: #EBEBEB;");
             showFastEnglishPane();
             System.out.println("click fastEnglish button");
         }

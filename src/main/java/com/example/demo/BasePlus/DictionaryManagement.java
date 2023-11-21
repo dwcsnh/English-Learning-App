@@ -13,6 +13,7 @@ public class DictionaryManagement {
 
     protected Dictionary dictionary;
     private Map<String, Word> mapStringWord = new HashMap<>();
+    private boolean isWordlistChanged = false;
 
     public DictionaryManagement(String path) {
         dictionary = new Dictionary();
@@ -68,6 +69,7 @@ public class DictionaryManagement {
             }
             fileWriter.flush();
             fileWriter.close();
+            setWordlistChanged(true);
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
@@ -123,5 +125,22 @@ public class DictionaryManagement {
     public void removeWordFromFile(Word word) {
         this.getDictionary().removeWord(word.getSpelling());
         writeToFile(this.getDictionary().getWordList());
+        setWordlistChanged(true);
+    }
+
+    public void editDefinition(Word word, String newDefinition) {
+        int index = dictionary.findWordIndex(0, dictionary.getWordList().size() - 1, word.getSpelling());
+        if (index != -1) {
+            dictionary.getWordList().get(index).setMeaning(newDefinition);
+            setWordlistChanged(true);
+        }
+    }
+
+    public boolean wordListChanged() {
+        return isWordlistChanged;
+    }
+
+    public void setWordlistChanged(boolean status) {
+        this.isWordlistChanged = status;
     }
 }

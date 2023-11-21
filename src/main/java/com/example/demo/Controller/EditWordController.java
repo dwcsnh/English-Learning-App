@@ -28,9 +28,8 @@ public class EditWordController {
     @FXML
     private WebView editWebView;
 
-    Map<String, Word> mapStringWord;
-
     private boolean unselectedWordOpen = false;
+    ContainerController parent = new ContainerController();
 
 
     @FXML
@@ -52,15 +51,24 @@ public class EditWordController {
         editWebView.getEngine().loadContent(content, "text/html");
     }
 
-    public void setMapStringWord(Map<String, Word> mapStringWord) {
-        this.mapStringWord = mapStringWord;
-    }
+//    public void setMapStringWord(Map<String, Word> mapStringWord) {
+//        this.mapStringWord = mapStringWord;
+//    }
 
     @FXML
     public void editUpdateDictionary(ActionEvent event) {
-        Word newWord = mapStringWord.get(currentWordLabel.getText());
-        newWord.setMeaning("<html>" + editTextArea.getText() + "</html>");
-        mapStringWord.put(newWord.getSpelling(), newWord);
+        Word newWord = parent.getDictionaryManagement().getMapStringWord().get(currentWordLabel.getText());
+        String newMeaning = "<html><i>" + newWord.getSpelling() +"</i><br/><ul><li><font color='#cc0000'><b> "
+                + editTextArea.getText() + "</b></font></li></ul></html>";
+        newWord.setMeaning(newMeaning);
+        System.out.println(newMeaning);
+        parent.getDictionaryManagement().editDefinition(newWord, newMeaning);
+        parent.getFavorite().editDefinition(newWord, newMeaning);
+        parent.getHistory().editDefinition(newWord, newMeaning);
+        parent.getDictionaryManagement().getMapStringWord().put(newWord.getSpelling(), newWord);
+        parent.getDictionaryManagement().writeToFile(parent.getDictionaryManagement().getDictionary().getWordList());
+        parent.getHistory().writeToFile(parent.getHistory().getDictionary().getWordList());
+        parent.getFavorite().writeToFile(parent.getFavorite().getDictionary().getWordList());
         closeEditWord(event);
     }
 
@@ -90,5 +98,9 @@ public class EditWordController {
     private void closeUnselectedWord(ActionEvent event) {
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    public void sync(ContainerController parent) {
+        this.parent = parent;
     }
 }
