@@ -93,11 +93,6 @@ public class AddWordController {
         Word word = new Word(target, editDef);
         dictionaryManagement.getDictionary().addWordByBinary(word);
         words = dictionaryManagement.getDictionary().getWordList();
-        System.out.println("..");
-        for(Word x : words) {
-            System.out.println(x.getSpelling());
-        }
-        System.out.println("..");
         //dictionaryController.setWords(words);
         dictionaryManagement.writeToFile(words);
         parent.getDictionaryManagement().getMapStringWord().put(target, word);

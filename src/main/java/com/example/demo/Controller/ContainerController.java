@@ -164,9 +164,20 @@ public class ContainerController implements Initializable {
         }
     }
 
+    public void resetButtonStyle() {
+        dictionaryButton.setStyle("-fx-background-color: transparent;");
+        historyButton.setStyle("-fx-background-color: transparent;");
+        favoriteListButton.setStyle("-fx-background-color: transparent;");
+        wordleButton.setStyle("-fx-background-color: transparent;");
+        googleTranslateButton.setStyle("-fx-background-color: transparent;");
+        addWordButton.setStyle("-fx-background-color: transparent;");
+    }
+
     @FXML
     public void handleClickComponents(ActionEvent event) throws IOException {
         if (event.getSource() == dictionaryButton) {
+            resetButtonStyle();
+            dictionaryButton.setStyle("-fx-background-color: #EBEBEB;");
             pickAddWord = addWordController.isAdded();
             if (pickAddWord) {
                 dictionaryController.init();
@@ -176,19 +187,28 @@ public class ContainerController implements Initializable {
             showDictionaryPane();
             System.out.println("click dictionary button");
         } else if (event.getSource() == historyButton) {
+            resetButtonStyle();
+            historyButton.setStyle("-fx-background-color: #EBEBEB;");
             showHistoryPane();
             System.out.println("click history button");
         } else if (event.getSource() == favoriteListButton) {
+            resetButtonStyle();
+            favoriteListButton.setStyle("-fx-background-color: #EBEBEB;");
             showFavoritePane();
             System.out.println("click favorite list button");
         } else if (event.getSource() == wordleButton) {
+            resetButtonStyle();
+            wordleButton.setStyle("-fx-background-color: #EBEBEB;");
             showWordlePane();
             System.out.println("click wordle button");
         } else if (event.getSource() == googleTranslateButton) {
+            resetButtonStyle();
+            googleTranslateButton.setStyle("-fx-background-color: #EBEBEB;");
             showGoogleTranslatePane();
             System.out.println("click google translate button");
         } else if (event.getSource() == addWordButton) {
-            //pickAddWord = true;
+            resetButtonStyle();
+            addWordButton.setStyle("-fx-background-color: #EBEBEB;");
             showAddWordPane();
             System.out.println("click addWord button");
         }

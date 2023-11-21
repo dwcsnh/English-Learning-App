@@ -124,4 +124,11 @@ public class DictionaryManagement {
         this.getDictionary().removeWord(word.getSpelling());
         writeToFile(this.getDictionary().getWordList());
     }
+
+    public void editDefinition(Word word, String newDefinition) {
+        int index = dictionary.findWordIndex(0, dictionary.getWordList().size() - 1, word.getSpelling());
+        if (index != -1) {
+            dictionary.getWordList().get(index).setMeaning(newDefinition);
+        }
+    }
 }

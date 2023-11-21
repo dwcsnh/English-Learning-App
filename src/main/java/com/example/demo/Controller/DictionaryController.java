@@ -128,12 +128,9 @@ public class DictionaryController implements Initializable {
                 Parent root = loader.load();
 
                 editWordController = loader.getController();
-
+                editWordController.sync(this.parent);
                 editWordController.setCurrentWordLabel(selectedWord);
-
                 editWordController.setWebView(mapStringWord.get(selectedWord).getMeaning());
-
-                editWordController.setMapStringWord(mapStringWord);
 
                 Stage stage = new Stage();
                 stage.setTitle("Edit Word");
@@ -153,13 +150,10 @@ public class DictionaryController implements Initializable {
     }
 
     public void resetMapAndWebView() {
+        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
         String newdefinition = mapStringWord.get(dictionaryListView.getSelectionModel().getSelectedItem()).getMeaning();
         dictionaryWebView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
-        parent.getDictionaryManagement().writeToFile(word);
-        for(Word w : word) {
-            System.out.println(w.getMeaning());
-        }
     }
 
     public void removeWord() {

@@ -72,7 +72,7 @@ public class HistoryController implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
-                    Word target = parent.getHistory().findWord(input);
+                    Word target = mapStringWord.get(input);
                     if (target != null) {
                         currentWord = target;
                         setFavoriteButton(currentWord);
@@ -113,12 +113,9 @@ public class HistoryController implements Initializable {
                 Parent root = loader.load();
 
                 editWordController = loader.getController();
-
+                editWordController.sync(this.parent);
                 editWordController.setCurrentWordLabel(selectedWord);
-
                 editWordController.setWebView(mapStringWord.get(selectedWord).getMeaning());
-
-                editWordController.setMapStringWord(mapStringWord);
 
                 Stage stage = new Stage();
                 stage.setTitle("Edit Word");
@@ -138,10 +135,10 @@ public class HistoryController implements Initializable {
     }
 
     public void resetMapAndWebView() {
+        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
         String newdefinition = mapStringWord.get(historyListView.getSelectionModel().getSelectedItem()).getMeaning();
         historyWebView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
-        parent.getDictionaryManagement().writeToFile(historyList);
     }
 
     public void removeWord() {
