@@ -26,6 +26,10 @@ The JavaFx Supporting Learning English Application is a flexible and user-friend
 
 ## UML diagram
 
+
+
+   <img src="https://github.com/dwcsnh/English-Learning-App/assets/144114071/dc05571e-2b28-4749-bfc5-5878e35a77b2" alt="..." width="760" />
+
 ## Installation
 1. Clone the project from the repository.
 2. Open the project in the IDE.
