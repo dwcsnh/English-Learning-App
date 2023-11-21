@@ -3,9 +3,9 @@
 ## Author
 
 Group BAB
-- Dao Duc Anh - 22021145
-- Do Trong Binh - 22021196
-- Bui Nguyen Cong Bang - 22021132
+- Đào Đức Anh - 22021145
+- Đỗ Trọng Bình - 22021196
+- Bùi Nguyễn Công Bằng - 22021132
 
 ## Description
 The JavaFx Supporting Learning English Application is a flexible and user-friendly English learning app that helps users effectively improve their English skills. With features such as diverse vocabulary, flexible exercises, and learning through games, this app provides an enjoyable and convenient learning experience. The application use E_V.txt file to store data.
@@ -15,8 +15,14 @@ The JavaFx Supporting Learning English Application is a flexible and user-friend
 3. The application is based on the MVC model.
 4. The application has one types of dictionaries: English-Vietnamese.
 5. The application use E_V.txt, favorite.txt, history.txt, wordleWord.txt, wordsFastEng.txt, highScore.txt files to store data.
-   
+
+
+
+
    <img src="https://github.com/dwcsnh/English-Learning-App/assets/144114071/c30d3184-9d73-4e35-909a-60b64a197adf" alt="..." width="760" />
+
+
+
 
 ## UML diagram
 
