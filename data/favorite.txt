@@ -1,3 +1,4 @@
+-mancy<html>  <head>      </head>  <body>    <i>-mancy</i><br>    <ul>      <li>        <font color="#cc0000"><b>h&#236;nh th&#225;i gh&#233;p ch&#7881; s&#7921; &#273;o&#225;n tr&#432;&#7899;c m&#224; &#273;&#227; &#273;o&#225;n</b></font>      </li>    </ul>  </body></html>
 -mer<html><i>-mer</i><br/><ul><li><font color='#cc0000'><b> hậu tố tạo danh từ có nghĩa là polyme (trùng phân) hoặc isome (đồng phân)</b></font></li></ul></html>
 2D (two dimension)<html><i>2D (two dimension)</i><br/><ul><li><font color='#cc0000'><b> (Tech) hai chiều, nhị thứ nguyên, phẳng</b></font></li></ul></html>
 A4-size<html><i>A4-size</i><br/><ul><li><font color='#cc0000'><b> (Tech) khổ giấy A4 (21 cm x 29.7 cm)</b></font></li></ul></html>

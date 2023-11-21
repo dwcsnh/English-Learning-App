@@ -157,9 +157,6 @@ public class DictionaryController implements Initializable {
         dictionaryWebView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
         parent.getDictionaryManagement().writeToFile(word);
-        for(Word w : word) {
-            System.out.println(w.getMeaning());
-        }
     }
 
     public void removeWord() {
