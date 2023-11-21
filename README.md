@@ -2,13 +2,13 @@
 
 ## Author
 
-Group 24
+Group BAB
 - Dao Duc Anh - 22021145
 - Do Trong Binh - 22021196
 - Bui Nguyen Cong Bang - 22021132
 
 ## Description
-English-Learning_App is a flexible and user-friendly English learning app that helps users effectively improve their English skills. With features such as diverse vocabulary, flexible exercises, and learning through games, this app provides an enjoyable and convenient learning experience. The application use E_V.txt file to store data.
+The JavaFx Supporting Learning English Application is a flexible and user-friendly English learning app that helps users effectively improve their English skills. With features such as diverse vocabulary, flexible exercises, and learning through games, this app provides an enjoyable and convenient learning experience. The application use E_V.txt file to store data.
 
 1. The application is designed to support learning English.
 2. The application is written in Java and uses the JavaFX library.
