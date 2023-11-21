@@ -55,7 +55,13 @@ The JavaFx Supporting Learning English Application is a flexible and user-friend
 ## Demo
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+We welcome and appreciate contributions from the community to improve The JavaFx Supporting Learning English Application. Whether it's reporting bugs, suggesting enhancements, or directly contributing code, your efforts are valuable to us.
+We appreciate code contributions! To contribute:
+1. Fork the repository and create a new branch for your feature/bug fix.
+2. Make your changes and ensure they follow our coding conventions.
+3. Write clear commit messages describing the changes made.
+4. Submit a pull request to the 'main' branch.
+
 
 ## Project status
 The project is completed.
