@@ -106,7 +106,6 @@ public class WordleController {
         }
         Random random = new Random();
         ans = words[random.nextInt(words.length)].toUpperCase();
-        System.out.println(ans);
     }
 
 
@@ -126,7 +125,6 @@ public class WordleController {
         for (int i = 0; i < guess.length(); i++) {
             String letter = guess.substring(i, i + 1);
             labels[i + round * 5].setText(letter);
-            System.out.println(labels[i + round * 5].getText());
             if (letter.equals(ans.substring(i, i + 1))) {
                 labels[i + round * 5].setStyle("-fx-background-radius: 5 5 5 5;" +
                         "-fx-background-color: #538D4E;");
@@ -141,12 +139,10 @@ public class WordleController {
         if (guess.equals(ans)) {
             win = true;
         }
-        System.out.println("end: " + end);
         if (!win) {
             if (!end) {
                 nextRound();
             } else {
-                System.out.println("You lose!!");
                 showLoseTheGame();
                 // Do something : show answer, alert, ...
                 for (int i = 0; i < 30; i++) {
@@ -159,7 +155,6 @@ public class WordleController {
                 reset();
             }
         } else {
-            System.out.println("You win!!");
             // Do something before start a new game
             showWinTheGame();
             //reset
@@ -298,6 +293,5 @@ public class WordleController {
         end = false;
         Random random = new Random();
         ans = words[random.nextInt(words.length)].toUpperCase();
-        System.out.println(ans);
     }
 }
