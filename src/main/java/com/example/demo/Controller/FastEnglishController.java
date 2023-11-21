@@ -92,7 +92,7 @@ public class FastEnglishController {
     private Button playButton;
     @FXML
     public void PlayGame() throws IOException {
-        System.out.println("Play");
+        //System.out.println("Play");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/fxml/FastEnglish.fxml"));
         //Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage) playButton.getScene().getWindow();
@@ -141,7 +141,7 @@ public class FastEnglishController {
         progressBar.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
         inGame();
-        System.out.println(curScoreNumber);
+        //System.out.println(curScoreNumber);
     }
 
     public void readData() {
@@ -197,7 +197,7 @@ public class FastEnglishController {
                 break;
             }
         }
-        System.out.println("r = " + result);
+        //System.out.println("r = " + result);
         loadImage(imageView1, arrWords[0]);
         loadImage(imageView2, arrWords[1]);
         loadImage(imageView3, arrWords[2]);
@@ -215,7 +215,7 @@ public class FastEnglishController {
             int ran = turn + random.nextInt(wordsList.size() - turn);
             swap(wordsList, turn, ran);
             arr[0] = wordsList.get(turn);
-            System.out.print(wordsList.get(turn) + " ");
+            //System.out.print(wordsList.get(turn) + " ");
             word = wordsList.get(turn);
             if (labelWordCheckBox.isSelected()) {
                 loadLabel(wordLabel, word);
@@ -230,7 +230,7 @@ public class FastEnglishController {
                 swap(tmp, j, randomIndex);
                 arr[j + 1] = tmp.get(j);
             }
-            System.out.println();
+            //System.out.println();
             loadImageToGame(arr);
         } else {
             winGame();
@@ -260,8 +260,8 @@ public class FastEnglishController {
                     curScoreNumber = 0;
                 }
                 loadLabel(curScoreLabel, "SCORE: " + curScoreNumber);
-                System.out.println("playSound");
-                System.out.println(false);
+                //System.out.println("playSound");
+                //System.out.println(false);
             }
         }
     }
@@ -278,7 +278,7 @@ public class FastEnglishController {
         readData();
         loadLabel(wordLabel, word);
         //task = new doWord();
-        System.out.println(lostGame);
+        //System.out.println(lostGame);
         task.cancel();
         progressBar.progressProperty().unbind();
         task =new doWord();
@@ -297,7 +297,7 @@ public class FastEnglishController {
         Platform.runLater(() -> {
             wordLabel.setText("Game Over!!!");
         });
-        playSoundOnLostGame();
+        //playSoundOnLostGame();
         exportHighScoreToFile();
     }
 
@@ -325,7 +325,7 @@ public class FastEnglishController {
         try {
             Scanner scanner = new Scanner(file);
             highScoreNumber = scanner.nextInt();
-            System.out.println(highScoreNumber);
+            //System.out.println(highScoreNumber);
             scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
