@@ -17,7 +17,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../logo/home.png" />
+                              <Image url="@../logo/dictionary.png" />
                            </image>
                         </ImageView>
                      </graphic>

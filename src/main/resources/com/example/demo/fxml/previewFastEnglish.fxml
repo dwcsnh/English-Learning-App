@@ -1,53 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #C0C0C0;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121213;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label alignment="CENTER" layoutX="1.0" layoutY="106.0" prefHeight="34.0" prefWidth="600.0" text="This is a simple game for learning basic English vocabulary.">
+        <Label alignment="CENTER" layoutX="1.0" layoutY="106.0" prefHeight="34.0" prefWidth="600.0" text="This is a simple game for learning basic English vocabulary." textFill="#4dc9c1">
             <font>
-                <Font size="18.0" />
+                <Font name="Century" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="176.0" prefHeight="34.0" prefWidth="600.0" text="but other learners may find it useful too." textOverrun="CENTER_ELLIPSIS">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="176.0" prefHeight="34.0" prefWidth="600.0" text="but other learners may find it useful too." textFill="#4dc9c1" textOverrun="CENTER_ELLIPSIS">
             <font>
-                <Font size="18.0" />
+                <Font name="Century" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="1.0" layoutY="141.0" prefHeight="34.0" prefWidth="600.0" text="Primarily, it is aimed at ESL (English as a second language) learners">
+        <Label alignment="CENTER" layoutX="1.0" layoutY="141.0" prefHeight="34.0" prefWidth="600.0" text="Primarily, it is aimed at ESL (English as a second language) learners" textFill="#4dc9c1">
             <font>
-                <Font size="18.0" />
+                <Font name="Century" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="1.0" layoutY="246.0" prefHeight="34.0" prefWidth="600.0" text="The game gets faster as you progress">
+        <Label alignment="CENTER" layoutX="1.0" layoutY="246.0" prefHeight="34.0" prefWidth="600.0" text="The game gets faster as you progress" textFill="#4dc9c1">
             <font>
-                <Font size="18.0" />
+                <Font name="Century" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="1.0" layoutY="211.0" prefHeight="34.0" prefWidth="600.0" text="To play, just listen to the words and click on the matching images.">
+        <Label alignment="CENTER" layoutX="1.0" layoutY="211.0" prefHeight="34.0" prefWidth="600.0" text="To play, just listen to the words and click on the matching images." textFill="#4dc9c1">
             <font>
-                <Font size="18.0" />
+                <Font name="Century" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="1.0" layoutY="316.0" prefHeight="34.0" prefWidth="600.0" text="You can choose which vocab to practice">
+        <Label alignment="CENTER" layoutX="1.0" layoutY="316.0" prefHeight="34.0" prefWidth="600.0" text="You can choose which vocab to practice" textFill="#4dc9c1">
             <font>
-                <Font size="18.0" />
+                <Font name="Century" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="1.0" layoutY="281.0" prefHeight="34.0" prefWidth="600.0" text="and if you do not click quickly enough, then the game will end.">
+        <Label alignment="CENTER" layoutX="1.0" layoutY="281.0" prefHeight="34.0" prefWidth="600.0" text="and if you do not click quickly enough, then the game will end." textFill="#4dc9c1">
             <font>
-                <Font size="18.0" />
+                <Font name="Century" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="1.0" layoutY="351.0" prefHeight="34.0" prefWidth="600.0" text="by clicking on a set in the content screen.">
+        <Label alignment="CENTER" layoutX="1.0" layoutY="351.0" prefHeight="34.0" prefWidth="600.0" text="by clicking on a set in the content screen." textFill="#4dc9c1">
             <font>
-                <Font size="18.0" />
+                <Font name="Century" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="145.0" layoutY="20.0" prefHeight="73.0" prefWidth="309.0" text="FAST ENGLISH" textFill="#338276">
+        <Label alignment="CENTER" layoutX="145.0" layoutY="20.0" prefHeight="73.0" prefWidth="309.0" text="FAST ENGLISH" textFill="#4dc9c1">
             <font>
                 <Font name="Cooper Black" size="34.0" />
             </font>
