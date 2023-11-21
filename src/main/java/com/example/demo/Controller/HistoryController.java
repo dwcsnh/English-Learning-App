@@ -22,19 +22,17 @@ import java.util.*;
 
 public class HistoryController implements Initializable {
     ContainerController parent = new ContainerController();
-    ArrayList<Word> historyList = parent.getHistory().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
     private Word currentWord;
 
     @FXML
     private TextField searchBar;
 
     @FXML
-    private ListView<String> historyListView;
+    private ListView<String> listView;
 
     @FXML
-    private WebView historyWebView;
+    private WebView webView;
 
     @FXML
     private Button speaker;
@@ -52,15 +50,15 @@ public class HistoryController implements Initializable {
             listViewWord.add(parent.getHistory().getDictionary().getWordList().get(i).getSpelling());
         }
 
-        historyListView.getItems().addAll(listViewWord);
-        historyListView.getSelectionModel().selectedItemProperty().addListener(
+        listView.getItems().addAll(listViewWord);
+        listView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
                         Word selectedWord = parent.getDictionaryManagement().getMapStringWord().get(newValue.trim());
                         currentWord = selectedWord;
                         setFavoriteButton(currentWord);
                         String definition = selectedWord.getMeaning();
-                        historyWebView.getEngine().loadContent(definition, "text/html");
+                        webView.getEngine().loadContent(definition, "text/html");
                     }
                 }
         );
@@ -77,7 +75,7 @@ public class HistoryController implements Initializable {
                         currentWord = target;
                         setFavoriteButton(currentWord);
                         String definition = target.getMeaning();
-                        historyWebView.getEngine().loadContent(definition, "text/html");
+                        webView.getEngine().loadContent(definition, "text/html");
                     } else {
                         System.out.println("cannot find word");
                     }
@@ -88,14 +86,14 @@ public class HistoryController implements Initializable {
                 String input = searchBar.getText();
                 if (!input.isEmpty()) {
                     ArrayList<String> relevantWords = parent.getHistory().getSearcher(input);
-                    historyListView.getItems().setAll(relevantWords);
+                    listView.getItems().setAll(relevantWords);
                     currentWord = null;
-                    historyWebView.getEngine().loadContent("");
+                    webView.getEngine().loadContent("");
                 } else {
-                    historyListView.getItems().clear();
-                    historyListView.getItems().addAll(listViewWord);
+                    listView.getItems().clear();
+                    listView.getItems().addAll(listViewWord);
                     currentWord = null;
-                    historyWebView.getEngine().loadContent("");
+                    webView.getEngine().loadContent("");
                 }
             }
         }
@@ -107,7 +105,7 @@ public class HistoryController implements Initializable {
             return;
         }
         try {
-            String selectedWord = historyListView.getSelectionModel().getSelectedItem();
+            String selectedWord = listView.getSelectionModel().getSelectedItem();
             if (selectedWord != null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/fxml/editWord.fxml"));
                 Parent root = loader.load();
@@ -135,18 +133,20 @@ public class HistoryController implements Initializable {
     }
 
     public void resetMapAndWebView() {
-        String newdefinition = parent.getDictionaryManagement().getMapStringWord().get(historyListView.getSelectionModel().getSelectedItem()).getMeaning();
-        historyWebView.getEngine().loadContent(newdefinition, "text/html");
+        String newdefinition = parent.getDictionaryManagement().getMapStringWord().get(listView.getSelectionModel().getSelectedItem()).getMeaning();
+        webView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
     }
 
-    public void reloadListView() {
+    public void reload() {
         listViewWord.clear();
         for(int i = parent.getHistory().getDictionary().getWordList().size() - 1; i >= 0; i--) {
             listViewWord.add(parent.getHistory().getDictionary().getWordList().get(i).getSpelling());
         }
-        historyListView.getItems().clear();
-        historyListView.getItems().addAll(listViewWord);
+        listView.getItems().clear();
+        listView.getItems().addAll(listViewWord);
+        searchBar.clear();
+        webView.getEngine().loadContent("");
     }
 
     public void removeWord() {
@@ -167,15 +167,7 @@ public class HistoryController implements Initializable {
                 parent.getDictionaryManagement().removeWordFromFile(currentWord);
                 parent.getHistory().removeWordFromFile(currentWord);
                 parent.getFavorite().removeWordFromFile(currentWord);
-//                historyList = parent.getHistory().getDictionary().getWordList();
-                listViewWord.clear();
-                for (Word w : parent.getHistory().getDictionary().getWordList()) {
-                    listViewWord.add(w.getSpelling());
-                }
-                historyListView.getItems().clear();
-                historyListView.getItems().addAll(listViewWord);
-                historyWebView.getEngine().loadContent("");
-                searchBar.clear();
+                reload();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -188,7 +180,7 @@ public class HistoryController implements Initializable {
 
     @FXML
     public void updateSearchBar(MouseEvent event) {
-        String spelling = historyListView.getSelectionModel().getSelectedItem();
+        String spelling = listView.getSelectionModel().getSelectedItem();
         if (spelling != null) {
             searchBar.setText(spelling);
         }

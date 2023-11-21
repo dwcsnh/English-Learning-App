@@ -3,7 +3,6 @@ package com.example.demo.Controller;
 import com.example.demo.BasePlus.DictionaryManagement;
 import com.example.demo.BasePlus.Favorite;
 import com.example.demo.BasePlus.History;
-import com.example.demo.BasePlus.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
@@ -64,7 +62,7 @@ public class ContainerController implements Initializable {
 
     public void showDictionaryPane() throws IOException {
         if(dictionaryManagement.wordListChanged()) {
-            dictionaryController.reloadListView();
+            dictionaryController.reload();
         }
         dictionaryController.sync(this);
         contentPane.getChildren().clear();
@@ -73,7 +71,7 @@ public class ContainerController implements Initializable {
 
     public void showHistoryPane() throws IOException {
         if(history.wordListChanged()) {
-            historyController.reloadListView();
+            historyController.reload();
         }
         historyController.sync(this);
         contentPane.getChildren().clear();
@@ -87,7 +85,7 @@ public class ContainerController implements Initializable {
 
     public void showFavoritePane() throws IOException {
         if (favorite.wordListChanged()) {
-            favoriteController.reloadListView();
+            favoriteController.reload();
         }
         favoriteController.sync(this);
         contentPane.getChildren().clear();

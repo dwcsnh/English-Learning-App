@@ -22,19 +22,17 @@ import java.util.*;
 
 public class FavoriteController implements Initializable {
     ContainerController parent = new ContainerController();
-//    ArrayList<Word> word = parent.getFavorite().getDictionary().getWordList();
     ArrayList<String> listViewWord = new ArrayList<>();
-    Map<String, Word> mapStringWord = parent.getDictionaryManagement().getMapStringWord();
     private Word currentWord;
 
     @FXML
     private TextField searchBar;
 
     @FXML
-    private ListView<String> favoriteListView;
+    private ListView<String> listView;
 
     @FXML
-    private WebView favoriteWebView;
+    private WebView webView;
 
     @FXML
     private Button speaker;
@@ -53,8 +51,8 @@ public class FavoriteController implements Initializable {
             listViewWord.add(x.getSpelling());
         }
 
-        favoriteListView.getItems().addAll(listViewWord);
-        favoriteListView.getSelectionModel().selectedItemProperty().addListener(
+        listView.getItems().addAll(listViewWord);
+        listView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null){
                         Word selectedWord = parent.getDictionaryManagement().getMapStringWord().get(newValue.trim());
@@ -62,7 +60,7 @@ public class FavoriteController implements Initializable {
                         setFavoriteButton(currentWord);
                         parent.getHistory().addWordToHistory(selectedWord);
                         String definition = selectedWord.getMeaning();
-                        favoriteWebView.getEngine().loadContent(definition, "text/html");
+                        webView.getEngine().loadContent(definition, "text/html");
                     }
                 }
         );
@@ -80,7 +78,7 @@ public class FavoriteController implements Initializable {
                         setFavoriteButton(currentWord);
                         parent.getHistory().addWordToHistory(target);
                         String definition = target.getMeaning();
-                        favoriteWebView.getEngine().loadContent(definition, "text/html");
+                        webView.getEngine().loadContent(definition, "text/html");
                     } else {
                         System.out.println("cannot find word");
                     }
@@ -90,14 +88,14 @@ public class FavoriteController implements Initializable {
             } else {
                 if (!input.isEmpty()) {
                     ArrayList<String> relevantWords = parent.getFavorite().getSearcher(input);
-                    favoriteListView.getItems().setAll(relevantWords);
+                    listView.getItems().setAll(relevantWords);
                     currentWord = null;
-                    favoriteWebView.getEngine().loadContent("");
+                    webView.getEngine().loadContent("");
                 } else {
-                    favoriteListView.getItems().clear();
-                    favoriteListView.getItems().addAll(listViewWord);
+                    listView.getItems().clear();
+                    listView.getItems().addAll(listViewWord);
                     currentWord = null;
-                    favoriteWebView.getEngine().loadContent("");
+                    webView.getEngine().loadContent("");
                 }
             }
         }
@@ -109,7 +107,7 @@ public class FavoriteController implements Initializable {
             return;
         }
         try {
-            String selectedWord = favoriteListView.getSelectionModel().getSelectedItem();
+            String selectedWord = listView.getSelectionModel().getSelectedItem();
             if (selectedWord != null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/fxml/editWord.fxml"));
                 Parent root = loader.load();
@@ -138,18 +136,20 @@ public class FavoriteController implements Initializable {
 
     public void resetMapAndWebView() {
 //        mapStringWord = parent.getDictionaryManagement().getMapStringWord();
-        String newdefinition = parent.getDictionaryManagement().getMapStringWord().get(favoriteListView.getSelectionModel().getSelectedItem()).getMeaning();
-        favoriteWebView.getEngine().loadContent(newdefinition, "text/html");
+        String newdefinition = parent.getDictionaryManagement().getMapStringWord().get(listView.getSelectionModel().getSelectedItem()).getMeaning();
+        webView.getEngine().loadContent(newdefinition, "text/html");
         editWordOpen = false;
     }
 
-    public void reloadListView() {
+    public void reload() {
         listViewWord.clear();
         for (Word w : parent.getFavorite().getDictionary().getWordList()) {
             listViewWord.add(w.getSpelling());
         }
-        favoriteListView.getItems().clear();
-        favoriteListView.getItems().addAll(listViewWord);
+        listView.getItems().clear();
+        listView.getItems().addAll(listViewWord);
+        searchBar.clear();
+        webView.getEngine().loadContent("");
     }
 
     public void removeWord() {
@@ -170,15 +170,7 @@ public class FavoriteController implements Initializable {
                 parent.getDictionaryManagement().removeWordFromFile(currentWord);
                 parent.getHistory().removeWordFromFile(currentWord);
                 parent.getFavorite().removeWordFromFile(currentWord);
-//                word = parent.getFavorite().getDictionary().getWordList();
-                listViewWord.clear();
-                for (Word w : parent.getFavorite().getDictionary().getWordList()) {
-                    listViewWord.add(w.getSpelling());
-                }
-                favoriteListView.getItems().clear();
-                favoriteListView.getItems().addAll(listViewWord);
-                favoriteWebView.getEngine().loadContent("");
-                searchBar.clear();
+                reload();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -191,7 +183,7 @@ public class FavoriteController implements Initializable {
 
     @FXML
     public void updateSearchBar() {
-        String spelling = favoriteListView.getSelectionModel().getSelectedItem();
+        String spelling = listView.getSelectionModel().getSelectedItem();
         if (spelling != null) {
             searchBar.setText(spelling);
         }
@@ -212,10 +204,10 @@ public class FavoriteController implements Initializable {
             if (parent.getFavorite().isExist(currentWord)) {
                 parent.getFavorite().removeWordFromFavorite(currentWord);
                 listViewWord.remove(currentWord.getSpelling());
-                favoriteListView.getItems().clear();
-                favoriteListView.getItems().addAll(listViewWord);
+                listView.getItems().clear();
+                listView.getItems().addAll(listViewWord);
                 searchBar.clear();
-                favoriteWebView.getEngine().loadContent("");
+                webView.getEngine().loadContent("");
                 favoriteButton.setOpacity(1);
             } else {
                 parent.getFavorite().addWordToFavorite(currentWord);

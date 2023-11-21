@@ -13,7 +13,7 @@
     <children>
         <AnchorPane prefHeight="500.0" prefWidth="290.0" styleClass="searchView" stylesheets="@../searcher.css">
             <children>
-                <ListView fx:id="dictionaryListView" layoutX="30.0" layoutY="90.0" onMouseClicked="#updateSearchBar" prefHeight="360.0" prefWidth="246.0" AnchorPane.rightAnchor="13.999999999999972" AnchorPane.topAnchor="90.0" />
+                <ListView fx:id="listView" layoutX="30.0" layoutY="90.0" onMouseClicked="#updateSearchBar" prefHeight="360.0" prefWidth="246.0" AnchorPane.rightAnchor="13.999999999999972" AnchorPane.topAnchor="90.0" />
             <AnchorPane layoutX="30.0" layoutY="42.0" prefHeight="48.0" prefWidth="260.0" AnchorPane.rightAnchor="0.39999999999997726" AnchorPane.topAnchor="38.0">
                <children>
                   <TextField fx:id="searchBar" layoutY="6.0" onKeyReleased="#updateListView" prefHeight="35.0" prefWidth="202.0" promptText="Search your word...">
@@ -85,7 +85,7 @@
                   </Button>
                     </children>
                 </AnchorPane>
-                <WebView fx:id="dictionaryWebView" layoutX="15.0" layoutY="90.0" prefHeight="360.0" prefWidth="440.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="90.0" />
+                <WebView fx:id="webView" layoutX="15.0" layoutY="90.0" prefHeight="360.0" prefWidth="440.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="90.0" />
             </children>
         </AnchorPane>
     </children>
