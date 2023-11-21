@@ -61,4 +61,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 The project is completed.
 
 ## Note 
-The application is written for educational purposes.
+The application is not just a tool but also a friendly environment supporting you on your English learning journey.
