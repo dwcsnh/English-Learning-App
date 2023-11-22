@@ -20,7 +20,7 @@
             </Label>
             <ImageView fitHeight="43.0" fitWidth="51.0" layoutX="479.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../logo/google%20translate.png" />
+                  <Image url="@../icon/google%20translate.png" />
                </image>
             </ImageView>
          </children></AnchorPane>
@@ -32,7 +32,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../logo/GreatBritainFlag.png" />
+                              <Image url="@../icon/GreatBritainFlag.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -41,7 +41,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../logo/VietNamFlag.png" />
+                              <Image url="@../icon/VietNamFlag.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -56,7 +56,7 @@
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../logo/audio.png" />
+                        <Image url="@../icon/audio.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -71,7 +71,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../logo/GreatBritainFlag.png" />
+                              <Image url="@../icon/GreatBritainFlag.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -80,7 +80,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../logo/VietNamFlag.png" />
+                              <Image url="@../icon/VietNamFlag.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -96,7 +96,7 @@
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../logo/audio.png" />
+                        <Image url="@../icon/audio.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -112,7 +112,7 @@
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../logo/change.png" />
+                        <Image url="@../icon/change.png" />
                      </image>
                   </ImageView>
                </graphic>

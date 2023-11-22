@@ -235,7 +235,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../logo/questionMark.png" />
+                  <Image url="@../icon/questionMark.png" />
                </image>
             </ImageView>
          </graphic>

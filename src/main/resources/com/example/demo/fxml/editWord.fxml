@@ -19,7 +19,7 @@
       </Label>
       <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="352.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../logo/edit.png" />
+            <Image url="@../icon/edit.png" />
          </image>
       </ImageView>
       <WebView fx:id="editWebView" layoutX="14.0" layoutY="135.0" prefHeight="150.0" prefWidth="275.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="15.0" />
@@ -51,7 +51,7 @@
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../logo/change.png" />
+                        <Image url="@../icon/change.png" />
                      </image>
                   </ImageView>
                </graphic>

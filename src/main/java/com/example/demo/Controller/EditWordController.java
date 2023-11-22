@@ -14,7 +14,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Objects;
 
 public class EditWordController {
@@ -83,7 +82,7 @@ public class EditWordController {
 
             Stage stage = new Stage();
             stage.setTitle("Unselected Word");
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/icon/B.png")));
             stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.setOnHidden(event -> unselectedWordOpen = false);

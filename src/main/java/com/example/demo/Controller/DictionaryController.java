@@ -53,10 +53,10 @@ public class DictionaryController extends Controller {
                         currentWord = target;
                         showWord();
                     } else {
-                        System.out.println("cannot find word");
+                        showAlert("Cannot find word!", "No exact match found for '" + input + "'" + " in our dictionary.");
                     }
                 } else {
-                    System.out.println("null");
+                    showAlert("Empty input!", "Please type a word.");
                 }
             } else {
                 if (!input.isEmpty()) {
@@ -85,10 +85,10 @@ public class DictionaryController extends Controller {
                 currentWord = target;
                 showWord();
             } else {
-                System.out.println("cannot find word");
+                showAlert("Cannot find word!", "No exact match found for '" + input + "'" + " in our dictionary.");
             }
         } else {
-            System.out.println("null");
+            showAlert("Empty input!", "Please type a word.");
         }
     }
 

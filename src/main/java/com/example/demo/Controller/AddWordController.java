@@ -1,16 +1,12 @@
 package com.example.demo.Controller;
 
-import com.example.demo.BasePlus.DictionaryManagement;
 import com.example.demo.BasePlus.Word;
-import com.example.demo.Controller.DictionaryController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class AddWordController {
@@ -35,7 +31,7 @@ public class AddWordController {
     }
 
     @FXML
-    public void getDefinationOnTextArea() {
+    public void getDefinitionOnTextArea() {
         System.out.println(definitionTextArea.getText());
     }
 

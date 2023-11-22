@@ -182,7 +182,7 @@ public class WordleController {
 
             Stage stage = new Stage();
             stage.setTitle("How to Play Wordle");
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/icon/B.png")));
             stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.setOnHidden(event -> howToPlayOpen = false);
@@ -209,7 +209,7 @@ public class WordleController {
 
             Stage stage = new Stage();
             stage.setTitle("You Won!!");
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/icon/B.png")));
             stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.show();
@@ -234,7 +234,7 @@ public class WordleController {
 
             Stage stage = new Stage();
             stage.setTitle("You Lose!!");
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/icon/B.png")));
             stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.show();
@@ -257,7 +257,7 @@ public class WordleController {
 
             Stage stage = new Stage();
             stage.setTitle("Invalid Input!!");
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/icon/B.png")));
             stage.getIcons().add(icon);
             stage.setScene(new Scene(root));
             stage.show();

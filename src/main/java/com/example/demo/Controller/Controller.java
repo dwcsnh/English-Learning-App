@@ -1,6 +1,5 @@
 package com.example.demo.Controller;
 
-import com.example.demo.BasePlus.DictionaryManagement;
 import com.example.demo.BasePlus.GoogleServices;
 import com.example.demo.BasePlus.Word;
 import javafx.event.ActionEvent;
@@ -17,9 +16,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 abstract class Controller implements Initializable {
     protected Word currentWord;
@@ -75,7 +72,7 @@ abstract class Controller implements Initializable {
                 Stage stage = new Stage();
                 stage.setTitle("Edit Word");
                 stage.setScene(new Scene(root));
-                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
+                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/icon/B.png")));
                 stage.getIcons().add(icon);
                 stage.setOnHidden(e -> resetMapAndWebView());
                 editWordOpen = true;
@@ -119,12 +116,16 @@ abstract class Controller implements Initializable {
                 reload();
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Warning!");
-            alert.setHeaderText(null);
-            alert.setContentText("No word chosen!");
-            alert.showAndWait();
+            showAlert("Empty word!", "Please choose a word!");
         }
+    }
+
+    public void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
@@ -138,14 +139,18 @@ abstract class Controller implements Initializable {
     @FXML
     public void readWord(MouseEvent event) {
         if (event.getSource() == speaker) {
-            GoogleServices.pronounce(searchBar.getText(), "en");
+            if (!searchBar.getText().isEmpty()) {
+                GoogleServices.pronounce(searchBar.getText(), "en");
+            } else {
+                showAlert("Empty word!", "Please choose a word.");
+            }
         }
     }
 
     @FXML
     public void updateFavoriteList() {
         if (currentWord == null) {
-            System.out.println("Current word is null");
+            showAlert("Empty word!", "Please choose a word.");
         } else {
             if (parent.getFavorite().isExist(currentWord)) {
                 parent.getFavorite().removeWordFromFavorite(currentWord);
