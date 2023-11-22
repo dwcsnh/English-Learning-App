@@ -11,3 +11,11 @@
 .sidebar-button:hover {
     -fx-background-color: #EBEBEB;
 }
+.sidebar-button.clicked {
+    -fx-background-color: #EBEBEB;
+}
+.tooltip {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+    -fx-opacity: 0.9;
+}

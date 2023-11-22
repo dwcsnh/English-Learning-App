@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -20,7 +22,7 @@ public class ContainerController implements Initializable {
     private History history = new History("data\\history.txt");
     private Favorite favorite = new Favorite("data\\favorite.txt");
     private DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
-    private boolean pickAddWord = false;
+    private Button lastClickedButton;
     private boolean fastEng = false;
     @FXML
     AnchorPane contentPane;
@@ -180,63 +182,69 @@ public class ContainerController implements Initializable {
             System.out.println(e.getMessage());
         } try {
             showDictionaryPane();
-            dictionaryButton.setStyle("-fx-background-color: #EBEBEB;");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public void resetButtonStyle() {
-        dictionaryButton.setStyle("-fx-background-color: transparent;");
-        historyButton.setStyle("-fx-background-color: transparent;");
-        favoriteListButton.setStyle("-fx-background-color: transparent;");
-        wordleButton.setStyle("-fx-background-color: transparent;");
-        googleTranslateButton.setStyle("-fx-background-color: transparent;");
-        addWordButton.setStyle("-fx-background-color: transparent;");
-        fastEnglishButton.setStyle("-fx-background-color: transparent;");
+        dictionaryButton.setTooltip(new Tooltip("Dictionary"));
+        dictionaryButton.getTooltip().getStyleClass().add("tooltip");
+        googleTranslateButton.setTooltip(new Tooltip("Google Translate"));
+        googleTranslateButton.getTooltip().getStyleClass().add("tooltip");
+        historyButton.setTooltip(new Tooltip("History"));
+        historyButton.getTooltip().getStyleClass().add("tooltip");
+        favoriteListButton.setTooltip(new Tooltip("Favorite"));
+        favoriteListButton.getTooltip().getStyleClass().add("tooltip");
+        addWordButton.setTooltip(new Tooltip("Add Word"));
+        addWordButton.getTooltip().getStyleClass().add("tooltip");
+        wordleButton.setTooltip(new Tooltip("Wordle"));
+        wordleButton.getTooltip().getStyleClass().add("tooltip");
+        fastEnglishButton.setTooltip(new Tooltip("Fast English"));
+        fastEnglishButton.getTooltip().getStyleClass().add("tooltip");
     }
 
     @FXML
     public void handleClickComponents(ActionEvent event) throws IOException {
+        if (lastClickedButton != null) {
+            lastClickedButton.getStyleClass().remove("clicked");
+        }
         if (fastEng && event.getSource() != fastEnglishController) {
             fastEng = false;
             //System.out.println(fastEng);
         }
         if (event.getSource() == dictionaryButton) {
-            resetButtonStyle();
-            dictionaryButton.setStyle("-fx-background-color: #EBEBEB;");
             showDictionaryPane();
+            dictionaryButton.getStyleClass().add("clicked");
+            lastClickedButton = dictionaryButton;
             System.out.println("click dictionary button");
         } else if (event.getSource() == historyButton) {
-            resetButtonStyle();
-            historyButton.setStyle("-fx-background-color: #EBEBEB;");
             showHistoryPane();
+            historyButton.getStyleClass().add("clicked");
+            lastClickedButton = historyButton;
             System.out.println("click history button");
         } else if (event.getSource() == favoriteListButton) {
-            resetButtonStyle();
-            favoriteListButton.setStyle("-fx-background-color: #EBEBEB;");
             showFavoritePane();
+            favoriteListButton.getStyleClass().add("clicked");
+            lastClickedButton = favoriteListButton;
             System.out.println("click favorite list button");
         } else if (event.getSource() == wordleButton) {
-            resetButtonStyle();
-            wordleButton.setStyle("-fx-background-color: #EBEBEB;");
             showWordlePane();
+            wordleButton.getStyleClass().add("clicked");
+            lastClickedButton = wordleButton;
             System.out.println("click wordle button");
         } else if (event.getSource() == googleTranslateButton) {
-            resetButtonStyle();
-            googleTranslateButton.setStyle("-fx-background-color: #EBEBEB;");
             showGoogleTranslatePane();
+            googleTranslateButton.getStyleClass().add("clicked");
+            lastClickedButton = googleTranslateButton;
             System.out.println("click google translate button");
         } else if (event.getSource() == addWordButton) {
-            resetButtonStyle();
-            addWordButton.setStyle("-fx-background-color: #EBEBEB;");
             showAddWordPane();
+            addWordButton.getStyleClass().add("clicked");
+            lastClickedButton = addWordButton;
             System.out.println("click addWord button");
         } else if (event.getSource() == fastEnglishButton) {
-            resetButtonStyle();
-            fastEnglishButton.setStyle("-fx-background-color: #EBEBEB;");
             fastEng = true;
             showFastEnglishPane();
+            fastEnglishButton.getStyleClass().add("clicked");
+            lastClickedButton = fastEnglishButton;
             System.out.println("click fastEnglish button");
         }
     }

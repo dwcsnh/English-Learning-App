@@ -748,7 +748,6 @@ heartland<html><i>heartland</i><br/><ul><li><b><i> danh từ</i></b><ul><li><fon
 -trophin<html><i>-trophin</i><br/><ul><li><font color='#cc0000'><b> hình thái ghép có nghĩa</b></font></li></ul><ul><li><font color='#cc0000'><b> chất kích thích</b></font><ul><li><b> gonadotrophin hocmon</b>: kích thích tuyến sinh dục</li></ul></li></ul></html>
 AFL-CIO<html><i>AFL-CIO</i><br/><ul><li><font color='#cc0000'><b> (Econ) Xem AMERICAN FEDERATION OF LABOR.</b></font></li></ul></html>
 hello<html><i>hello</i><br/><ul><li><font color='#cc0000'><b> Chúng mình là BAB :^</b></font></li></ul></html>
-étude<html><i>etude</i><br/><ul><li><b><i> danh từ</i></b><ul><li><font color='#cc0000'><b> (âm nhạc) khúc luyện</b></font></li></ul></li></ul></html>
 -manchester<html><i>-manchester</i><br/><ul><li><font color='#cc0000'><b> is red</b></font></li></ul></html>
 8-bit character string<html><i>8-bit character string</i><br/><ul><li><font color='#cc0000'><b> (Tech) chuỗi ký tự 8 bít</b></font></li></ul></html>
 test<html><i>test</i><br/><ul><li><font color='#cc0000'><b> tse</b></font></li></ul></html>
@@ -757,3 +756,4 @@ test<html><i>test</i><br/><ul><li><font color='#cc0000'><b> tse</b></font></li><
 1-byte character set<html><i>1-byte character set</i><br/><ul><li><font color='#cc0000'><b> (Tech) bộ ký tự 1 bai</b></font></li></ul></html>
 -ty<html><i>-ty</i><br/><ul><li><font color='#cc0000'><b> hậu tố để tạo những con số có bao nhiêu lần mười</b></font></li></ul><ul><li><font color='#cc0000'><b> twenty</b></font></li></ul><ul><li><font color='#cc0000'><b> hai mươi</b></font></li></ul><ul><li><font color='#cc0000'><b> fifty</b></font></li></ul><ul><li><font color='#cc0000'><b> năm mươi</b></font></li></ul><ul><li><font color='#cc0000'><b> hậu tố tạo danh từ chỉ tính chất, điều kiện</b></font></li></ul><ul><li><font color='#cc0000'><b> puberty</b></font></li></ul><ul><li><font color='#cc0000'><b> tuổi dậy thì</b></font></li></ul><ul><li><font color='#cc0000'><b> cruelty</b></font></li></ul><ul><li><font color='#cc0000'><b> tính tàn ác</b></font></li></ul></html>
 -london<html><i>-london</i><br/><ul><li><font color='#cc0000'><b> is blue</b></font></li></ul></html>
+étude<html><i>etude</i><br/><ul><li><b><i> danh từ</i></b><ul><li><font color='#cc0000'><b> (âm nhạc) khúc luyện</b></font></li></ul></li></ul></html>
