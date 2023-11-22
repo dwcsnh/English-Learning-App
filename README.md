@@ -19,7 +19,8 @@ The JavaFx Supporting Learning English Application is a flexible and user-friend
 
 
 
-   <img src="https://github.com/dwcsnh/English-Learning-App/assets/144114071/c30d3184-9d73-4e35-909a-60b64a197adf" alt="..." width="760" />
+![image](https://github.com/dwcsnh/English-Learning-App/assets/119034915/f4bb8ed3-bb72-4744-bbd8-46e02cb4b311)
+
 
 
 
