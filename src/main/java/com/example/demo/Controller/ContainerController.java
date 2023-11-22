@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ContainerController implements Initializable {
@@ -40,6 +41,8 @@ public class ContainerController implements Initializable {
     Button addWordButton;
     @FXML
     Button fastEnglishButton;
+    @FXML
+    AnchorPane sidebar;
 
     AnchorPane dictionaryPane;
     AnchorPane informationPane;
@@ -205,6 +208,21 @@ public class ContainerController implements Initializable {
     public void handleClickComponents(ActionEvent event) throws IOException {
         if (lastClickedButton != null) {
             lastClickedButton.getStyleClass().remove("clicked");
+            if (lastClickedButton == wordleButton) {
+                sidebar.getStyleClass().remove("wordle");
+                wordleButton.getStyleClass().remove("wordleClicked");
+                for (Button btn : Arrays.asList(dictionaryButton, historyButton, favoriteListButton,
+                        googleTranslateButton, addWordButton, fastEnglishButton)) {
+                    btn.getStyleClass().remove("wordle");
+                }
+            } else if (lastClickedButton == fastEnglishButton) {
+                sidebar.getStyleClass().remove("fastEnglish");
+                fastEnglishButton.getStyleClass().remove("fastEnglishClicked");
+                for (Button btn : Arrays.asList(dictionaryButton, historyButton, favoriteListButton,
+                        googleTranslateButton, addWordButton, wordleButton)) {
+                    btn.getStyleClass().remove("fastEnglish");
+                }
+            }
         }
         if (fastEng && event.getSource() != fastEnglishController) {
             fastEng = false;
@@ -227,7 +245,12 @@ public class ContainerController implements Initializable {
             System.out.println("click favorite list button");
         } else if (event.getSource() == wordleButton) {
             showWordlePane();
-            wordleButton.getStyleClass().add("clicked");
+            wordleButton.getStyleClass().add("wordleClicked");
+            sidebar.getStyleClass().add("wordle");
+            for (Button btn : Arrays.asList(dictionaryButton, historyButton, favoriteListButton,
+                    googleTranslateButton, addWordButton, fastEnglishButton)) {
+                btn.getStyleClass().add("wordle");
+            }
             lastClickedButton = wordleButton;
             System.out.println("click wordle button");
         } else if (event.getSource() == googleTranslateButton) {
@@ -243,7 +266,12 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == fastEnglishButton) {
             fastEng = true;
             showFastEnglishPane();
-            fastEnglishButton.getStyleClass().add("clicked");
+            fastEnglishButton.getStyleClass().add("fastEnglishClicked");
+            sidebar.getStyleClass().add("fastEnglish");
+            for (Button btn : Arrays.asList(dictionaryButton, historyButton, favoriteListButton,
+                    googleTranslateButton, addWordButton, wordleButton)) {
+                btn.getStyleClass().add("fastEnglish");
+            }
             lastClickedButton = fastEnglishButton;
             System.out.println("click fastEnglish button");
         }

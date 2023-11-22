@@ -6,16 +6,41 @@
 }
 .sidebar {
     -fx-background-color: #ffffff;
-    -fx-background-radius: 0px 0px 0px 0px;
 }
-.sidebar-button:hover {
+.sidebar-button:hover{
     -fx-background-color: #EBEBEB;
 }
 .sidebar-button.clicked {
     -fx-background-color: #EBEBEB;
 }
+.sidebar-button.wordle {
+    -fx-background-color: transparent;
+}
+.sidebar-button.wordleClicked {
+    -fx-background-color: #2D2F39;
+}
+.sidebar-button.wordle:hover {
+    -fx-background-color: #2D2F39;
+}
+.sidebar-button.fastEnglish {
+    -fx-background-color: transparent;
+}
+.sidebar-button.fastEnglishClicked {
+    -fx-background-color: #10537d;
+}
+.sidebar-button.fastEnglish:hover {
+    -fx-background-color: #10537d;
+}
 .tooltip {
     -fx-background-color: #ffffff;
     -fx-text-fill: black;
     -fx-opacity: 0.9;
+}
+.sidebar.wordle {
+    -fx-background-color: #1B1C22;
+    -fx-background-radius: 0px 0px 0px 0px;
+}
+.sidebar.fastEnglish {
+    -fx-background-color: #136090;
+    -fx-background-radius: 0px 0px 0px 0px;
 }

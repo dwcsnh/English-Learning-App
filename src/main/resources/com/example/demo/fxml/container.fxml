@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="container" stylesheets="@../container.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.ContainerController">
    <children>
-      <AnchorPane prefHeight="500.0" prefWidth="40.0" styleClass="sidebar" stylesheets="@../container.css">
+      <AnchorPane fx:id="sidebar" prefHeight="500.0" prefWidth="40.0" styleClass="sidebar" stylesheets="@../container.css">
          <children>
             <VBox layoutY="125.0">
                <children>
