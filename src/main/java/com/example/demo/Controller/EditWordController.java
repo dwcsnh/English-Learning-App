@@ -61,7 +61,7 @@ public class EditWordController {
         String newMeaning = "<html><i>" + newWord.getSpelling() +"</i><br/><ul><li><font color='#cc0000'><b> "
                 + editTextArea.getText() + "</b></font></li></ul></html>";
         newWord.setMeaning(newMeaning);
-        System.out.println(newMeaning);
+        //System.out.println(newMeaning);
         parent.getDictionaryManagement().editDefinition(newWord, newMeaning);
         parent.getFavorite().editDefinition(newWord, newMeaning);
         parent.getHistory().editDefinition(newWord, newMeaning);

@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/demo/fxml/container.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("BAB_Dictionary");
+        stage.setTitle("BAB_More than a dictionary");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/demo/logo/B.png")));
         stage.getIcons().add(icon);
         stage.setScene(scene);

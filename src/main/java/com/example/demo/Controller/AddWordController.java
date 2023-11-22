@@ -42,9 +42,9 @@ public class AddWordController {
     @FXML
     public void saveWord() {
         target = targetTextField.getText();
-        System.out.println("t = " + targetTextField.getText());
+        //System.out.println("t = " + targetTextField.getText());
         definition = definitionTextArea.getText();
-        System.out.println(definitionTextArea.getText());
+        //System.out.println(definitionTextArea.getText());
         if (target.isEmpty()) {
             creatAlert("Thông báo", "Vui lòng nhập từ cần thêm!");
         } else if(definition.isEmpty()) {
@@ -77,9 +77,9 @@ public class AddWordController {
         if (result.isPresent() && result.get() == buttonTypeYes) {
             targetTextField.clear();
             definitionTextArea.clear();
-            System.out.println("Yes");
+            //System.out.println("Yes");
         } else {
-            System.out.println("No");
+            //System.out.println("No");
         }
     }
 
@@ -115,9 +115,9 @@ public class AddWordController {
         if (result.isPresent() && result.get() == buttonTypeYes) {
             parent.getDictionaryManagement().getDictionary().getWordList().remove(wordExist());
             addWordToFile();
-            System.out.println("Yes");
+            //System.out.println("Yes");
         } else {
-            System.out.println("No");
+            //System.out.println("No");
         }
     }
 

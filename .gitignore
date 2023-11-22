@@ -12,6 +12,8 @@ target/
 *.iml
 *.ipr
 data/E_V.txt
+data/history.txt
+data/favorite.txt
 
 ### Eclipse ###
 .apt_generated
