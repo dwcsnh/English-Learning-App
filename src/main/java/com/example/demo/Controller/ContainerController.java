@@ -185,6 +185,8 @@ public class ContainerController implements Initializable {
             System.out.println(e.getMessage());
         } try {
             showDictionaryPane();
+            dictionaryButton.getStyleClass().add("clicked");
+            lastClickedButton = dictionaryButton;
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
