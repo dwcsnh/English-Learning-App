@@ -49,11 +49,7 @@ public class HistoryController extends Controller {
                     if (target != null) {
                         currentWord = target;
                         showWord();
-                    } else {
-                        System.out.println("cannot find word");
                     }
-                } else {
-                    System.out.println("null");
                 }
             } else {
                 String input = searchBar.getText();
@@ -82,11 +78,7 @@ public class HistoryController extends Controller {
             if (target != null) {
                 currentWord = target;
                 showWord();
-            } else {
-                System.out.println("cannot find word");
             }
-        } else {
-            System.out.println("null");
         }
     }
 

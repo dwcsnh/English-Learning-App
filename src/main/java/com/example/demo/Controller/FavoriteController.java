@@ -50,11 +50,7 @@ public class FavoriteController extends Controller {
                     if (target != null) {
                         currentWord = target;
                         showWord();
-                    } else {
-                        System.out.println("cannot find word");
                     }
-                } else {
-                    System.out.println("null");
                 }
             } else {
                 if (!input.isEmpty()) {
@@ -82,11 +78,7 @@ public class FavoriteController extends Controller {
             if (target != null) {
                 currentWord = target;
                 showWord();
-            } else {
-                System.out.println("cannot find word");
             }
-        } else {
-            System.out.println("null");
         }
     }
 
