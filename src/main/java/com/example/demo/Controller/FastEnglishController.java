@@ -35,6 +35,7 @@ public class FastEnglishController {
     private ArrayList<Integer> arrNumbers = new ArrayList<>();
 
     private GoogleServices googleServices = new GoogleServices();
+    private ContainerController parent;
 
     private String word;
     private int result;
@@ -48,6 +49,7 @@ public class FastEnglishController {
     private int curScoreNumber;
     private int highScoreNumber;
     private boolean preview = false;
+    private boolean pause;
 
     @FXML
     AnchorPane contentPane;
@@ -88,6 +90,10 @@ public class FastEnglishController {
         lostGame = false;
     }
 
+    public void setContainerController(ContainerController containerController) {
+        this.parent = containerController;
+    }
+
     @FXML
     private Button playButton;
     @FXML
@@ -103,6 +109,9 @@ public class FastEnglishController {
         stage.setOnCloseRequest(event -> {
             fastEnglishController.shutdown();
         });
+        fastEnglishController.setContainerController(parent);
+        //System.out.println("p= " + parent.isFastEng());
+        //pause = parent.isFastEng();
         fastEnglishController.init();
     }
 
@@ -136,7 +145,9 @@ public class FastEnglishController {
         //readCheckBox.setSelected(true);
         labelWordCheckBox.setSelected(true);
         loadHighScore();
-
+        //pause = b;
+        //pause = parent.isFastEng();
+        //System.out.println(pause);
         task = new doWord();
         progressBar.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
@@ -297,7 +308,7 @@ public class FastEnglishController {
         Platform.runLater(() -> {
             wordLabel.setText("Game Over!!!");
         });
-        //playSoundOnLostGame();
+        playSoundOnLostGame();
         exportHighScoreToFile();
     }
 
@@ -443,7 +454,7 @@ public class FastEnglishController {
     @Override
     protected Void call() throws Exception {
         for (int i = TIME_OF_GAME; i >= 0; i--) {
-            if (isCancelled()) {
+            if (!parent.isFastEng()) {
                 updateMessage("Cancelled");
                 break;
             }
@@ -465,6 +476,7 @@ public class FastEnglishController {
             //updateProgress(i, TIME_OF_GAME);
             // arr = [10, 20, 30, 40, inf]
             // aaa = [10, 8, 6, 5, 4]
+            //System.out.println("p = " + parent.isFastEng());
             if (turn < 10) {
                 //System.out.println(i);
                 Thread.sleep(10);

@@ -21,6 +21,7 @@ public class ContainerController implements Initializable {
     private Favorite favorite = new Favorite("data\\favorite.txt");
     private DictionaryManagement dictionaryManagement = new DictionaryManagement("data\\E_V.txt");
     private boolean pickAddWord = false;
+    private boolean fastEng = false;
     @FXML
     AnchorPane contentPane;
     @FXML
@@ -64,6 +65,14 @@ public class ContainerController implements Initializable {
 
     public Favorite getFavorite() {
         return favorite;
+    }
+
+    public boolean isFastEng() {
+        return fastEng;
+    }
+
+    public void setFastEng(boolean fastEng) {
+        this.fastEng = fastEng;
     }
 
     public void showDictionaryPane() throws IOException {
@@ -112,6 +121,7 @@ public class ContainerController implements Initializable {
     public void showFastEnglishPane() {
         contentPane.getChildren().clear();
         contentPane.getChildren().add(fastEnglishPane);
+        fastEnglishController.setContainerController(this);
     }
 
     public void initialize(URL location, ResourceBundle resourceBundle) {
@@ -188,6 +198,10 @@ public class ContainerController implements Initializable {
 
     @FXML
     public void handleClickComponents(ActionEvent event) throws IOException {
+        if (fastEng && event.getSource() != fastEnglishController) {
+            fastEng = false;
+            //System.out.println(fastEng);
+        }
         if (event.getSource() == dictionaryButton) {
             resetButtonStyle();
             dictionaryButton.setStyle("-fx-background-color: #EBEBEB;");
@@ -221,6 +235,7 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == fastEnglishButton) {
             resetButtonStyle();
             fastEnglishButton.setStyle("-fx-background-color: #EBEBEB;");
+            fastEng = true;
             showFastEnglishPane();
             System.out.println("click fastEnglish button");
         }
