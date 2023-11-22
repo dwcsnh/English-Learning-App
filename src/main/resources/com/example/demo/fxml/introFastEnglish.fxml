@@ -17,7 +17,7 @@
             <Font name="Cooper Black" size="28.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="207.0" layoutY="103.0" prefHeight="107.0" prefWidth="346.0" text="FAST ENGLISH" textFill="#338276">
+      <Label alignment="CENTER" layoutX="207.0" layoutY="103.0" prefHeight="107.0" prefWidth="346.0" text="FAST ENGLISH" textFill="#458033">
          <font>
             <Font name="Cooper Black" size="43.0" />
          </font>

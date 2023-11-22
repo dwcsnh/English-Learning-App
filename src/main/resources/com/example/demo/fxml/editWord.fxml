@@ -9,10 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.EditWordController">
    <children>
-      <Label layoutX="217.0" layoutY="14.0" text="Edit Word" textFill="#65dc9b">
+      <Label layoutX="217.0" layoutY="14.0" text="Edit Word" textFill="#edbe00">
          <font>
             <Font name="Cooper Black" size="24.0" />
          </font>
@@ -39,7 +38,7 @@
             <Font name="Times New Roman" size="18.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" layoutX="223.0" layoutY="299.0" mnemonicParsing="false" onAction="#editUpdateDictionary" prefHeight="60.0" prefWidth="154.0" style="-fx-background-color: #65dc9b;" textFill="#65dc9b">
+      <Button alignment="CENTER" layoutX="223.0" layoutY="309.0" mnemonicParsing="false" onAction="#editUpdateDictionary" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: #EDBE00;" textFill="#65dc9b">
          <font>
             <Font name="Cooper Black" size="21.0" />
          </font>

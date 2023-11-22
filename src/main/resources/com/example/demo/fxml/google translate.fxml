@@ -103,7 +103,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="303.0" layoutY="410.0" mnemonicParsing="false" onAction="#translate" prefHeight="60.0" prefWidth="154.0" style="-fx-background-color: #65dc9b;" textAlignment="CENTER">
+      <Button layoutX="303.0" layoutY="410.0" mnemonicParsing="false" onAction="#translate" prefHeight="60.0" prefWidth="154.0" style="-fx-background-color: #52a8f5;" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

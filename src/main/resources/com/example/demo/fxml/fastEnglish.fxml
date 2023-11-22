@@ -12,9 +12,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="760.0" styleClass="anchorPane" stylesheets="@../fastEnglish.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.FastEnglishController">
    <children>
-      <Label fx:id="wordLabel" layoutX="207.0" layoutY="9.0" prefHeight="42.0" prefWidth="270.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #808080;" stylesheets="@../fastEnglish.css" textAlignment="CENTER" textFill="RED">
+      <Label fx:id="wordLabel" layoutX="178.0" layoutY="9.0" prefHeight="42.0" prefWidth="299.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #136090;" stylesheets="@../fastEnglish.css" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="28.0" />
+            <Font name="Cooper Black" size="28.0" />
          </font>
       </Label>
       <Button layoutX="52.0" layoutY="75.0" mnemonicParsing="false" onAction="#onClickButton1" prefHeight="158.0" prefWidth="194.0" style="-fx-background-radius: 10 10 10 10;" AnchorPane.bottomAnchor="267.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="75.0">
@@ -47,14 +47,14 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="highScoreLabel" layoutX="535.0" layoutY="446.0" prefHeight="30.0" prefWidth="210.0" textFill="RED">
+      <Label fx:id="highScoreLabel" layoutX="535.0" layoutY="446.0" prefHeight="30.0" prefWidth="210.0" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="Cooper Black" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="curScoreLabel" alignment="CENTER" layoutX="471.0" layoutY="15.0" prefHeight="30.0" prefWidth="153.0" textFill="RED">
+      <Label fx:id="curScoreLabel" alignment="CENTER" layoutX="471.0" layoutY="15.0" prefHeight="30.0" prefWidth="153.0" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="Cooper Black" size="20.0" />
          </font>
       </Label>
       <CheckBox fx:id="readCheckBox" layoutX="45.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="70.0">

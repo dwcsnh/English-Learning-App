@@ -8,9 +8,9 @@
 }
 
 .button:hover {
-    -fx-background-color: #538D4E
+    -fx-background-color: #136090
 }
 
 .button:pressed {
-    -fx-background-color: #538D4E
+    -fx-background-color: #136090
 }
