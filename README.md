@@ -46,7 +46,14 @@ The JavaFx Supporting Learning English Application is a flexible and user-friend
 6. To add word to your favorite list, choose that word and click favorite button, to unfavorite word, do the samething with that word (unfavorite button). 
 7. To practice, click the Wordle Button (W icon) to play wordle or click the FastEnglish Button (F icon), then the application will display a Game window.
    - Wordle Game:
-     + You need to the 5 letter word
+     + You need to find the 5 letter word.
+     + You will have 6 guesses to find what the word is, type down your guess and press Enter.
+     + After each guess, you will find some hint about the word.
+     + If the color of letters is grey, that mean they aren't in the target word at all.
+     + If the color of letters is yellow, that mean they in the target word but in the wrong spot.
+     + And if the color of letters is green, that mean they in the target word and in the right spot.
+     + It's simple, but it's not easy to find that word. Besides having a rich vocabulary, you also need to have a good strategy to be able to win the game.
+     + Good Luck!!
     
    - FastEnglish Game:
      + This is a simple game for learning basic English vocabulary.
