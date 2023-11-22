@@ -50,7 +50,9 @@ abstract class Controller implements Initializable {
         setFavoriteButton(currentWord);
         parent.getHistory().addWordToHistory(currentWord);
         String definition = currentWord.getMeaning();
-        webView.getEngine().loadContent(definition, "text/html");
+        if(listViewWord.contains(searchBar.getText())) {
+            webView.getEngine().loadContent(definition, "text/html");
+        }
     }
 
     @FXML

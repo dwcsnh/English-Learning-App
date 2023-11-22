@@ -94,7 +94,9 @@ public class HistoryController extends Controller {
     public void showWord() {
         setFavoriteButton(currentWord);
         String definition = currentWord.getMeaning();
-        webView.getEngine().loadContent(definition, "text/html");
+        if(listViewWord.contains(searchBar.getText())) {
+            webView.getEngine().loadContent(definition, "text/html");
+        }
     }
 
     public void reload() {
